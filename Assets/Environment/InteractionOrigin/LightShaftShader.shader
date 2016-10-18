@@ -12,7 +12,7 @@
 		o.Albedo = 1;
 		half rim = saturate(dot(normalize(IN.viewDir), o.Normal));
 		o.Emission = fixed3(1, 1, 1);
-		o.Alpha = 0.01 * pow(rim, 4);// *sin(-_Time[1] * IN.worldPos.x / 10);
+		o.Alpha = 0.1 * pow(rim, 4);// *sin(-_Time[1] * IN.worldPos.x / 10);
 			
 			// (sin(_Time[1]*IN.worldPos.x) + sin(-_Time[1] *IN.worldPos.y) + sin(IN.worldPos.z/10) + sin(_Time[1]+IN.worldPos.x/100) + sin(200+IN.worldPos.y/120) + sin(_Time[1]+IN.worldPos.z));
 	}

@@ -11,7 +11,9 @@ public class LifeCycle : MonoBehaviour {
 
     void Awake()
     {
+        Application.LoadLevelAdditive("PlayerScene");
         Application.LoadLevelAdditive("SoftwareCityScene");
+        Application.LoadLevelAdditive("EnvironmentScene");
     }
 
     void Start()
@@ -21,17 +23,18 @@ public class LifeCycle : MonoBehaviour {
 
     public void Begin()
     {
-        OnBeginHandler();
+        if (OnBeginHandler != null)
+        {
+            OnBeginHandler();
+        }
     }
 
     public void Finish()
     {
-        OnFinishHandler();
+        if (OnFinishHandler != null)
+        {
+            OnFinishHandler();
+        }
     }
 
-
-    // Update is called once per frame
-    void Update () {
-	
-	}
 }
