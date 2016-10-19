@@ -3,11 +3,16 @@ using System.Collections;
 
 public class LifeCycle : MonoBehaviour {
 
+    public delegate void OnInit();
+    public delegate void OnShutdown();
+    public OnInit OnInitHandler;
+    public OnShutdown OnShutdownHandler;
+
     public delegate void OnBegin();
     public delegate void OnFinish();
+    public OnInit OnBeginHandler;
+    public OnShutdown OnFinishHandler;
 
-    public OnBegin OnBeginHandler;
-    public OnFinish OnFinishHandler;
 
     void Awake()
     {
@@ -18,7 +23,23 @@ public class LifeCycle : MonoBehaviour {
 
     void Start()
     {
-        Begin();
+        Init();
+    }
+
+    public void Init()
+    {
+        if (OnInitHandler != null)
+        {
+            OnInitHandler();
+        }
+    }
+
+    public void Shutdown()
+    {
+        if (OnShutdownHandler != null)
+        {
+            OnShutdownHandler();
+        }
     }
 
     public void Begin()

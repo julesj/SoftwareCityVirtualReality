@@ -5,7 +5,7 @@ public class Test : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        FindObjectOfType<LifeCycle>().OnBeginHandler += DoOnBegin;
+        FindObjectOfType<LifeCycle>().OnInitHandler += DoOnBegin;
     }
 
     private void DoOnBegin()

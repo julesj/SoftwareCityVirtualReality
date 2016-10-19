@@ -12,7 +12,15 @@
 		o.Albedo = 1;
 		half rim = saturate(dot(normalize(IN.viewDir), o.Normal));
 		o.Emission = fixed3(1, 1, 1);
-		o.Alpha = 0.1 * pow(rim, 4);// *sin(-_Time[1] * IN.worldPos.x / 10);
+		float fade = IN.worldPos.y;
+		if (fade > 1) {
+			fade = 1;
+		}
+		else if (fade < 0) {
+			fade = 0;
+		}
+		o.Alpha = 0.1 * pow(rim, 4) * fade;// +abs(sin(_Time[1] + IN.worldPos.y)) / 100
+			//+ abs(sin(_Time[1]*2)) / 200 +abs(sin(_Time[1] * 20)) / 444;
 			
 			// (sin(_Time[1]*IN.worldPos.x) + sin(-_Time[1] *IN.worldPos.y) + sin(IN.worldPos.z/10) + sin(_Time[1]+IN.worldPos.x/100) + sin(200+IN.worldPos.y/120) + sin(_Time[1]+IN.worldPos.z));
 	}
