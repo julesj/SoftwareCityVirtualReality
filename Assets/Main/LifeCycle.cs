@@ -19,12 +19,9 @@ public class LifeCycle : MonoBehaviour {
         Application.LoadLevelAdditive("PlayerScene");
         Application.LoadLevelAdditive("SoftwareCityScene");
         Application.LoadLevelAdditive("EnvironmentScene");
+        Invoke("Init", 1);
     }
 
-    void Start()
-    {
-        Init();
-    }
 
     public void Init()
     {

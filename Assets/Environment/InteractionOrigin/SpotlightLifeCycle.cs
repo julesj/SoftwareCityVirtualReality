@@ -17,6 +17,7 @@ public class SpotlightLifeCycle : MonoBehaviour {
         cam = FindObjectOfType<Camera>();
         light = GetComponentInChildren<Light>();
         lightShaft = transform.parent.FindChild("LightShaft");
+        OnBegin();
     }
 
     private void OnBegin() {
