@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using VRTK;
+using System;
 
-public class MenuController : MonoBehaviour {
+public class MenuController : MonoBehaviour, InteractionConceptElement{
 
 	public GameObject front;
 	public GameObject back;
@@ -16,17 +17,12 @@ public class MenuController : MonoBehaviour {
     private Transform attach;
     private Vector2 direction = Vector2.zero;
 
+
     // Use this for initialization
     void Start () {
 
 		rigidBody = GetComponent<Rigidbody>();
-		anchorCircle = GetComponent<AnchorCircle>();
-
-		if (controller != null) {
-			VRTK_ControllerEvents controllerEvents = controller.GetComponent<VRTK_ControllerEvents> ();
-			controllerEvents.TouchpadAxisChanged += new ControllerInteractionEventHandler (DoTouchpadAxisChanged);
-            controllerEvents.ControllerEnabled += new ControllerInteractionEventHandler(DoControllerEnabled);
-        }
+		anchorCircle = GetComponent<AnchorCircle>();	
 
 		anchorCircle.SetGameObjectAtAnchorpoint (0, Instantiate (front));
 		anchorCircle.SetGameObjectAtAnchorpoint (1, Instantiate (right));
@@ -66,5 +62,20 @@ public class MenuController : MonoBehaviour {
     private void DoTouchpadAxisChanged(object sender, ControllerInteractionEventArgs e)
     {
         direction = e.touchpadAxis;
+    }
+
+    public void ActivateElement()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void DeactivateElement()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public InteractionConcept GetConcept()
+    {
+        return InteractionConcept.ScaleTranslate;
     }
 }

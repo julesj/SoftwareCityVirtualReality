@@ -8,6 +8,7 @@ public class DebugTrigger : MonoBehaviour {
         if (other.transform.GetComponentInChildren<Camera>() != null)
         {
             FindObjectOfType<LifeCycle>().Begin();
+            FindObjectOfType<InteractionConceptManager>().ChangeConcept(InteractionConcept.ScaleTranslate);
         }
     }
 
@@ -16,6 +17,7 @@ public class DebugTrigger : MonoBehaviour {
         if (other.transform.GetComponentInChildren<Camera>() != null)
         {
             FindObjectOfType<LifeCycle>().Finish();
+            FindObjectOfType<InteractionConceptManager>().ChangeConcept(InteractionConcept.Nothing);
         }
     }
 
