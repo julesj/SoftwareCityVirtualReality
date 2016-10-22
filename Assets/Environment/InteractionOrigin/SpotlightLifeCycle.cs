@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SpotlightLifeCycle : MonoBehaviour {
 
     private Light light;
-    private Camera cam;
+    private Camera[] cams;
     private Transform lightShaft;
 	
 	void Awake () {
@@ -14,7 +15,7 @@ public class SpotlightLifeCycle : MonoBehaviour {
             lifeCycle.OnBeginHandler += OnBegin;
             lifeCycle.OnFinishHandler += OnFinish;
         }
-        cam = FindObjectOfType<Camera>();
+        cams = FindObjectsOfType<Camera>();
         light = GetComponentInChildren<Light>();
         lightShaft = transform.parent.FindChild("LightShaft");
         OnBegin();
@@ -37,9 +38,12 @@ public class SpotlightLifeCycle : MonoBehaviour {
         lightShaft.localScale = new Vector3(shaftScale, 100, shaftScale);
         RenderSettings.ambientLight = new Color(0.01f + 0.2f * val, 0.01f + 0.2f * val, 0.02f + 0.4f * val);
         RenderSettings.fogColor = RenderSettings.ambientLight / 5;
-        if (cam != null)
+        if (cams != null)
         {
-            cam.backgroundColor = RenderSettings.fogColor;
+            foreach(Camera cam in cams)
+            {
+                cam.backgroundColor = RenderSettings.fogColor;
+            }
         }
     }
 
