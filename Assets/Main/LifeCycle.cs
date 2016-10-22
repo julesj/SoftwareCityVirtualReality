@@ -55,4 +55,9 @@ public class LifeCycle : MonoBehaviour {
         }
     }
 
+    public void Restart()
+    {
+        Application.LoadLevel("MainScene");
+    }
+
 }
