@@ -10,11 +10,8 @@ public class SpotlightLifeCycle : MonoBehaviour {
 	
 	void Awake () {
         LifeCycle lifeCycle = FindObjectOfType<LifeCycle>();
-        if (lifeCycle != null)
-        {
-            lifeCycle.OnBeginHandler += OnBegin;
-            lifeCycle.OnFinishHandler += OnFinish;
-        }
+        lifeCycle.OnBeginHandler += OnBegin;
+        lifeCycle.OnFinishHandler += OnFinish;
         cams = FindObjectsOfType<Camera>();
         light = GetComponentInChildren<Light>();
         lightShaft = transform.parent.FindChild("LightShaft");
@@ -32,9 +29,9 @@ public class SpotlightLifeCycle : MonoBehaviour {
 
     void Update()
     {
-        float val = light.spotAngle / 30;
-        float shaftScale = 0.007f * (1 - (val-(1/30f))) + 0.4f * (val - (1 / 30f));
-        lightShaft.localScale = new Vector3(shaftScale, 100, shaftScale);
+        float val = (light.spotAngle-1) / 30;
+        float shaftScale = 1.1f + 23f*val;
+        lightShaft.localScale = new Vector3(shaftScale, 1, shaftScale);
         RenderSettings.ambientLight = new Color(0.01f + 0.2f * val, 0.01f + 0.2f * val, 0.02f + 0.4f * val);
         RenderSettings.fogColor = RenderSettings.ambientLight / 5;
         if (cams != null)

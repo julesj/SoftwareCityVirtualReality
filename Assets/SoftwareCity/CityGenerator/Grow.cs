@@ -7,7 +7,40 @@ public class Grow : MonoBehaviour {
     private  SliderControl rotationSliderControl;
     public float minScale = 1;
     public float maxScale = 100;
-    
+    private float scale;
+    private float scaleToReach;
+    private float animateTimeStart;
+    private float animateTimeEnd;
+    private bool animating;
+
+    void Awake()
+    {
+        LifeCycle lifeCycle = FindObjectOfType<LifeCycle>();
+        if (lifeCycle != null) {
+            lifeCycle.OnBeginHandler += OnBegin;
+            lifeCycle.OnFinishHandler += OnFinish;
+        }
+        
+    }
+
+    private void OnBegin()
+    {
+        scale = CalcScale();
+        scaleToReach = maxScale;
+        animating = true;
+        animateTimeStart = Time.time;
+        animateTimeEnd = animateTimeStart + 3;
+    }
+
+    private void OnFinish()
+    {
+        scale = CalcScale();
+        scaleToReach = 0;
+        animating = true;
+        animateTimeStart = Time.time;
+        animateTimeEnd = animateTimeStart + 2;
+    }
+
     public void AddScaleSliderControl(SliderControl scaleSliderControl)
     {
         this.scaleSliderControl = scaleSliderControl;
@@ -22,17 +55,53 @@ public class Grow : MonoBehaviour {
 
     void Start()
     {
-        transform.localScale = Vector3.one * minScale;
+        transform.localScale = Vector3.zero;
        
     }
 
     private void SetScaleValue(float value)
     {
-		transform.localScale = Vector3.one * (minScale + (maxScale - minScale) * value* value* value* value* value* value* value);
+        scale = CalcScale();
+		scaleToReach = (minScale + (maxScale - minScale) * value* value* value* value* value* value* value);
+        animating = true;
+        animateTimeStart = Time.time;
+        animateTimeEnd = animateTimeStart + 1;
     }
 
     private void SetRotationValue(float value)
     {
         transform.localRotation = Quaternion.Euler(0, value * 360, 0);
+    }
+
+    private float CalcScale()
+    {
+        if (!animating)
+        {
+            return scale;
+        }
+        float t = (Time.time - animateTimeStart) / (animateTimeEnd - animateTimeStart);
+        if (t > 1)
+        {
+            t = 1;
+        }
+        t = (Mathf.Cos(Mathf.PI * t) - 1) / -2;
+        return scale * (1 - t) + scaleToReach * t;
+    }
+
+    void Update()
+    {
+        if (animating)
+        {
+            if (Time.time > animateTimeEnd)
+            {
+                animating = false;
+                scale = scaleToReach;
+                transform.localScale = Vector3.one * scale;
+            } else
+            {
+                transform.localScale = Vector3.one * CalcScale();
+            }
+
+        }
     }
 }

@@ -1,4 +1,7 @@
 ﻿Shader "Custom/Light Shaft" {
+	Properties{
+		_MainTex("Texture", 2D) = "white" {}
+	}
 	SubShader{
 		Tags{ "RenderType" = "Fade" }
 		CGPROGRAM
@@ -8,22 +11,34 @@
 		float3 viewDir;
 		float3 worldPos;
 	};
+	sampler2D _MainTex;
 	void surf(Input IN, inout SurfaceOutput o) {
-		o.Albedo = 1;
-		half rim = saturate(dot(normalize(IN.viewDir), o.Normal));
-		o.Emission = fixed3(1, 1, 1);
-		float fade = IN.worldPos.y;
+		
+		float3 projectedViewDir = IN.viewDir;
+		float3 projectedNormal = o.Normal;
+		projectedViewDir[1] = 0;
+		projectedNormal[1] = 0;
+		half rim = saturate(dot(normalize(projectedViewDir), normalize(projectedNormal)));
+		
+		float fade = IN.worldPos.y / 3;
 		if (fade > 1) {
 			fade = 1;
 		}
 		else if (fade < 0) {
 			fade = 0;
 		}
-		o.Alpha = 0.1 * pow(rim, 4) * fade;// +abs(sin(_Time[1] + IN.worldPos.y)) / 100
-			//+ abs(sin(_Time[1]*2)) / 200 +abs(sin(_Time[1] * 20)) / 444;
-			
-			// (sin(_Time[1]*IN.worldPos.x) + sin(-_Time[1] *IN.worldPos.y) + sin(IN.worldPos.z/10) + sin(_Time[1]+IN.worldPos.x/100) + sin(200+IN.worldPos.y/120) + sin(_Time[1]+IN.worldPos.z));
-	}
+		float scale = 20;
+		fixed3 col1 = tex2D(_MainTex, float2(_Time[1]/50 + IN.worldPos.x / scale, IN.worldPos.y / scale)).rgb;
+		fixed3 col2 = tex2D(_MainTex, float2(IN.worldPos.y / scale, _Time[1] / 100 + IN.worldPos.z / scale)).rgb;
+		fixed3 col;
+		float z = abs(IN.worldPos.z / 20);
+		float x = abs(IN.worldPos.x / 20);
+		col = float3(col1[0] * z + col2[0] * x, col1[1] * z + col2[1] * x, col1[2] * z + col2[2] * x);
+		o.Albedo = col;
+		o.Emission = normalize(col);
+		float weight = ((col[0] + col[1] + col[2]) / 3);
+		o.Alpha = weight* 0.1 * pow(rim, 10) * fade;
+		}
 	ENDCG
 	}
 		Fallback "Diffuse"
