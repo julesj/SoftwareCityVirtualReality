@@ -10,8 +10,12 @@ public class SpotlightLifeCycle : MonoBehaviour {
 	
 	void Awake () {
         LifeCycle lifeCycle = FindObjectOfType<LifeCycle>();
-        lifeCycle.OnBeginHandler += OnBegin;
-        lifeCycle.OnFinishHandler += OnFinish;
+        if (lifeCycle != null)
+        {
+            lifeCycle.OnBeginHandler += OnBegin;
+            lifeCycle.OnFinishHandler += OnFinish;
+
+        } 
         cams = FindObjectsOfType<Camera>();
         light = GetComponentInChildren<Light>();
         lightShaft = transform.parent.FindChild("LightShaft");
