@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum InteractionConcept { ScaleTranslate, Nothing };
+public enum InteractionConcept { Calibration, ScaleTranslate, Nothing };
 
 public class InteractionConceptManager : MonoBehaviour {
 

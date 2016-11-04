@@ -8,6 +8,7 @@ public class TableCalibrator : MonoBehaviour {
 
     private Transform appButton;
     private Transform sysButton;
+    private Transform controllerBase;
 
     public Vector3 calibratedCenter;
     public float calibratedRadius;
@@ -21,9 +22,9 @@ public class TableCalibrator : MonoBehaviour {
     private bool shouldCalibrate = false;
 
     void Start () {
-        controllerActions.ControllerModelVisible += new ControllerActionsEventHandler(ControllerDidBecomeVisible);
         appButton = controllerActions.gameObject.transform.FindChild(controllerActions.modelElementPaths.appMenuModelPath + "/attach");
         sysButton = controllerActions.gameObject.transform.FindChild(controllerActions.modelElementPaths.systemMenuModelPath + "/attach");
+        controllerBase = controllerActions.gameObject.transform.FindChild("Model/base/attach");
     }
 	
 	void Update () {
@@ -77,12 +78,14 @@ public class TableCalibrator : MonoBehaviour {
             }
         }
 
-        calibratedCenter = result / size;
-        calibratedRadius = Vector3.Distance(calibratedCenter, sysButton.position);
+        Vector3 actualResult = result / size;
+
+        calibratedCenter = new Vector3(actualResult.x, base.transform.position.y, actualResult.z);
+        calibratedRadius = Vector3.Distance(calibratedCenter, sysButton.position) + 0.04f;
         isCalibrating = false;
     }
 
-    private void addCalibrationVector()
+    public void addCalibrationVector(VRTK_ControllerActions controllerActions)
     {
         controllerActions.TriggerHapticPulse(3999);
         Vector3 direction = sysButton.position - appButton.position;
@@ -95,11 +98,6 @@ public class TableCalibrator : MonoBehaviour {
         {
             CancelInvoke("addCalibrationVector");
         }
-    }
-
-    void ControllerDidBecomeVisible(object sender, ControllerActionsEventArgs e)
-    { 
-        print("Controller became visible");
     }
 
     //Two non-parallel lines which may or may not touch each other have a point on each line which are closest
