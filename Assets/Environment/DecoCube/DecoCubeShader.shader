@@ -51,7 +51,7 @@
 		half fresnel = saturate(1.0 - dot(v.normal, viewDir));
 		fresnel = pow(fresnel, _FPOW);
 		fresnel = _R0 + (1.0 - _R0) * fresnel;
-		o.color *= fresnel;
+		o.color *= fresnel*5;
 		return o;
 	}
 

@@ -3,100 +3,83 @@ using System.Collections;
 using VRTK;
 
 public class TableCalibrator : MonoBehaviour {
-
-    public VRTK_ControllerActions controllerActions;
-
-    private Transform appButton;
-    private Transform sysButton;
-    private Transform controllerBase;
+    
+    public delegate void OnCalibrationComplete(Vector3 center, float radius);
+    public OnCalibrationComplete OnCalibrationCompleteHandler;
 
     public Vector3 calibratedCenter;
     public float calibratedRadius;
 
     private const uint maxCalibrationVectors = 1000;
-    private Vector3[] points = new Vector3[maxCalibrationVectors];
+    private Vector3[] appButtonPoints = new Vector3[maxCalibrationVectors];
     private Vector3[] directions = new Vector3[maxCalibrationVectors];
+    private Vector3[] controllerBasePoints = new Vector3[maxCalibrationVectors];
     private uint numberOfCalibrationVectors = 0;
 
-    private bool isCalibrating = false;
-    private bool shouldCalibrate = false;
-
-    void Start () {
-        appButton = controllerActions.gameObject.transform.FindChild(controllerActions.modelElementPaths.appMenuModelPath + "/attach");
-        sysButton = controllerActions.gameObject.transform.FindChild(controllerActions.modelElementPaths.systemMenuModelPath + "/attach");
-        controllerBase = controllerActions.gameObject.transform.FindChild("Model/base/attach");
-    }
-	
-	void Update () {
-        if (isCalibrating)
-        {
-            return;
-        } else if (shouldCalibrate)
-        {
-            print("calibrating... x:" + calibratedCenter.x + " y:" + calibratedCenter.y + " z:" + calibratedCenter.z + " r:" + calibratedRadius);
-            calibrate();
-        }
-    }
-
-    public void StartCalibration()
+    private void Calibrate()
     {
-        InvokeRepeating("addCalibrationVector", 5, 0.5f);
-        shouldCalibrate = true;
-    }
-
-    public void StopCalibration()
-    {
-        CancelInvoke();
-        shouldCalibrate = false;
-        print("calibration complete: x:" + calibratedCenter.x + " y:" + calibratedCenter.y + " z:" + calibratedCenter.z + " r:" + calibratedRadius);
-    }
-
-
-    private void calibrate()
-    {
-        if (numberOfCalibrationVectors < 6)
+        if (numberOfCalibrationVectors < 2)
         {
             return;
         }
-
-        isCalibrating = true;
+        
         uint actualSize = numberOfCalibrationVectors;
-
         uint size = 0;
-        Vector3 result = new Vector3();
 
+        Vector3 result = new Vector3();
         for (int i = 0; i<actualSize; i++)
         {
             for (int j = i+1; j < actualSize; j++)
             {
                 Vector3 pointLine1;
                 Vector3 pointLine2;
-                ClosestPointsOnTwoLines(out pointLine1, out pointLine2, points[i], directions[i], points[j], directions[j]);
+                ClosestPointsOnTwoLines(out pointLine1, out pointLine2, appButtonPoints[i], directions[i], appButtonPoints[j], directions[j]);
                 result += pointLine1;
                 result += pointLine2;
                 size += 2;
             }
         }
 
-        Vector3 actualResult = result / size;
+        Vector3 center = result / size;
 
-        calibratedCenter = new Vector3(actualResult.x, base.transform.position.y, actualResult.z);
-        calibratedRadius = Vector3.Distance(calibratedCenter, sysButton.position) + 0.04f;
-        isCalibrating = false;
+        float radiusResult = 0;
+        float heightResult = 0;
+        for (int i = 0; i < actualSize; i++)
+        {
+            radiusResult += Vector3.Distance(center, new Vector3(appButtonPoints[i].x, center.y, appButtonPoints[i].z));
+            heightResult += controllerBasePoints[i].y;
+        }
+
+        float radius = radiusResult / actualSize;
+        float height = heightResult / actualSize - 0.015f; // - constant value
+
+        calibratedCenter = new Vector3(center.x, height, center.z);
+        calibratedRadius = radius + 0.04f; // + constant value
+
+        OnCalibrationCompleteHandler(calibratedCenter, calibratedRadius);
     }
 
-    public void addCalibrationVector(VRTK_ControllerActions controllerActions)
+    public void AddCalibrationVector(VRTK_ControllerActions controllerActions)
     {
         controllerActions.TriggerHapticPulse(3999);
+
+        Transform appButton = controllerActions.gameObject.transform.FindChild("Model/button/attach");
+        Transform sysButton = controllerActions.gameObject.transform.FindChild("Model/sys_button/attach");
+        Transform controllerBase = controllerActions.gameObject.transform.FindChild("Model/base/attach");
+
         Vector3 direction = sysButton.position - appButton.position;
-        points[numberOfCalibrationVectors] = appButton.position;
+
+        appButtonPoints[numberOfCalibrationVectors] = appButton.position;
         directions[numberOfCalibrationVectors] = direction;
+        controllerBasePoints[numberOfCalibrationVectors] = controllerBase.position;
+
         if (numberOfCalibrationVectors < maxCalibrationVectors-1)
         {
             numberOfCalibrationVectors++;
+            Calibrate();
         } else
         {
-            CancelInvoke("addCalibrationVector");
+            //CancelInvoke("addCalibrationVector");
         }
     }
 

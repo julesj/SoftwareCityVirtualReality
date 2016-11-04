@@ -5,7 +5,7 @@ public enum InteractionConcept { Calibration, ScaleTranslate, Nothing };
 
 public class InteractionConceptManager : MonoBehaviour {
 
-    private InteractionConcept currentConcept;
+    private InteractionConcept currentConcept = InteractionConcept.Nothing;
 
 	// Use this for initialization
 	void Start () {

@@ -24,6 +24,7 @@ public class AdjustableRoundTable : MonoBehaviour {
         }
 	}
 
+    // TODO refactor
     private bool NeedsUpdate()
     {
         float actualHeight = top.height + middle.height + bottom.height;

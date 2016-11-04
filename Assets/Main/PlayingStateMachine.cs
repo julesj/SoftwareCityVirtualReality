@@ -81,24 +81,13 @@ public class CalibratingState : State
 
     public void OnEnterState()
     {
-        /*
-        GameObject table = GameObject.Find("AdjustableRoundTable");
-        TableCalibrator calibrator = table.GetComponent<TableCalibrator>();
-        calibrator.StartCalibration();
-        */
+        // Activate Interaction Calibration
+        GameObject.FindObjectOfType<InteractionConceptManager>().ChangeConcept(InteractionConcept.Calibration);
     }
 
     public void OnExitState()
     {
-        /*
-        GameObject table = GameObject.Find("AdjustableRoundTable");
-        TableCalibrator calibrator = table.GetComponent<TableCalibrator>();
-        calibrator.StopCalibration();
-        AdjustableRoundTable roundTable = table.GetComponent<AdjustableRoundTable>();
-        roundTable.height = calibrator.calibratedCenter.y;
-        roundTable.radius = calibrator.calibratedRadius;
-        table.transform.position = new Vector3(calibrator.calibratedCenter.x, 0, calibrator.calibratedCenter.z);
-        */
+        GameObject.FindObjectOfType<InteractionConceptManager>().ChangeConcept(InteractionConcept.Nothing);
     }
 }
 
