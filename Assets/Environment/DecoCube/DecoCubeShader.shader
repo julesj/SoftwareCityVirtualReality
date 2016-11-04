@@ -1,40 +1,66 @@
 ﻿Shader "Custom/Deco Cube" {
 	Properties{
-		_SpecColor("Specular Color", Color) = (0.5, 0.5, 0.5, 1)
-		_Shininess("Shininess", Range(0.01, 1)) = 0.078125
-		_ReflectColor("Reflection Color", Color) = (1,1,1,0.5)
-		_Cube("Reflection Cubemap", Cube) = "black" { TexGen CubeReflect }
+		_Color("Rim Color", Color) = (0.5,0.5,0.5,0.5)
+		_FPOW("FPOW Fresnel", Float) = 5.0
+		_R0("R0 Fresnel", Float) = 0.05
+		_MainTex("Bumpmap", 2D) = "bump" {}
 	}
+
+		Category{
+		Tags{ "Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType" = "Transparent" }
+		Blend SrcAlpha OneMinusSrcAlpha
+		ZWrite On
+
 		SubShader{
-		Tags{
-		"Queue" = "Transparent"
-		"IgnoreProjector" = "True"
-		"RenderType" = "Transparent"
-	}
-		LOD 300
+		Pass{
 
 		CGPROGRAM
-#pragma surface surf BlinnPhong decal:add nolightmap
+#pragma vertex vert
+#pragma fragment frag
+#include "UnityCG.cginc"
 
-		samplerCUBE _Cube;
+		sampler2D _MainTex;
+	fixed4 _Color;
+	float _FPOW;
+	float _R0;
 
-	fixed4 _ReflectColor;
-	half _Shininess;
 
-	struct Input {
-		float3 worldRefl;
+	struct appdata_t {
+		float4 vertex : POSITION;
+		fixed4 color : COLOR;
+		float2 texcoord : TEXCOORD0;
+		float3 normal : NORMAL;
 	};
 
-	void surf(Input IN, inout SurfaceOutput o) {
-		o.Albedo = 0;
-		o.Gloss = 1;
-		o.Specular = _Shininess;
+	struct v2f {
+		float4 vertex : POSITION;
+		fixed4 color : COLOR;
+		float2 texcoord : TEXCOORD0;
+	};
 
-		fixed4 reflcol = texCUBE(_Cube, IN.worldRefl);
-		o.Emission = reflcol.rgb * _ReflectColor.rgb;
-		o.Alpha = reflcol.a * _ReflectColor.a;
+	float4 _MainTex_ST;
+
+	v2f vert(appdata_t v)
+	{
+		v2f o;
+		o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
+		o.color = v.color;
+		o.texcoord = TRANSFORM_TEX(v.texcoord,_MainTex);
+
+		float3 viewDir = normalize(ObjSpaceViewDir(v.vertex));
+		half fresnel = saturate(1.0 - dot(v.normal, viewDir));
+		fresnel = pow(fresnel, _FPOW);
+		fresnel = _R0 + (1.0 - _R0) * fresnel;
+		o.color *= fresnel;
+		return o;
 	}
-	ENDCG
+
+	fixed4 frag(v2f i) : COLOR
+	{
+		return 2.0f * i.color * _Color * tex2D(_MainTex, i.texcoord);
 	}
-		FallBack "Transparent/VertexLit"
+		ENDCG
+	}
+	}
+	}
 }

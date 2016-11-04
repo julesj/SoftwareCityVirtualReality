@@ -26,9 +26,9 @@
 		float3 c3 = tex2D(_MainTex, IN.uv_MainTex*2 + float2(0, - _Time[1] / 50)).rgb;
 
 		float3 c = (c1 + c2 + c3)/3;
-		o.Albedo = c;
-		o.Emission = saturate(c);
-		o.Alpha = fade*c*0.7*(1+o.Normal[1])*2;
+		o.Albedo = saturate(c);
+		o.Emission = saturate(c)*1.1f;
+		o.Alpha = fade*c*1.0*(1+o.Normal[1])*2;
 		}
 	ENDCG
 	}
