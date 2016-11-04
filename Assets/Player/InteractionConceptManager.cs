@@ -7,16 +7,6 @@ public class InteractionConceptManager : MonoBehaviour {
 
     private InteractionConcept currentConcept = InteractionConcept.Nothing;
 
-	// Use this for initialization
-	void Start () {
-	       
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
     public void ChangeConcept(InteractionConcept interactionConcept)
     {
         foreach (InteractionConceptElement element in GetComponentsInChildren<InteractionConceptElement>(true))

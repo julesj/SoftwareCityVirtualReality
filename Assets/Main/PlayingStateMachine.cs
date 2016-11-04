@@ -133,11 +133,13 @@ public class PlayingState : State
     public void OnEnterState()
     {
         GameObject.FindObjectOfType<LifeCycle>().Begin();
+        GameObject.FindObjectOfType<InteractionConceptManager>().ChangeConcept(InteractionConcept.ScaleTranslate);
     }
 
     public void OnExitState()
     {
         GameObject.FindObjectOfType<LifeCycle>().Finish();
+        GameObject.FindObjectOfType<InteractionConceptManager>().ChangeConcept(InteractionConcept.Nothing);
     }
 }
 
