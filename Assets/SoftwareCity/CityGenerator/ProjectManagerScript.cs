@@ -4,13 +4,14 @@ using System.Collections.Generic;
 
 public class ProjectManagerScript : MonoBehaviour {
 
-	private ContentGenerator contentGenerator;
+    public string filename = "Assets/sample2.json";
+    private ContentGenerator contentGenerator;
 	private Project _currentProject;
 
 	void Start () {
 		contentGenerator = Component.FindObjectOfType<ContentGenerator> ();
       
-         _currentProject = new Project("Assets/sample2.json");
+         _currentProject = new Project(filename);
 
         Dictionary<BuildingProperty, MetricMapping> mappings = new Dictionary<BuildingProperty, MetricMapping>();
 
@@ -74,8 +75,8 @@ public class Project {
 		this.mappings = mappings;
 	}
 
-	public Node CreateNodeModel() {
-		return modelFactory.CreateNodeModel (mappings);
+	public Node CreateNodeModel(string pathSeparator) {
+		return modelFactory.CreateNodeModel (pathSeparator, mappings);
 	}
 
 }
@@ -170,10 +171,10 @@ public class ModelFactory {
 		ParseJson();
 	}
 
-	public Node CreateNodeModel(Dictionary<BuildingProperty, MetricMapping> mappings) {
+	public Node CreateNodeModel(string pathSeparator, Dictionary<BuildingProperty, MetricMapping> mappings) {
 		JSONObject nodesArray = jsonObject.GetField ("nodes");
 		JSONObject root = nodesArray.list [0];
-		return CreateNodeModel (root, mappings);
+		return CreateNodeModel (pathSeparator, "", root, mappings);
 	}
 
 	private void ParseJson() {
@@ -211,24 +212,36 @@ public class ModelFactory {
 		}
 	}
 
-	public Node CreateNodeModel(JSONObject folderOrFile, Dictionary<BuildingProperty, MetricMapping> mappings) {
+	public Node CreateNodeModel(string pathSeparator, string path, JSONObject folderOrFile, Dictionary<BuildingProperty, MetricMapping> mappings) {
 		if (folderOrFile.GetField ("type").str.Equals ("Folder")) {
 			List<Node> list = new List<Node> ();
 			foreach(JSONObject child in folderOrFile.GetField("children").list) {
-				list.Add (CreateNodeModel (child, mappings));
+				list.Add (CreateNodeModel (pathSeparator, path + ((path.Length != 0) ? pathSeparator : "") + folderOrFile.GetField("name").str, child, mappings));
 			}
-			return new Street (list.ToArray());
-		} else {
-			JSONObject attribs = folderOrFile.GetField ("attributes");
-			Building building = new Building ();
+			return new StreetNode (list.ToArray());
+		} else if (folderOrFile.GetField("type").str.Equals("File")) {
+            JSONObject attribs = folderOrFile.GetField ("attributes");
+			BuildingNode building = new BuildingNode ();
+            building.pathName = path;
+            building.name = folderOrFile.GetField("name").str;
+            building.heightMappedAttribute = mappings[BuildingProperty.Height].metricName;
+            building.groundMappedAttribute = mappings[BuildingProperty.Width].metricName;
+            building.colorMappedAttribute = mappings[BuildingProperty.Red].metricName;
 
-			building.height = mappings [BuildingProperty.Height].Apply (attribs);
+            building.height = mappings [BuildingProperty.Height].Apply (attribs);
 			building.groundSize = mappings [BuildingProperty.Width].Apply (attribs);
+
 			building.color = new Vector3 (
 				mappings[BuildingProperty.Red].Apply(attribs), mappings[BuildingProperty.Green].Apply(attribs), mappings[BuildingProperty.Blue].Apply(attribs)
 			);
 
+            foreach(KeyValuePair<string, string> attrib in attribs.ToDictionary())
+            {
+                building.allAttributes[attrib.Key] = attrib.Value;
+            }
+
 			return building;
 		}
+        return null;
 	}
 }

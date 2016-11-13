@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.12758556, g: 0.13438153, b: 0.12117006, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -118,49 +118,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1974499648}
   m_RootOrder: 0
---- !u!1 &1825954229
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1000012751502092, guid: 3a37675c59e2952488c66767a799d095,
-    type: 2}
-  m_PrefabInternal: {fileID: 1999414555}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1825954231}
-  - 114: {fileID: 1825954230}
-  m_Layer: 0
-  m_Name: RedirectToMainScene
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1825954230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000011307286096, guid: 3a37675c59e2952488c66767a799d095,
-    type: 2}
-  m_PrefabInternal: {fileID: 1999414555}
-  m_GameObject: {fileID: 1825954229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72e08654d9ed58f41a8dd521fc97a838, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1825954231
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4000013137510326, guid: 3a37675c59e2952488c66767a799d095,
-    type: 2}
-  m_PrefabInternal: {fileID: 1999414555}
-  m_GameObject: {fileID: 1825954229}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.031104, y: 6.71215, z: 2.0825663}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
 --- !u!1 &1974499646
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,6 +151,7 @@ MonoBehaviour:
   buildingPrefab: {fileID: 171230, guid: 6e6c2355b28ad7b49ba27b21b5ad486e, type: 2}
   streetPrefab: {fileID: 132800, guid: 75691b4af6780b349a0619695a937d63, type: 2}
   blockPrefab: {fileID: 145100, guid: 2b9f5ae4c105e9749beb75bf49902784, type: 2}
+  pathSeparator: .
 --- !u!4 &1974499648
 Transform:
   m_ObjectHideFlags: 0
@@ -219,6 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 914c4c0ee876c584699da12716954212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  filename: Assets/sample2.json
 --- !u!114 &1974499650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,5 +232,4 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3a37675c59e2952488c66767a799d095, type: 2}
-  m_RootGameObject: {fileID: 1825954229}
   m_IsPrefabParent: 0

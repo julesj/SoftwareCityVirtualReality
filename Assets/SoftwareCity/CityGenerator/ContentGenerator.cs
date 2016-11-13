@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class ContentGenerator : MonoBehaviour {
@@ -8,14 +7,15 @@ public class ContentGenerator : MonoBehaviour {
 	public GameObject buildingPrefab;
 	public GameObject streetPrefab;
 	public GameObject blockPrefab;
+    public string pathSeparator = ".";
 
 
-	public void GenerateContent(Project project) {
+    public void GenerateContent(Project project) {
         origin.localScale = Vector3.one;
         foreach (Transform  child in origin) {
 			Destroy (child.gameObject);
 		}
-		Block city = CreateBlock (project.CreateNodeModel ());
+		Block city = CreateBlock (project.CreateNodeModel (pathSeparator));
 		city.gameObject.transform.SetParent (origin, true);
 		city.gameObject.transform.position = new Vector3 (0, 0, -city.length / 2);
 		float size = Mathf.Max(city.length, city.width);
@@ -32,33 +32,34 @@ public class ContentGenerator : MonoBehaviour {
 		}
 
 		for (int i = 0; i < leafCount; i++) {
-			nodes.Insert((int) (nodes.Count*Random.value), new Building());
+			nodes.Insert((int) (nodes.Count*Random.value), new BuildingNode());
 		}
 
-		Street street = new Street (nodes.ToArray());
+		StreetNode street = new StreetNode (nodes.ToArray());
 
 		return street;
 	}
 
 	private Block CreateBlock(Node node) {
-		if (node is Building) {
-			return CreateBuildingBlock ((Building)node);
+		if (node is BuildingNode) {
+			return CreateBuildingBlock ((BuildingNode)node);
 		} else {
-			return CreateStreetBlock ((Street)node);
+			return CreateStreetBlock ((StreetNode)node);
 		}
 	}
 
-	private Block CreateBuildingBlock(Building building) {
+	private Block CreateBuildingBlock(BuildingNode building) {
 		Block result = new Block ();
 		result.gameObject = (GameObject) GameObject.Instantiate (buildingPrefab, Vector3.zero, Quaternion.identity);
 		result.gameObject.transform.localScale = new Vector3 (building.groundSize, building.height, building.groundSize);
 		result.gameObject.transform.Find("Building Object").GetComponent<Renderer> ().material.SetColor ("_Color", new Color(building.color.x, building.color.y, building.color.z));
 		result.width = building.groundSize * 1.2f;
 		result.length = result.width;
-		return result;
+        result.gameObject.GetComponentInChildren<Building>().node = building;
+        return result;
 	}
 
-	private Block CreateStreetBlock(Street street) {
+	private Block CreateStreetBlock(StreetNode street) {
 
 		GameObject blockGameObject = (GameObject) GameObject.Instantiate (blockPrefab, Vector3.zero, Quaternion.identity);
 

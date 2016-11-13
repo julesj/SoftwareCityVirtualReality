@@ -14,7 +14,11 @@ public class SpotCalibrationSuccesshandler : MonoBehaviour {
 
     private void OnInit()
     {
-        FindObjectOfType<TableCalibrator>().OnCalibrationCompleteHandler += OnCalibrationComplete;
+        TableCalibrator tableCalibrator = FindObjectOfType<TableCalibrator>();
+        if (tableCalibrator != null)
+        {
+            tableCalibrator.OnCalibrationCompleteHandler += OnCalibrationComplete;
+        }
     }
 
     private void OnCalibrationComplete(Vector3 center, float radius)
