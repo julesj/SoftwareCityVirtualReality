@@ -10,17 +10,20 @@ public class AdjustableRoundTable : MonoBehaviour {
     private AdjustableTableMesh top;
     private AdjustableTableMesh middle;
     private AdjustableTableMesh bottom;
+    private SphereCollider sphereCollider;
 
 	void Start () {
         top = transform.FindChild("Top").GetComponent<AdjustableTableMesh>();
         middle = transform.FindChild("Middle").GetComponent<AdjustableTableMesh>();
         bottom = transform.FindChild("Bottom").GetComponent<AdjustableTableMesh>();
+        sphereCollider = top.GetComponent<SphereCollider>();
     }
 	
 	void Update () {
 	    if (NeedsUpdate())
         {
             UpdateMesh();
+            UpdateCollider();
         }
 	}
 
@@ -29,6 +32,11 @@ public class AdjustableRoundTable : MonoBehaviour {
     {
         float actualHeight = top.height + middle.height + bottom.height;
         return (actualHeight != height) || (radius != top.topRadius);
+    }
+
+    private void UpdateCollider()
+    {
+        sphereCollider.radius = radius;
     }
 
     private void UpdateMesh()

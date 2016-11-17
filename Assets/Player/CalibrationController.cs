@@ -17,6 +17,7 @@ public class CalibrationController : MonoBehaviour, InteractionConceptElement {
     {
         table.height = center.y;
         table.radius = radius;
+
         gameObject.transform.position = new Vector3(center.x, 0, center.z);
     }
 
