@@ -5,10 +5,10 @@ public class Test : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        FindObjectOfType<LifeCycle>().OnInitHandler += DoOnBegin;
+        EventBus.Register(this);
     }
 
-    private void DoOnBegin()
+    void OnEvent(SceneReadyEvent e)
     {
         Debug.Log("test");
     }

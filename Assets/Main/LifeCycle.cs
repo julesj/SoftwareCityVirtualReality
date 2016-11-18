@@ -2,57 +2,20 @@
 using System.Collections;
 
 public class LifeCycle : MonoBehaviour {
-
-    public delegate void OnInit();
-    public delegate void OnShutdown();
-    public OnInit OnInitHandler;
-    public OnShutdown OnShutdownHandler;
-
-    public delegate void OnBegin();
-    public delegate void OnFinish();
-    public OnInit OnBeginHandler;
-    public OnShutdown OnFinishHandler;
-
-
+    
     void Awake()
     {
+        EventBus.Register(this);
         Application.LoadLevelAdditive("PlayerScene");
         Application.LoadLevelAdditive("SoftwareCityScene");
         Application.LoadLevelAdditive("EnvironmentScene");
-        Invoke("Init", 1);
+        Invoke("SceneReady", 2);
     }
 
 
-    public void Init()
+    private void SceneReady()
     {
-        if (OnInitHandler != null)
-        {
-            OnInitHandler();
-        }
-    }
-
-    public void Shutdown()
-    {
-        if (OnShutdownHandler != null)
-        {
-            OnShutdownHandler();
-        }
-    }
-
-    public void Begin()
-    {
-        if (OnBeginHandler != null)
-        {
-            OnBeginHandler();
-        }
-    }
-
-    public void Finish()
-    {
-        if (OnFinishHandler != null)
-        {
-            OnFinishHandler();
-        }
+        EventBus.Post(new SceneReadyEvent());
     }
 
     public void Restart()
@@ -60,4 +23,16 @@ public class LifeCycle : MonoBehaviour {
         Application.LoadLevel("MainScene");
     }
 
+}
+
+public class SceneReadyEvent
+{
+}
+
+public class StartPlayingEvent
+{
+}
+
+public class StopPlayingEvent
+{
 }

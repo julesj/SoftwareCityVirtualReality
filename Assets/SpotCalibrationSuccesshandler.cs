@@ -5,14 +5,10 @@ public class SpotCalibrationSuccesshandler : MonoBehaviour {
 
     void Awake()
     {
-        LifeCycle lifeCycle = FindObjectOfType<LifeCycle>();
-        if (lifeCycle != null)
-        {
-            lifeCycle.OnInitHandler += OnInit;
-        }
+        EventBus.Register(this);
     }
 
-    private void OnInit()
+    public void OnEvent(SceneReadyEvent e)
     {
         TableCalibrator tableCalibrator = FindObjectOfType<TableCalibrator>();
         if (tableCalibrator != null)

@@ -8,22 +8,16 @@ public class AmbientChoreograph : MonoBehaviour {
     private AudioSource welcome;
     private AudioSource goodbye;
 
-    void Awake()
+    public void Awake()
     {
+        EventBus.Register(this);
         ambient1 = GetComponents<AudioSource>()[0];
         ambient2 = GetComponents<AudioSource>()[1];
         welcome = GetComponents<AudioSource>()[2];
         goodbye = GetComponents<AudioSource>()[3];
-
-        LifeCycle lifeCycle = FindObjectOfType<LifeCycle>();
-        if (lifeCycle != null)
-        {
-            lifeCycle.OnBeginHandler += OnBegin;
-            lifeCycle.OnFinishHandler += OnFinish;
-        }
     }
 
-    private void OnBegin()
+    public void OnEvent(StartPlayingEvent e)
     {
         // todo Fading
         ambient2.volume = 1;
@@ -31,7 +25,7 @@ public class AmbientChoreograph : MonoBehaviour {
     }
 
 
-    private void OnFinish()
+    public void OnEvent(StopPlayingEvent e)
     {
         // todo Fading
         ambient2.volume = 0;

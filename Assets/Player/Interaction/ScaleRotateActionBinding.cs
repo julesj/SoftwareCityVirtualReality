@@ -6,15 +6,10 @@ public class ScaleRotateActionBinding : MonoBehaviour {
 
     void Awake()
     {
-        LifeCycle lifeCycle = FindObjectOfType<LifeCycle>();
-        if (lifeCycle != null)
-        {
-            lifeCycle.OnInitHandler += OnInit;
-        }
-        
+        EventBus.Register(this);
     }
 
-    void OnInit () {
+    public void OnEvent(SceneReadyEvent e) {
         Grow cityManager = FindObjectOfType<Grow>();
         cityManager.AddScaleSliderControl(transform.Find("Slider/Grip Scale").GetComponent<SliderControl>());
         cityManager.AddRotationSliderControl(transform.Find("Slider/Grip Rotate").GetComponent<SliderControl>());

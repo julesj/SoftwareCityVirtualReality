@@ -15,15 +15,10 @@ public class Grow : MonoBehaviour {
 
     void Awake()
     {
-        LifeCycle lifeCycle = FindObjectOfType<LifeCycle>();
-        if (lifeCycle != null) {
-            lifeCycle.OnBeginHandler += OnBegin;
-            lifeCycle.OnFinishHandler += OnFinish;
-        }
-        
+        EventBus.Register(this);
     }
 
-    private void OnBegin()
+    public void OnEvent(StartPlayingEvent e)
     {
         scale = CalcScale();
         scaleToReach = maxScale;
@@ -32,7 +27,7 @@ public class Grow : MonoBehaviour {
         animateTimeEnd = animateTimeStart + 3;
     }
 
-    private void OnFinish()
+    public void OnEvent(StopPlayingEvent e)
     {
         scale = CalcScale();
         scaleToReach = 0;

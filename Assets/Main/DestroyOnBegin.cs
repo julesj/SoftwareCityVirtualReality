@@ -5,14 +5,12 @@ public class DestroyOnBegin : MonoBehaviour {
 
     void Awake()
     {
-        LifeCycle lifeCycle = FindObjectOfType<LifeCycle>();
-        lifeCycle.OnBeginHandler += OnBegin;
+        EventBus.Register(this);
     }
 
-    private void OnBegin()
+    public void OnEvent(StartPlayingEvent e)
     {
-        LifeCycle lifeCycle = FindObjectOfType<LifeCycle>();
-        lifeCycle.OnBeginHandler -= OnBegin;
+        EventBus.Unregister(this);
         GameObject.Destroy(gameObject);
     }
 }
