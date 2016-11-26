@@ -4,7 +4,7 @@ Properties{
 	_MainTex("Base (RGB)", 2D) = "	" {}
 }
 SubShader{
-	Tags{ "RenderType" = "Fade" }
+	Tags{ "RenderType" = "Transparent" }
 
 	CGPROGRAM
 	// Physically based Standard lighting model, and enable shadows on all light types
@@ -23,11 +23,7 @@ struct Input {
 fixed4 _Color;
 
 void surf(Input IN, inout SurfaceOutput o) {
-
-
 	float c = ((sin(_Time[1] * 3) + 1) / 2) * 0.5 + 0.3;
-
-
 	o.Alpha = c;
 	o.Emission = _Color*c;
 }
