@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5246e4555fb85c4bad0b5d875c5bed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  samplingIntervalInSeconds: 0.25
+  samplingIntervalInSeconds: 0.1
   selectionPrefab: {fileID: 1000011176040926, guid: 2113514fc375699469d76c55e03fbeb1,
     type: 2}
 --- !u!1 &283609660
