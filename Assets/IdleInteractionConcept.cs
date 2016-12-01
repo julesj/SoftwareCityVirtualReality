@@ -41,7 +41,7 @@ public class IdleInteractionConcept : MonoBehaviour {
 
     public void StartScaleRotate(object sender, ControllerInteractionEventArgs e)
     {
-        EventBus.Post(new ChangeInteractionConceptEvent(InteractionConcept.ScaleTranslate));
+        EventBus.Post(new ChangeInteractionConceptEvent(InteractionConcept.ScaleRotate));
     }
 
     public void StartSelectNavigate(object sender, ControllerInteractionEventArgs e)
