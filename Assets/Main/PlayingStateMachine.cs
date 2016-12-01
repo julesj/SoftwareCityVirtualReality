@@ -133,7 +133,7 @@ public class PlayingState : State
     public void OnEnterState()
     {
         EventBus.Post(new StartPlayingEvent());
-        EventBus.Post(new ChangeInteractionConceptEvent(InteractionConcept.ScaleTranslate));
+        EventBus.Post(new ChangeInteractionConceptEvent(InteractionConcept.Idle));
     }
 
     public void OnExitState()
