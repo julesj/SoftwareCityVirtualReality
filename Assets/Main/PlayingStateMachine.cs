@@ -82,12 +82,12 @@ public class CalibratingState : State
     public void OnEnterState()
     {
         // Activate Interaction Calibration
-        GameObject.FindObjectOfType<InteractionConceptManager>().ChangeConcept(InteractionConcept.Calibration);
+        EventBus.Post(new ChangeInteractionConceptEvent(InteractionConcept.Calibration));
     }
 
     public void OnExitState()
     {
-        GameObject.FindObjectOfType<InteractionConceptManager>().ChangeConcept(InteractionConcept.Nothing);
+        EventBus.Post(new ChangeInteractionConceptEvent(InteractionConcept.Nothing));
     }
 }
 
@@ -133,13 +133,13 @@ public class PlayingState : State
     public void OnEnterState()
     {
         EventBus.Post(new StartPlayingEvent());
-        GameObject.FindObjectOfType<InteractionConceptManager>().ChangeConcept(InteractionConcept.ScaleTranslate);
+        EventBus.Post(new ChangeInteractionConceptEvent(InteractionConcept.ScaleTranslate));
     }
 
     public void OnExitState()
     {
         EventBus.Post(new StopPlayingEvent());
-        GameObject.FindObjectOfType<InteractionConceptManager>().ChangeConcept(InteractionConcept.Nothing);
+        EventBus.Post(new ChangeInteractionConceptEvent(InteractionConcept.Nothing));
     }
 }
 

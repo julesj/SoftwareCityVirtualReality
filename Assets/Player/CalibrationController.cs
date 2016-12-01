@@ -3,22 +3,28 @@ using System.Collections;
 using System;
 using VRTK;
 
-public class CalibrationController : MonoBehaviour, InteractionConceptElement {
+public class CalibrationController : MonoBehaviour {
 
     public GameObject leftController;
     public GameObject rightController;
 
-    private TableCalibrator calibrator;
-    private AdjustableRoundTable table;
+    public TableCalibrator calibrator;
+    public AdjustableRoundTable table;
 
     private ControllerInteractionEventHandler applicationButtonPressedHandler;
+
+    void Awake()
+    {
+        EventBus.Register(this);
+    }
 
     void OnCalibrationComplete(Vector3 center, float radius)
     {
         table.height = center.y;
         table.radius = radius;
 
-        gameObject.transform.position = new Vector3(center.x, 0, center.z);
+        table.gameObject.transform.position = new Vector3(center.x, 0, center.z);
+        table.gameObject.SetActive(true);
     }
 
     void ApplicationMenuButtonPressed(object sender, ControllerInteractionEventArgs e)
@@ -32,27 +38,25 @@ public class CalibrationController : MonoBehaviour, InteractionConceptElement {
 
     void Start()
     {
-        calibrator = gameObject.GetComponent<TableCalibrator>();
         calibrator.OnCalibrationCompleteHandler += OnCalibrationComplete;
-
-        table = gameObject.GetComponent<AdjustableRoundTable>();
     }
 
     // Interaction Concept Element Impl
 
-    public void ActivateElement()
+    public void OnEvent(StartInteractionConceptEvent c)
     {
-        RegisterHandler();
+        if (c.newConcept == InteractionConcept.Calibration)
+        {
+            RegisterHandler();
+        }
     }
 
-    public void DeactivateElement()
+    public void OnEvent(StopInteractionConceptEvent c)
     {
-        UnRegisterHandler();
-    }
-
-    public InteractionConcept GetConcept()
-    {
-        return InteractionConcept.Calibration;
+        if (c.oldConcept == InteractionConcept.Calibration)
+        {
+            UnRegisterHandler();
+        }
     }
 
     // Controller Event Handling Helper

@@ -3,7 +3,7 @@ using System.Collections;
 using VRTK;
 using System;
 
-public class MenuController : MonoBehaviour, InteractionConceptElement{
+public class MenuController : MonoBehaviour {
 
 	public GameObject front;
 	public GameObject back;
@@ -62,20 +62,5 @@ public class MenuController : MonoBehaviour, InteractionConceptElement{
     private void DoTouchpadAxisChanged(object sender, ControllerInteractionEventArgs e)
     {
         direction = e.touchpadAxis;
-    }
-
-    public void ActivateElement()
-    {
-        gameObject.SetActive(true);
-    }
-
-    public void DeactivateElement()
-    {
-        gameObject.SetActive(false);
-    }
-
-    public InteractionConcept GetConcept()
-    {
-        return InteractionConcept.ScaleTranslate;
     }
 }

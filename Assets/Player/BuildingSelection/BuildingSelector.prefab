@@ -55,6 +55,7 @@ GameObject:
   - 4: {fileID: 4000010970872920}
   - 114: {fileID: 114000011862620802}
   - 82: {fileID: 82000013222059406}
+  - 114: {fileID: 114000013191874098}
   m_Layer: 0
   m_Name: BuildingSelector
   m_TagString: Untagged
@@ -422,3 +423,15 @@ MonoBehaviour:
   samplingIntervalInSeconds: 0.1
   selectionPrefab: {fileID: 1000011176040926, guid: 2113514fc375699469d76c55e03fbeb1,
     type: 2}
+--- !u!114 &114000013191874098
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012086905440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28b598a51f3c9a84e87d661e7eb7bcb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionConceptName: Selection
