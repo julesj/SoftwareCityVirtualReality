@@ -58,6 +58,8 @@ public class InitState : State
 
     public void OnEnterState()
     {
+        // Activate Interaction Calibration Switch
+        EventBus.Post(new ChangeInteractionConceptEvent(InteractionConcept.ReadyForCalibration));
     }
 
     public void OnExitState()
