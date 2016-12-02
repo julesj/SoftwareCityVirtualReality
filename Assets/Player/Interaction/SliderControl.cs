@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using VRTK;
 
 public class SliderControl : MonoBehaviour {
 
@@ -10,16 +11,35 @@ public class SliderControl : MonoBehaviour {
     public Transform sliderEnd;
     public Transform buttonTransform;
 
+    private bool isGrabbed;
+    private Vector3 offset;
+
     void OnTriggerStay(Collider other)
     {
-        if (!other.transform.GetComponent<ControlTrigger>())
+
+        ControlTrigger trigger = other.transform.GetComponent<ControlTrigger>();
+
+        if (trigger == null)
         {
+            return;
+        }
+
+        if (trigger.IsPressed())
+        {
+            if (!isGrabbed)
+            {
+                offset = buttonTransform.position - other.transform.position;
+                isGrabbed = true;
+            }
+        } else
+        {
+            isGrabbed = false;
             return;
         }
 
         Vector3 contact = other.transform.position;
         Vector3 completeSlide = sliderEnd.position - sliderStart.position;
-        Vector3 amountSlide = Vector3.Project(contact - sliderStart.position, completeSlide.normalized);
+        Vector3 amountSlide = Vector3.Project((contact + offset) - sliderStart.position, completeSlide.normalized);
         float value = amountSlide.magnitude / completeSlide.magnitude;
         Vector3 buttonPos = sliderStart.position + amountSlide;
 

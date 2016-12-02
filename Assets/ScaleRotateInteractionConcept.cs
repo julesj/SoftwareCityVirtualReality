@@ -39,6 +39,10 @@ public class ScaleRotateInteractionConcept : MonoBehaviour {
             
             leftController.TriggerAxisChanged -= showScaleRotateMenu;
             leftController.TriggerTouchEnd -= startIdle;
+
+            // reset animation and hide menu
+            scaleRotateMenu.gameObject.GetComponent<ScaleAnimator>().ResetAnimation();
+            scaleRotateMenu.SetActive(false);
         }
     }
 
@@ -50,10 +54,6 @@ public class ScaleRotateInteractionConcept : MonoBehaviour {
 
     public void StartIdle(object sender, ControllerInteractionEventArgs e)
     {
-        // reset animation and hide menu
-        scaleRotateMenu.gameObject.GetComponent<ScaleAnimator>().ResetAnimation();
-        scaleRotateMenu.SetActive(false);
-
         EventBus.Post(new ChangeInteractionConceptEvent(InteractionConcept.Idle));
     }
 }

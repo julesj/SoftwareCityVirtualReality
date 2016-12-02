@@ -8,7 +8,7 @@ public class Grow : MonoBehaviour {
     public float minScale = 1;
     public float maxScale = 100;
     private float scale;
-    private float scaleToReach;
+    //private float scaleToReach;
     private float animateTimeStart;
     private float animateTimeEnd;
     private bool animating;
@@ -20,20 +20,20 @@ public class Grow : MonoBehaviour {
 
     public void OnEvent(StartPlayingEvent e)
     {
-        scale = CalcScale();
-        scaleToReach = maxScale;
-        animating = true;
+        scale = minScale;
+        //scaleToReach = minScale;
+        /*animating = true;
         animateTimeStart = Time.time;
-        animateTimeEnd = animateTimeStart + 3;
+        animateTimeEnd = animateTimeStart + 3;*/
     }
 
     public void OnEvent(StopPlayingEvent e)
     {
-        scale = CalcScale();
-        scaleToReach = 0;
-        animating = true;
+        scale = 0;
+        //scaleToReach = 0;
+        /*animating = true;
         animateTimeStart = Time.time;
-        animateTimeEnd = animateTimeStart + 2;
+        animateTimeEnd = animateTimeStart + 2;*/
     }
 
     public void AddScaleSliderControl(SliderControl scaleSliderControl)
@@ -56,11 +56,13 @@ public class Grow : MonoBehaviour {
 
     private void SetScaleValue(float value)
     {
-        scale = CalcScale();
-		scaleToReach = (minScale + (maxScale - minScale) * value* value* value* value* value* value* value);
-        animating = true;
-        animateTimeStart = Time.time;
-        animateTimeEnd = animateTimeStart + 1;
+        /*scale = CalcScale(); */
+		scale = (minScale + (maxScale - minScale) * value* value* value* value* value* value* value);
+        transform.localScale = Vector3.one * scale;
+        //animating = true;
+        //animateTimeStart = Time.time;
+        //animateTimeEnd = animateTimeStart + 1;*/
+
     }
 
     private void SetRotationValue(float value)
@@ -68,7 +70,7 @@ public class Grow : MonoBehaviour {
         transform.localRotation = Quaternion.Euler(0, value * 360, 0);
     }
 
-    private float CalcScale()
+   /* private float CalcScale()
     {
         if (!animating)
         {
@@ -81,11 +83,11 @@ public class Grow : MonoBehaviour {
         }
         t = (Mathf.Cos(Mathf.PI * t) - 1) / -2;
         return scale * (1 - t) + scaleToReach * t;
-    }
+    }*/
 
     void Update()
     {
-        if (animating)
+       /* if (animating)
         {
             if (Time.time > animateTimeEnd)
             {
@@ -97,6 +99,6 @@ public class Grow : MonoBehaviour {
                 transform.localScale = Vector3.one * CalcScale();
             }
 
-        }
+        }*/
     }
 }
