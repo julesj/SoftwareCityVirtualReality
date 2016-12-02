@@ -4,7 +4,7 @@ using VRTK;
 
 public class ScaleRotateInteractionConcept : MonoBehaviour {
 
-    public GameObject rotationMenu;
+    public GameObject scaleRotateMenu;
 
     private ControllerInteractionEventHandler showScaleRotateMenu;
     private ControllerInteractionEventHandler startIdle;
@@ -27,10 +27,13 @@ public class ScaleRotateInteractionConcept : MonoBehaviour {
             leftController.TriggerTouchEnd += startIdle;
 
             // set inital scale and show menu
-            float scale = leftController.GetTriggerAxis();
+            scaleRotateMenu.SetActive(true);
+            float progress = leftController.GetTriggerAxis();
+            scaleRotateMenu.gameObject.GetComponent<ScaleAnimator>().SetAnimationProgress(progress);
+            /*
             print("start: " + scale);
-            rotationMenu.transform.localScale = new Vector3(scale, scale, scale);
-            rotationMenu.SetActive(true);
+            scaleRotateMenu.transform.localScale = new Vector3(scale, scale, scale);
+            */
         }
     }
 
@@ -47,14 +50,18 @@ public class ScaleRotateInteractionConcept : MonoBehaviour {
 
     public void UpdateScaleRotateMenu(object sender, ControllerInteractionEventArgs e)
     {
-        float scale = e.buttonPressure;
+        float progress = e.buttonPressure;
+        scaleRotateMenu.gameObject.GetComponent<ScaleAnimator>().SetAnimationProgress(progress);
+        /*
         print("update: " + scale);
-        rotationMenu.transform.localScale = new Vector3(scale, scale, scale);
+        scaleRotateMenu.transform.localScale = new Vector3(scale, scale, scale);
+        */
     }
 
     public void StartIdle(object sender, ControllerInteractionEventArgs e)
     {
-        rotationMenu.SetActive(false);
+        scaleRotateMenu.gameObject.GetComponent<ScaleAnimator>().ResetAnimation();
+        scaleRotateMenu.SetActive(false);
         EventBus.Post(new ChangeInteractionConceptEvent(InteractionConcept.Idle));
     }
 }

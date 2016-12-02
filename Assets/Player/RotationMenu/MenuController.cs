@@ -10,18 +10,18 @@ public class MenuController : MonoBehaviour {
 	public GameObject left;
 	public GameObject right;
 
-	public GameObject controller;
+	//public GameObject controller;
 
-	private Rigidbody rigidBody;
+	//private Rigidbody rigidBody;
 	private AnchorCircle anchorCircle;
-    private Transform attach;
-    private Vector2 direction = Vector2.zero;
+    //private Transform attach;
+    //private Vector2 direction = Vector2.zero;
 
 
     // Use this for initialization
     void Start () {
 
-		rigidBody = GetComponent<Rigidbody>();
+		//rigidBody = GetComponent<Rigidbody>();
 		anchorCircle = GetComponent<AnchorCircle>();	
 
 		anchorCircle.SetGameObjectAtAnchorpoint (0, Instantiate (front));
@@ -32,6 +32,7 @@ public class MenuController : MonoBehaviour {
 		//anchorCircle.RotateToAnchorPoint(0);
 	}
 	
+    /*
 	void Update () {
         if (attach == null)
         {
@@ -62,5 +63,5 @@ public class MenuController : MonoBehaviour {
     private void DoTouchpadAxisChanged(object sender, ControllerInteractionEventArgs e)
     {
         direction = e.touchpadAxis;
-    }
+    }*/
 }
