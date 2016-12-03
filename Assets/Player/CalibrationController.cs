@@ -12,12 +12,24 @@ public class CalibrationController : MonoBehaviour {
     public AdjustableRoundTable table;
 
     private ControllerInteractionEventHandler applicationButtonPressedHandler;
+    private ControllerInteractionEventHandler gripButtonPressedHandler;
+    private ControllerInteractionEventHandler touchPadPressedHandler;
 
+    // Life Cycle
     void Awake()
     {
         EventBus.Register(this);
     }
 
+    void Start()
+    {
+        calibrator.OnCalibrationCompleteHandler += OnCalibrationComplete;
+        table.gameObject.SetActive(false);
+    }
+
+    // Callbacks
+
+    // Set calibrated values and show table
     void OnCalibrationComplete(Vector3 center, float radius)
     {
         table.height = center.y;
@@ -27,21 +39,29 @@ public class CalibrationController : MonoBehaviour {
         table.gameObject.SetActive(true);
     }
 
+    // Get relevant controller component and hand it over to calibrator
     void ApplicationMenuButtonPressed(object sender, ControllerInteractionEventArgs e)
     {
-        //TODO add normalized vector to calibrator from pressed controller
         VRTK_ControllerActions controllerActions = ((VRTK_ControllerEvents)sender).gameObject.GetComponent<VRTK_ControllerActions>();
         calibrator.AddCalibrationVector(controllerActions);
     }
 
-    // Life Cycle
-
-    void Start()
+    // Finish Calibration Mode
+    void GripButtonPressed(object sender, ControllerInteractionEventArgs e)
     {
-        calibrator.OnCalibrationCompleteHandler += OnCalibrationComplete;
+        FindObjectOfType<LifeCycle>().GetComponent<PlayingStateMachine>().PostStateEvent(StateEvent.FinishCalibrating);
     }
 
-    // Interaction Concept Element Impl
+    // Reset calibration and hide last calibrated table
+    void TouchPadPressed(object sender, ControllerInteractionEventArgs e)
+    {
+        calibrator.ResetCalibration();
+        table.gameObject.SetActive(false);
+    }
+
+
+
+    // Interaction Events
 
     public void OnEvent(StartInteractionConceptEvent c)
     {
@@ -59,10 +79,11 @@ public class CalibrationController : MonoBehaviour {
         }
     }
 
-    // Controller Event Handling Helper
+    // Controller Event Handling Register Helper
 
     private void RegisterHandler()
     {
+        // register ApplicationMenuButton
         if (applicationButtonPressedHandler == null)
         {
             applicationButtonPressedHandler = new ControllerInteractionEventHandler(ApplicationMenuButtonPressed);
@@ -70,14 +91,47 @@ public class CalibrationController : MonoBehaviour {
         
         leftController.GetComponent<VRTK_ControllerEvents>().ApplicationMenuPressed += applicationButtonPressedHandler;
         rightController.GetComponent<VRTK_ControllerEvents>().ApplicationMenuPressed += applicationButtonPressedHandler;
+
+        // register GripButton
+        if (gripButtonPressedHandler == null)
+        {
+            gripButtonPressedHandler = new ControllerInteractionEventHandler(GripButtonPressed);
+        }
+
+        leftController.GetComponent<VRTK_ControllerEvents>().GripPressed += gripButtonPressedHandler;
+        rightController.GetComponent<VRTK_ControllerEvents>().GripPressed += gripButtonPressedHandler;
+
+        // register TouchPad
+        if (touchPadPressedHandler == null)
+        {
+            touchPadPressedHandler = new ControllerInteractionEventHandler(TouchPadPressed);
+        }
+
+        leftController.GetComponent<VRTK_ControllerEvents>().TouchpadPressed += touchPadPressedHandler;
+        rightController.GetComponent<VRTK_ControllerEvents>().TouchpadPressed += touchPadPressedHandler;
     }
 
     private void UnRegisterHandler()
     {
+        // unregister ApplicationMenuButton
         if (applicationButtonPressedHandler != null)
         {
             leftController.GetComponent<VRTK_ControllerEvents>().ApplicationMenuPressed -= applicationButtonPressedHandler;
             rightController.GetComponent<VRTK_ControllerEvents>().ApplicationMenuPressed -= applicationButtonPressedHandler;
+        }
+
+        // unregister GripButton
+        if (gripButtonPressedHandler != null)
+        {
+            leftController.GetComponent<VRTK_ControllerEvents>().GripPressed -= gripButtonPressedHandler;
+            rightController.GetComponent<VRTK_ControllerEvents>().GripPressed -= gripButtonPressedHandler;
+        }
+
+        // unregister Touchpad
+        if (touchPadPressedHandler != null)
+        {
+            leftController.GetComponent<VRTK_ControllerEvents>().TouchpadPressed -= touchPadPressedHandler;
+            rightController.GetComponent<VRTK_ControllerEvents>().TouchpadPressed -= touchPadPressedHandler;
         }
     }
 }

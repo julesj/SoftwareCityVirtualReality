@@ -2,19 +2,53 @@
 using System.Collections;
 using VRTK;
 
-public class TableCalibrator : MonoBehaviour {
+public class TableCalibrator: MonoBehaviour {
     
     public delegate void OnCalibrationComplete(Vector3 center, float radius);
     public OnCalibrationComplete OnCalibrationCompleteHandler;
 
-    public Vector3 calibratedCenter;
-    public float calibratedRadius;
+    public Vector3 lastCalibratedCenter;
+    public float lastCalibratedRadius;
 
     private const uint maxCalibrationVectors = 1000;
+
     private Vector3[] appButtonPoints = new Vector3[maxCalibrationVectors];
     private Vector3[] directions = new Vector3[maxCalibrationVectors];
     private Vector3[] controllerBasePoints = new Vector3[maxCalibrationVectors];
     private uint numberOfCalibrationVectors = 0;
+
+    public void AddCalibrationVector(VRTK_ControllerActions controllerActions)
+    {
+        controllerActions.TriggerHapticPulse(3999);
+
+        Transform appButton = controllerActions.gameObject.transform.FindChild("Model/button/attach");
+        Transform sysButton = controllerActions.gameObject.transform.FindChild("Model/sys_button/attach");
+        Transform controllerBase = controllerActions.gameObject.transform.FindChild("Model/base/attach");
+
+        Vector3 direction = sysButton.position - appButton.position;
+
+        appButtonPoints[numberOfCalibrationVectors] = appButton.position;
+        directions[numberOfCalibrationVectors] = direction;
+        controllerBasePoints[numberOfCalibrationVectors] = controllerBase.position;
+
+        if (numberOfCalibrationVectors < maxCalibrationVectors - 1)
+        {
+            numberOfCalibrationVectors++;
+            Calibrate();
+        }
+        else
+        {
+            //CancelInvoke("addCalibrationVector");
+        }
+    }
+
+    public void ResetCalibration()
+    {
+        appButtonPoints = new Vector3[maxCalibrationVectors];
+        directions = new Vector3[maxCalibrationVectors];
+        controllerBasePoints = new Vector3[maxCalibrationVectors];
+        numberOfCalibrationVectors = 0;
+    }
 
     private void Calibrate()
     {
@@ -53,34 +87,10 @@ public class TableCalibrator : MonoBehaviour {
         float radius = radiusResult / actualSize;
         float height = heightResult / actualSize - 0.015f; // - constant value
 
-        calibratedCenter = new Vector3(center.x, height, center.z);
-        calibratedRadius = radius + 0.04f; // + constant value
+        lastCalibratedCenter = new Vector3(center.x, height, center.z);
+        lastCalibratedRadius = radius + 0.04f; // + constant value
 
-        OnCalibrationCompleteHandler(calibratedCenter, calibratedRadius);
-    }
-
-    public void AddCalibrationVector(VRTK_ControllerActions controllerActions)
-    {
-        controllerActions.TriggerHapticPulse(3999);
-
-        Transform appButton = controllerActions.gameObject.transform.FindChild("Model/button/attach");
-        Transform sysButton = controllerActions.gameObject.transform.FindChild("Model/sys_button/attach");
-        Transform controllerBase = controllerActions.gameObject.transform.FindChild("Model/base/attach");
-
-        Vector3 direction = sysButton.position - appButton.position;
-
-        appButtonPoints[numberOfCalibrationVectors] = appButton.position;
-        directions[numberOfCalibrationVectors] = direction;
-        controllerBasePoints[numberOfCalibrationVectors] = controllerBase.position;
-
-        if (numberOfCalibrationVectors < maxCalibrationVectors-1)
-        {
-            numberOfCalibrationVectors++;
-            Calibrate();
-        } else
-        {
-            //CancelInvoke("addCalibrationVector");
-        }
+        OnCalibrationCompleteHandler(lastCalibratedCenter, lastCalibratedRadius);
     }
 
     //Two non-parallel lines which may or may not touch each other have a point on each line which are closest

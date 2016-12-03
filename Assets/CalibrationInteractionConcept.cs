@@ -4,7 +4,7 @@ using VRTK;
 
 public class CalibrationInteractionConcept : MonoBehaviour {
 
-    private ControllerInteractionEventHandler switchCalibration;
+    private ControllerInteractionEventHandler startCalibration;
 
     void Awake()
     {
@@ -18,27 +18,26 @@ public class CalibrationInteractionConcept : MonoBehaviour {
             VRTK_ControllerEvents leftController = VRTK.VRTK_DeviceFinder.GetControllerLeftHand().GetComponent<VRTK_ControllerEvents>();
             VRTK_ControllerEvents rightController = VRTK.VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerEvents>();
 
-            switchCalibration = new ControllerInteractionEventHandler(SwitchCalibration);
-            leftController.GripPressed += switchCalibration;
-            rightController.GripPressed += switchCalibration;
+            startCalibration = new ControllerInteractionEventHandler(StartCalibration);
+            leftController.GripPressed += startCalibration;
+            rightController.GripPressed += startCalibration;
         }
     }
 
     public void OnEvent(StopInteractionConceptEvent e)
     {
-        if (e.oldConcept == InteractionConcept.Calibration)
+        if (e.oldConcept == InteractionConcept.ReadyForCalibration)
         {
             VRTK_ControllerEvents leftController = VRTK.VRTK_DeviceFinder.GetControllerLeftHand().GetComponent<VRTK_ControllerEvents>();
             VRTK_ControllerEvents rightController = VRTK.VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerEvents>();
 
-            leftController.GripPressed -= switchCalibration;
-            rightController.GripPressed -= switchCalibration;
+            leftController.GripPressed -= startCalibration;
+            rightController.GripPressed -= startCalibration;
         }
     }
 
-    public void SwitchCalibration(object sender, ControllerInteractionEventArgs e)
+    public void StartCalibration(object sender, ControllerInteractionEventArgs e)
     {
-        FindObjectOfType<LifeCycle>().GetComponent<PlayingStateMachine>().PostStateEvent(StateEvent.FinishCalibrating);
         FindObjectOfType<LifeCycle>().GetComponent<PlayingStateMachine>().PostStateEvent(StateEvent.StartCalibrating);
     }
 }
