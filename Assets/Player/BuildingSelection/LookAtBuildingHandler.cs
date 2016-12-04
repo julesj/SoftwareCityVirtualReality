@@ -42,8 +42,12 @@ public class LookAtBuildingHandler : MonoBehaviour {
             {
                 if (selectedBuilding != null)
                 {
-                    transform.FindChild("FileNameLabel").GetComponent<TextMesh>().text = selectedBuilding.node.name;
-                    transform.FindChild("PathNameLabel").GetComponent<TextMesh>().text = selectedBuilding.node.pathName;
+                    transform.FindChild("TextHolder/FileNameLabel").GetComponent<TextMesh>().text = selectedBuilding.node.name;
+                    transform.FindChild("TextHolder/PathNameLabel").GetComponent<TextMesh>().text = selectedBuilding.node.pathName;
+                    AnimateThis anim = transform.FindChild("TextHolder").GetComponent<AnimateThis>();
+                    anim.CancelAll();
+                    anim.Transformate().Duration(1).FromScale(new Vector3(1, 0, 1)).ToScale(Vector3.one).Ease(AnimateThis.EaseOutElastic).Start();
+
                     if (currentSelectionObject != null)
                     {
                         Destroy(currentSelectionObject);
@@ -55,8 +59,8 @@ public class LookAtBuildingHandler : MonoBehaviour {
                 }
                 else
                 {
-                    transform.FindChild("FileNameLabel").GetComponent<TextMesh>().text = "";
-                    transform.FindChild("PathNameLabel").GetComponent<TextMesh>().text = "";
+                    transform.FindChild("TextHolder/FileNameLabel").GetComponent<TextMesh>().text = "";
+                    transform.FindChild("TextHolder/PathNameLabel").GetComponent<TextMesh>().text = "";
                     if (currentSelectionObject != null)
                     {
                         Destroy(currentSelectionObject);

@@ -20,5 +20,9 @@ public class KeyListener : MonoBehaviour {
         {
             GetComponent<PlayingStateMachine>().PostStateEvent(StateEvent.StopPlaying);
         }
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            FindObjectOfType<Grow>().SetScaleValue(1f);
+        }
     }
 }

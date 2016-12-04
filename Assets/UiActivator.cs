@@ -26,4 +26,6 @@ public class UiActivator : MonoBehaviour {
             gameObject.SetActive(false);
         }
     }
+
+    void Update() { }
 }
