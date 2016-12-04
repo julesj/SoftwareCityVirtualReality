@@ -209,17 +209,14 @@ public class AnimateThis : MonoBehaviour {
 
     private List<Animation> animations = new List<Animation>();
 
-    public TransformAnimationBuilder Transformate(Transform transform)
+    public void CancelAll()
+    {
+        animations.Clear();
+    }
+
+    public TransformAnimationBuilder Transformate()
     {
         return new TransformAnimationBuilder(this, new TransformAnimatable(transform));
-    }
-    public TransformAnimationBuilder Transformate(GameObject gameObject)
-    {
-        return Transformate(gameObject.transform);
-    }
-    public TransformAnimationBuilder Transformate(MonoBehaviour monoBehaviour)
-    {
-        return Transformate(monoBehaviour.transform);
     }
 
     public void Add(Animation a)

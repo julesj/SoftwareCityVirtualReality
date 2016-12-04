@@ -54,7 +54,7 @@ public class Grow : MonoBehaviour {
        
     }
 
-    private void SetScaleValue(float value)
+    public void SetScaleValue(float value)
     {
         /*scale = CalcScale(); */
 		scale = (minScale + (maxScale - minScale) * value* value* value* value* value* value* value);
