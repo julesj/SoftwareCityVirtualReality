@@ -20,9 +20,13 @@ public class KeyListener : MonoBehaviour {
         {
             GetComponent<PlayingStateMachine>().PostStateEvent(StateEvent.StopPlaying);
         }
-        if (Input.GetKeyDown(KeyCode.Keypad1))
+        if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1))
         {
             FindObjectOfType<Grow>().SetScaleValue(1f);
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            EventBus.Post(new Events.BuildingSelectionConfirmedEvent());
         }
     }
 }

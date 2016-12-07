@@ -6,13 +6,15 @@ public class LookAtBuildingHandler : MonoBehaviour {
     private Ray ray;
     private float timeNextSample;
     private Building lastSelectedBuilding;
+    private Vector3 lastSelectedPosition;
     private GameObject currentSelectionObject;
-
+    
     public float samplingIntervalInSeconds = 0.25f;
     public GameObject selectionPrefab;
+    public GameObject displayPrefab;
 
 	void Start () {
-	
+        EventBus.Register(this);
 	}
 	
 	// Update is called once per frame
@@ -36,6 +38,7 @@ public class LookAtBuildingHandler : MonoBehaviour {
                 if (hit.collider.transform.GetComponent<Building>() != null)
                 {
                     selectedBuilding = hit.collider.transform.GetComponent<Building>();
+                    lastSelectedPosition = hit.point;
                 }
             }
             if (selectedBuilding != lastSelectedBuilding)
@@ -71,4 +74,13 @@ public class LookAtBuildingHandler : MonoBehaviour {
             }
         }
 	}
+
+    public void OnEvent(Events.BuildingSelectionConfirmedEvent e)
+    {
+        if (lastSelectedBuilding != null)
+        {
+            GameObject display = GameObject.Instantiate(displayPrefab);
+            display.GetComponent<DisplayBehaviour>().SetData(lastSelectedBuilding, lastSelectedPosition, FindObjectOfType<Camera>().transform);
+        }
+    }
 }
