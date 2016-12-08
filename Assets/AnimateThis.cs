@@ -199,6 +199,16 @@ public class AnimateThis : MonoBehaviour {
             return this;
         }
 
+        public TransformAnimationBuilder FromScale(float scaleFrom)
+        {
+            return FromScale(Vector3.one * scaleFrom);
+        }
+
+        public TransformAnimationBuilder ToScale(float scaleTo)
+        {
+            return ToScale(Vector3.one * scaleTo);
+        }
+
         public TransformAnimationBuilder FromScale(Vector3 scaleFrom)
         {
             transformAnimatable.scaleFrom = scaleFrom;
@@ -240,6 +250,7 @@ public class AnimateThis : MonoBehaviour {
             } else if (t >= a.timeStop)
             {
                 animations.RemoveAt(i);
+                a.animatable.DoAnimFrame(1);
                 if (a.onAnimationEnd != null)
                 {
                     a.onAnimationEnd();

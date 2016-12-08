@@ -47,13 +47,14 @@ public class EventBus : MonoBehaviour {
                     MethodInfo method = target.GetType().GetMethod("OnEvent", types);
                     if (method != null)
                     {
-                        try
-                        {
+                        /*try
+                        {*/
                             method.Invoke(target, param);
-                        } catch(Exception e)
+                        /*} catch(Exception e)
                         {
                             Debug.Log("Exception occured while dispatching event " + objectTypeName + ": " + e.Message);
-                        }
+
+                        }*/
                        
                     }
                 }

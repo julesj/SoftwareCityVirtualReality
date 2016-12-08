@@ -665,6 +665,8 @@ MonoBehaviour:
   samplingIntervalInSeconds: 0.25
   selectionPrefab: {fileID: 1000011176040926, guid: 2113514fc375699469d76c55e03fbeb1,
     type: 2}
+  displayPrefab: {fileID: 1000012507550166, guid: 4ed9d5ca27493ed4c99a80754804127c,
+    type: 2}
 --- !u!4 &637919390
 Transform:
   m_ObjectHideFlags: 0
