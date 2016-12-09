@@ -31,8 +31,6 @@ public class SelectBoxControl : MonoBehaviour {
     }
 
     void Start() {
-        sliderControl.OnValueChanged = SetValue;
-        SetValue(0);
 	}
 
     private void SetValue(float value)

@@ -22,7 +22,7 @@ public class KeyListener : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1))
         {
-            FindObjectOfType<Grow>().SetScaleValue(1f);
+            FindObjectOfType<FloatModel>().SetValue(0.5f);
         }
         if (Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2))
         {

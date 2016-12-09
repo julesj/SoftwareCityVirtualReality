@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using VRTK;
 
 public class LookAtBuildingHandler : MonoBehaviour {
 
@@ -59,9 +60,11 @@ public class LookAtBuildingHandler : MonoBehaviour {
                     Bounds bounds = selectedBuilding.gameObject.GetComponent<Renderer>().bounds;
                     currentSelectionObject.transform.position = bounds.center;
                     currentSelectionObject.transform.localScale = bounds.size + new Vector3(0.001f, 0.001f, 0.001f);
+                    //VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerActions>().ToggleHighlightTouchpad(true, new Color(0, 0, 1, 0.5f));
                 }
                 else
                 {
+                    //VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerActions>().ToggleHighlightTouchpad(false, new Color(0, 0, 1, 0.5f));
                     transform.FindChild("TextHolder/FileNameLabel").GetComponent<TextMesh>().text = "";
                     transform.FindChild("TextHolder/PathNameLabel").GetComponent<TextMesh>().text = "";
                     if (currentSelectionObject != null)
@@ -75,12 +78,24 @@ public class LookAtBuildingHandler : MonoBehaviour {
         }
 	}
 
+    public void OnEvent(Events.ClearDisplayEvent e)
+    {
+        //VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerActions>().ToggleHighlightTouchpad(false, new Color(0, 0, 1, 0.5f));
+        if (currentSelectionObject != null)
+        {
+            Destroy(currentSelectionObject);
+            currentSelectionObject = null;
+        }
+    }
+
     public void OnEvent(Events.BuildingSelectionConfirmedEvent e)
     {
         if (lastSelectedBuilding != null)
         {
             GameObject display = GameObject.Instantiate(displayPrefab);
-            display.GetComponent<DisplayBehaviour>().SetData(lastSelectedBuilding, lastSelectedPosition, FindObjectOfType<Camera>().transform);
+            display.GetComponent<DisplayBehaviour>().SetData(lastSelectedBuilding, lastSelectedPosition, VRTK_DeviceFinder.HeadsetTransform());
+            //VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerActions>().ToggleHighlightTouchpad(false, new Color(0, 0, 1, 0.5f));
+            EventBus.Post(new ChangeInteractionConceptEvent(InteractionConcept.Idle));
         }
     }
 }
