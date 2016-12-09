@@ -21,7 +21,7 @@ public class SelectionInteractionConcept : MonoBehaviour {
             startIdle = new ControllerInteractionEventHandler(StartIdle);
             selectionConfirmed = new ControllerInteractionEventHandler(SelectionConfirmed);
             rightController.TriggerTouchEnd += startIdle;
-            rightController.TriggerClicked += selectionConfirmed;
+            rightController.TouchpadPressed += selectionConfirmed;
         }
     }
 
@@ -32,7 +32,7 @@ public class SelectionInteractionConcept : MonoBehaviour {
             VRTK_ControllerEvents rightController = VRTK.VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerEvents>();
 
             rightController.TriggerTouchEnd -= startIdle;
-            rightController.TriggerClicked -= selectionConfirmed;
+            rightController.TouchpadPressed -= selectionConfirmed;
         }
     }
 

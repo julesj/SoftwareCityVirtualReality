@@ -43,7 +43,7 @@ public class DisplayBehaviour : MonoBehaviour {
     {
         GetComponent<AnimateThis>().Transformate()
             .ToScale(new Vector3(1.2f, 0, 1.2f))
-            .Duration(0.5f)
+            .Duration(0.25f)
             .OnEnd(DestroyMe)
             .Start();
     }
