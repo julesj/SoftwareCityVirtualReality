@@ -106,12 +106,12 @@ public class AnimateThis : MonoBehaviour {
         public EaseFunction easeFunction;
         public float timeStart;
         public float timeStop;
-        public delegate void OnAnimationStart();
-        public OnAnimationStart onAnimationStart;
+        public delegate void AnimationHandlerDelegate();
+        public AnimationHandlerDelegate onAnimationStart;
         public delegate void OnAnimationEnd();
-        public OnAnimationEnd onAnimationEnd;
+        public AnimationHandlerDelegate onAnimationEnd;
         public delegate void OnAnimationCanceled();
-        public OnAnimationCanceled onAnimationCanceled;
+        public AnimationHandlerDelegate onAnimationCancelled;
         public bool isPlaying;
         public bool isCanceled;
     }
@@ -123,6 +123,9 @@ public class AnimateThis : MonoBehaviour {
         private float startDelay = 0;
         private float duration = 1;
         private Animation.EaseFunction easeFunction;
+        private Animation.AnimationHandlerDelegate onAnimationStartDelegate;
+        private Animation.AnimationHandlerDelegate onAnimationEndDelegate;
+        private Animation.AnimationHandlerDelegate onAnimationCancelledDelegate;
 
         protected AnimationBuilder(AnimateThis animator, Animatable animatable)
         {
@@ -148,6 +151,18 @@ public class AnimateThis : MonoBehaviour {
             return (T) this;
         }
 
+        public T OnStart(Animation.AnimationHandlerDelegate onStartDelegate)
+        {
+            this.onAnimationStartDelegate = onStartDelegate;
+            return (T)this;
+        }
+
+        public T OnEnd(Animation.AnimationHandlerDelegate onEndDelegate)
+        {
+            this.onAnimationEndDelegate = onEndDelegate;
+            return (T)this;
+        }
+
         public Animation Start()
         {
             Animation result = new Animation();
@@ -156,6 +171,9 @@ public class AnimateThis : MonoBehaviour {
             result.timeStart = t + startDelay;
             result.timeStop = result.timeStart + duration;
             result.easeFunction = easeFunction;
+            result.onAnimationStart = onAnimationStartDelegate;
+            result.onAnimationEnd = onAnimationEndDelegate;
+            result.onAnimationCancelled = onAnimationCancelledDelegate;
             animator.Add(result);
             return result;
         }
@@ -243,9 +261,9 @@ public class AnimateThis : MonoBehaviour {
             if (a.isCanceled)
             {
                 animations.RemoveAt(i);
-                if (a.onAnimationCanceled != null)
+                if (a.onAnimationCancelled != null)
                 {
-                    a.onAnimationCanceled();
+                    a.onAnimationCancelled();
                 }
             } else if (t >= a.timeStop)
             {

@@ -5,6 +5,7 @@ using VRTK;
 public class SelectionInteractionConcept : MonoBehaviour {
 
     private ControllerInteractionEventHandler startIdle;
+    private ControllerInteractionEventHandler selectionConfirmed;
 
     void Awake()
     {
@@ -18,7 +19,9 @@ public class SelectionInteractionConcept : MonoBehaviour {
             VRTK_ControllerEvents rightController = VRTK.VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerEvents>();
 
             startIdle = new ControllerInteractionEventHandler(StartIdle);
+            selectionConfirmed = new ControllerInteractionEventHandler(SelectionConfirmed);
             rightController.TriggerTouchEnd += startIdle;
+            rightController.TriggerClicked += selectionConfirmed;
         }
     }
 
@@ -29,11 +32,17 @@ public class SelectionInteractionConcept : MonoBehaviour {
             VRTK_ControllerEvents rightController = VRTK.VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerEvents>();
 
             rightController.TriggerTouchEnd -= startIdle;
+            rightController.TriggerClicked -= selectionConfirmed;
         }
     }
 
     public void StartIdle(object sender, ControllerInteractionEventArgs e)
     {
         EventBus.Post(new ChangeInteractionConceptEvent(InteractionConcept.Idle));
+    }
+
+    public void SelectionConfirmed(object sender, ControllerInteractionEventArgs e)
+    {
+        EventBus.Post(new Events.BuildingSelectionConfirmedEvent());
     }
 }

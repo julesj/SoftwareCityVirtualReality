@@ -16,4 +16,9 @@ public class Events {
     {
 
     }
+
+    public class ClearDisplayEvent
+    {
+
+    }
 }

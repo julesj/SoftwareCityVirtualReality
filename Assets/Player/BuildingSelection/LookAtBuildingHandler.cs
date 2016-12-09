@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using VRTK;
 
 public class LookAtBuildingHandler : MonoBehaviour {
 
@@ -75,12 +76,22 @@ public class LookAtBuildingHandler : MonoBehaviour {
         }
 	}
 
+    public void OnEvent(Events.ClearDisplayEvent e)
+    {
+        if (currentSelectionObject != null)
+        {
+            Destroy(currentSelectionObject);
+            currentSelectionObject = null;
+        }
+    }
+
     public void OnEvent(Events.BuildingSelectionConfirmedEvent e)
     {
         if (lastSelectedBuilding != null)
         {
             GameObject display = GameObject.Instantiate(displayPrefab);
-            display.GetComponent<DisplayBehaviour>().SetData(lastSelectedBuilding, lastSelectedPosition, FindObjectOfType<Camera>().transform);
+            display.GetComponent<DisplayBehaviour>().SetData(lastSelectedBuilding, lastSelectedPosition, VRTK_DeviceFinder.HeadsetTransform());
+            EventBus.Post(new ChangeInteractionConceptEvent(InteractionConcept.Idle));
         }
     }
 }
