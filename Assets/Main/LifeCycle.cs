@@ -6,7 +6,7 @@ public class LifeCycle : MonoBehaviour {
     void Awake()
     {
         EventBus.Register(this);
-        Application.LoadLevelAdditive("PlayerScene");
+        Application.LoadLevelAdditive("PlayerSceneFallback");
         Application.LoadLevelAdditive("SoftwareCityScene");
         Application.LoadLevelAdditive("EnvironmentScene");
         Invoke("SceneReady", 2);
