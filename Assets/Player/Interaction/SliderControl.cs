@@ -8,6 +8,9 @@ public class SliderControl : MonoBehaviour {
     public Transform sliderEnd;
     public Transform buttonTransform;
 
+    public delegate void OnSliderMove(SliderControl sliderControl);
+    public OnSliderMove OnSliderMoveHanders;
+
     private bool isGrabbed;
     private Vector3 offset;
     private FloatModel model;
@@ -49,6 +52,11 @@ public class SliderControl : MonoBehaviour {
         {
             isGrabbed = false;
             return;
+        }
+
+        if (OnSliderMoveHanders != null)
+        {
+            OnSliderMoveHanders(this);
         }
 
         Vector3 contact = other.transform.position;

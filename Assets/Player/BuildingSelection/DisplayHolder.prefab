@@ -503,7 +503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseLight: 1
-  variance: 0.25
+  variance: 0.1
 --- !u!114 &114000012228153240
 MonoBehaviour:
   m_ObjectHideFlags: 1
