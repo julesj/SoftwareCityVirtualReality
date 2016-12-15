@@ -5,78 +5,55 @@ using System;
 
 public class Hint : MonoBehaviour {
 
-    private static Dictionary<string, HintState> allHints = new Dictionary<string, HintState>();
-    internal class HintState
+    public class DisplayHintEvent
     {
-        internal string name;
-        internal Hint hint;
-        internal int displayedCount;
-        internal int maxDisplayCount;
-        internal bool visible = false;
+        public string name;
+        public DisplayHintEvent(string name)
+        {
+            this.name = name;
+        }
+    }
+
+    public class HideHintEvent
+    {
+        public string name;
+        public HideHintEvent(string name)
+        {
+            this.name = name;
+        }
+    }
+
+    public class ConfirmHintEvent
+    {
+        public string name;
+        public ConfirmHintEvent(string name)
+        {
+            this.name = name;
+        }
+    }
+
+    public class ResetAllHintsEvent
+    {
     }
 
     public static void Display(string name)
     {
-        if (!allHints.ContainsKey(name))
-        {
-            Debug.Log("Unable to display hint " + name + ": Not registered");
-            return;
-        }
-        HintState state = allHints[name];
-        if (!state.visible)
-        {
-            if (state.displayedCount < state.maxDisplayCount)
-            {
-                state.hint.transform.Find("Body").gameObject.SetActive(true);
-                state.hint.transform.Find("Body").GetComponent<AnimateThis>().Transformate()
-                .FromScale(0)
-                .ToScale(1)
-                .Duration(1)
-                .Ease(AnimateThis.EaseOutElastic)
-                .Start();
-            }
-            state.displayedCount++;
-            state.visible = true;
-        }
+        EventBus.Post(new DisplayHintEvent(name));
     }
 
     public static void Hide(string name)
     {
-        if (!allHints.ContainsKey(name))
-        {
-            Debug.Log("Unable to hide hint " + name + ": Not registered");
-            return;
-        }
-        HintState state = allHints[name];
-        state.visible = false;
-        /*state.hint.transform.Find("Body").GetComponent<AnimateThis>().Transformate()
-            .FromScale(1)
-            .ToScale(0)
-            .Duration(0.125f)
-            .Start();
-        // FIXME: End Action*/
-        state.hint.transform.Find("Body").gameObject.SetActive(false);
-        state.hint.transform.Find("Body").transform.localScale = new Vector3(0, 0, 0);
+        EventBus.Post(new HideHintEvent(name));
     }
 
     public static void Confirm(string name)
     {
-        if (!allHints.ContainsKey(name))
-        {
-            Debug.Log("Unable to confirm hint " + name + ": Not registered");
-            return;
-        }
-        HintState state = allHints[name];
-        state.displayedCount = state.maxDisplayCount;
-        Hide(name);
+        EventBus.Post(new ConfirmHintEvent(name));
     }
 
     public static void Reset()
     {
-        foreach (HintState state in allHints.Values)
-        {
-            state.displayedCount = 0;
-        }
+        EventBus.Post(new ResetAllHintsEvent());
     }
 
     public string name;
@@ -84,22 +61,83 @@ public class Hint : MonoBehaviour {
     [Multiline]
     public string text;
 
+    private int displayedCount;
+    private bool visible;
+    private bool confirmed;
+
+    void Awake()
+    {
+        EventBus.Register(this);
+    }
+
 	void Start () {
         if (name == null || name.Length == 0)
         {
             name = transform.name;
-        }
-	    if (!allHints.ContainsKey(name))
-        {
-            HintState state = new HintState();
-            state.displayedCount = 0;
-            state.hint = this;
-            state.maxDisplayCount = maxDisplayCount;
-            state.name = name;
-            allHints.Add(name, state);
-        }
+        }      
+
         GetComponentInChildren<TextMesh>().text = text;
         transform.Find("Body").transform.localScale = new Vector3(0, 0, 0);
         transform.Find("Body").gameObject.SetActive(false);
 	}
+
+    public void OnEvent(ResetAllHintsEvent e)
+    {
+        displayedCount = 0;
+        confirmed = false;
+        visible = false;
+        transform.Find("Body").gameObject.SetActive(false);
+        transform.Find("Body").transform.localScale = new Vector3(0, 0, 0);
+    }
+
+    public void OnEvent(ConfirmHintEvent e)
+    {
+        if (e.name.Equals(name))
+        {
+            confirmed = true;
+            Hide(name);
+        }
+    }
+
+    public void OnEvent(HideHintEvent e)
+    {
+        if (e.name.Equals(name) && visible)
+        {
+            visible = false;
+            /*transform.Find("Body").GetComponent<AnimateThis>().Transformate()
+                .FromScale(1)
+                .ToScale(0)
+                .Duration(0.125f)
+                .OnEnd(disableMe)
+                .Start();*/
+            transform.Find("Body").gameObject.SetActive(false);
+            transform.Find("Body").transform.localScale = new Vector3(0, 0, 0);
+
+        }
+    }
+
+    private void disableMe()
+    {
+        transform.Find("Body").gameObject.SetActive(false);
+        transform.Find("Body").transform.localScale = new Vector3(0, 0, 0);
+    }
+
+    public void OnEvent(DisplayHintEvent e)
+    {
+        if (e.name.Equals(name) &&  !visible && !confirmed)
+        {
+            if (displayedCount < maxDisplayCount)
+            {
+                transform.Find("Body").gameObject.SetActive(true);
+                transform.Find("Body").GetComponent<AnimateThis>().Transformate()
+                .FromScale(0)
+                .ToScale(1)
+                .Duration(1)
+                .Ease(AnimateThis.EaseOutElastic)
+                .Start();
+            }
+            displayedCount++;
+            visible = true;
+        }
+    }
 }
