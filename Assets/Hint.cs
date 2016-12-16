@@ -57,6 +57,7 @@ public class Hint : MonoBehaviour {
     }
 
     public string name;
+    public string dependsOn;
     public int maxDisplayCount = 1;
     [Multiline]
     public string text;
@@ -64,6 +65,8 @@ public class Hint : MonoBehaviour {
     private int displayedCount;
     private bool visible;
     private bool confirmed;
+    private HashSet<string> confirmedHints = new HashSet<string>();
+    private HashSet<string> preconditionHints = new HashSet<string>();
 
     void Awake()
     {
@@ -79,19 +82,32 @@ public class Hint : MonoBehaviour {
         GetComponentInChildren<TextMesh>().text = text;
         transform.Find("Body").transform.localScale = new Vector3(0, 0, 0);
         transform.Find("Body").gameObject.SetActive(false);
+        foreach (string precondition in dependsOn.Split(' '))
+        {
+            if (precondition.Length > 0)
+            {
+                preconditionHints.Add(precondition);
+            }
+        }
 	}
+
+    private bool DependenciesSatisfied()
+    {
+        return preconditionHints.Count == 0 || preconditionHints.IsSubsetOf(confirmedHints);
+    }
 
     public void OnEvent(ResetAllHintsEvent e)
     {
         displayedCount = 0;
         confirmed = false;
         visible = false;
-        transform.Find("Body").gameObject.SetActive(false);
-        transform.Find("Body").transform.localScale = new Vector3(0, 0, 0);
+        confirmedHints.Clear();
+        DisableMe();
     }
 
     public void OnEvent(ConfirmHintEvent e)
     {
+        confirmedHints.Add(e.name);
         if (e.name.Equals(name))
         {
             confirmed = true;
@@ -110,13 +126,12 @@ public class Hint : MonoBehaviour {
                 .Duration(0.125f)
                 .OnEnd(disableMe)
                 .Start();*/
-            transform.Find("Body").gameObject.SetActive(false);
-            transform.Find("Body").transform.localScale = new Vector3(0, 0, 0);
+            DisableMe();
 
         }
     }
 
-    private void disableMe()
+    private void DisableMe()
     {
         transform.Find("Body").gameObject.SetActive(false);
         transform.Find("Body").transform.localScale = new Vector3(0, 0, 0);
@@ -124,7 +139,7 @@ public class Hint : MonoBehaviour {
 
     public void OnEvent(DisplayHintEvent e)
     {
-        if (e.name.Equals(name) &&  !visible && !confirmed)
+        if (e.name.Equals(name) &&  !visible && !confirmed && DependenciesSatisfied())
         {
             if (displayedCount < maxDisplayCount)
             {
