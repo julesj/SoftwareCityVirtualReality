@@ -23,6 +23,11 @@ public class LifeCycle : MonoBehaviour {
         Application.LoadLevel("MainScene");
     }
 
+    public void OnEvent(StopPlayingEvent e)
+    {
+        Hint.Reset();
+    }
+
 }
 
 public class SceneReadyEvent

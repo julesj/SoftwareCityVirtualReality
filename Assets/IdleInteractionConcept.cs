@@ -24,6 +24,9 @@ public class IdleInteractionConcept : MonoBehaviour {
             
             startSelectNavigate = new ControllerInteractionEventHandler(StartSelectNavigate);
             rightController.TriggerTouchStart += startSelectNavigate;
+
+            Hint.Display("BuildingSelectionTriggerHint");
+            Hint.Display("ScaleTranslateTriggerHint");
         }
     }
 
@@ -36,6 +39,9 @@ public class IdleInteractionConcept : MonoBehaviour {
 
             leftController.TriggerTouchStart -= startScaleRotate;
             rightController.TriggerTouchStart -= startSelectNavigate;
+
+            Hint.Hide("BuildingSelectionTriggerHint");
+            Hint.Hide("ScaleTranslateTriggerHint");
         }
     }
 

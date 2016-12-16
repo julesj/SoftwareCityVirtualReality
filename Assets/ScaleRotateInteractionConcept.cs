@@ -28,6 +28,9 @@ public class ScaleRotateInteractionConcept : MonoBehaviour {
             // set inital animation progress and show menu
             scaleRotateMenu.SetActive(true);
             scaleRotateMenu.gameObject.GetComponent<ScaleAnimator>().SetAnimationProgress(leftController.GetTriggerAxis());
+
+            Hint.Display("HowToScaleTranslate1Hint");
+            Hint.Display("HowToScaleTranslate2Hint");
         }
     }
 
@@ -43,6 +46,9 @@ public class ScaleRotateInteractionConcept : MonoBehaviour {
             // reset animation and hide menu
             scaleRotateMenu.gameObject.GetComponent<ScaleAnimator>().ResetAnimation();
             scaleRotateMenu.SetActive(false);
+
+            Hint.Hide("HowToScaleTranslate1Hint");
+            Hint.Hide("HowToScaleTranslate2Hint");
         }
     }
 

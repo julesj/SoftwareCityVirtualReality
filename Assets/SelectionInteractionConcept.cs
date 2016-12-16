@@ -33,6 +33,8 @@ public class SelectionInteractionConcept : MonoBehaviour {
 
             rightController.TriggerTouchEnd -= startIdle;
             rightController.TouchpadPressed -= selectionConfirmed;
+
+            Hint.Hide("BuildingSelectionConfirmHint");
         }
     }
 
