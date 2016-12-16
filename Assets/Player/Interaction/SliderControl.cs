@@ -8,12 +8,29 @@ public class SliderControl : MonoBehaviour {
     public Transform sliderEnd;
     public Transform buttonTransform;
 
+    public float lightValueOff = 0;
+    public float lightValueHovered = 0.1f;
+    public float lightValueActive = 1f;
+
+    public float materialEmissionOff = 0;
+    public float materialEmissionHovered = 0.1f;
+    public float materialEmissionActive = 1f;
+
     public delegate void OnSliderMove(SliderControl sliderControl);
     public OnSliderMove OnSliderMoveHanders;
 
     private bool isGrabbed;
     private Vector3 offset;
     private FloatModel model;
+    private Light light;
+    private Material material;
+
+    void Start()
+    {
+        light = GetComponent<Light>();
+        material = GetComponent<MeshRenderer>().material;
+        SetHighlightOff();
+    }
 
     public void SetModel(FloatModel model)
     {
@@ -29,6 +46,16 @@ public class SliderControl : MonoBehaviour {
     private void OnModelChanged(FloatModel model)
     {
         SetUi();
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        ControlTrigger trigger = other.transform.GetComponent<ControlTrigger>();
+
+        if (trigger != null)
+        {
+            SetHighlightOff();
+        }
     }
 
     void OnTriggerStay(Collider other)
@@ -47,10 +74,12 @@ public class SliderControl : MonoBehaviour {
             {
                 offset = buttonTransform.position - other.transform.position;
                 isGrabbed = true;
+                SetHighlightGrabbed();
             }
         } else
         {
             isGrabbed = false;
+            SetHighlightHovered();
             return;
         }
 
@@ -92,6 +121,34 @@ public class SliderControl : MonoBehaviour {
         else
         {
             buttonTransform.localPosition = buttonPos;
+        }
+    }
+
+    private void SetHighlightOff()
+    {
+        SetHighlightValues(lightValueOff, materialEmissionOff);
+        Debug.Log("off");
+    }
+
+    private void SetHighlightHovered()
+    {
+        SetHighlightValues(lightValueHovered, materialEmissionHovered);
+    }
+
+    private void SetHighlightGrabbed()
+    {
+        SetHighlightValues(lightValueActive, materialEmissionActive);
+    }
+
+    private void SetHighlightValues(float lightValue, float materialEmissionValue)
+    {
+        if (light != null)
+        {
+            light.intensity = lightValue;
+        }
+        if (material != null)
+        {
+            material.SetColor("_EmissionColor", material.GetColor("_Color") * materialEmissionValue);
         }
     }
 }
