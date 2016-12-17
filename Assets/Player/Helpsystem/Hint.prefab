@@ -349,7 +349,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: 
+  dependsOn: 
   maxDisplayCount: 1
+  initialDelay: 0.5
+  delay: 0.5
   text: Hello World
 --- !u!114 &114000013249789170
 MonoBehaviour:

@@ -5,6 +5,11 @@ using System;
 
 public class Hint : MonoBehaviour {
 
+    private enum DisplayState
+    {
+        Invisible, WaitingForDisplay, Displaying
+    }
+
     public class DisplayHintEvent
     {
         public string name;
@@ -59,12 +64,15 @@ public class Hint : MonoBehaviour {
     public string name;
     public string dependsOn;
     public int maxDisplayCount = 1;
+    public float initialDelay = 0.5f;
+    public float delay = 0.5f;
     [Multiline]
     public string text;
 
     private int displayedCount;
-    private bool visible;
+    private DisplayState displayState = DisplayState.Invisible;
     private bool confirmed;
+    private float waitUntil;
     private HashSet<string> confirmedHints = new HashSet<string>();
     private HashSet<string> preconditionHints = new HashSet<string>();
 
@@ -100,9 +108,8 @@ public class Hint : MonoBehaviour {
     {
         displayedCount = 0;
         confirmed = false;
-        visible = false;
         confirmedHints.Clear();
-        DisableMe();
+        HideMe();
     }
 
     public void OnEvent(ConfirmHintEvent e)
@@ -111,35 +118,45 @@ public class Hint : MonoBehaviour {
         if (e.name.Equals(name))
         {
             confirmed = true;
-            Hide(name);
+            HideMe();
         }
     }
 
     public void OnEvent(HideHintEvent e)
     {
-        if (e.name.Equals(name) && visible)
+        if (e.name.Equals(name) && (displayState != DisplayState.Invisible))
         {
-            visible = false;
+            
             /*transform.Find("Body").GetComponent<AnimateThis>().Transformate()
                 .FromScale(1)
                 .ToScale(0)
                 .Duration(0.125f)
                 .OnEnd(disableMe)
                 .Start();*/
-            DisableMe();
-
+            HideMe();
         }
-    }
-
-    private void DisableMe()
-    {
-        transform.Find("Body").gameObject.SetActive(false);
-        transform.Find("Body").transform.localScale = new Vector3(0, 0, 0);
     }
 
     public void OnEvent(DisplayHintEvent e)
     {
-        if (e.name.Equals(name) &&  !visible && !confirmed && DependenciesSatisfied())
+        if (e.name.Equals(name) && displayState == DisplayState.Invisible && !confirmed && DependenciesSatisfied())
+        {
+            displayState = DisplayState.WaitingForDisplay;
+            Invoke("ShowMe", displayedCount == 0 ? initialDelay : delay);
+        }
+    }
+
+    private void HideMe()
+    {
+        transform.Find("Body").gameObject.SetActive(false);
+        transform.Find("Body").transform.localScale = new Vector3(0, 0, 0);
+        CancelInvoke();
+        displayState = DisplayState.Invisible;
+    }
+
+    private void ShowMe()
+    {
+        if (displayState != DisplayState.Displaying)
         {
             if (displayedCount < maxDisplayCount)
             {
@@ -152,7 +169,7 @@ public class Hint : MonoBehaviour {
                 .Start();
             }
             displayedCount++;
-            visible = true;
+            displayState = DisplayState.Displaying;
         }
     }
 }
