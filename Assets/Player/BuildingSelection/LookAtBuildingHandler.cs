@@ -7,8 +7,11 @@ public class LookAtBuildingHandler : MonoBehaviour {
     private Ray ray;
     private float timeNextSample;
     private Building lastSelectedBuilding;
-    private Vector3 lastSelectedPosition;
+    private Vector3 lastSelectedBuildingPosition;
     private GameObject currentSelectionObject;
+
+    private Vector3 lastSelectedFloorPosition;
+    private bool selectionOnFloor = false;
     
     public float samplingIntervalInSeconds = 0.25f;
     public GameObject selectionPrefab;
@@ -39,7 +42,15 @@ public class LookAtBuildingHandler : MonoBehaviour {
                 if (hit.collider.transform.GetComponent<Building>() != null)
                 {
                     selectedBuilding = hit.collider.transform.GetComponent<Building>();
-                    lastSelectedPosition = hit.point;
+                    lastSelectedBuildingPosition = hit.point;
+                }
+                if (hit.collider.transform.GetComponent<Floor>() != null)
+                {
+                    lastSelectedFloorPosition = hit.point;
+                    selectionOnFloor = true;
+                } else
+                {
+                    selectionOnFloor = false;
                 }
             }
             if (selectedBuilding != lastSelectedBuilding)
@@ -98,13 +109,16 @@ public class LookAtBuildingHandler : MonoBehaviour {
         if (lastSelectedBuilding != null)
         {
             GameObject display = GameObject.Instantiate(displayPrefab);
-            display.GetComponent<DisplayBehaviour>().SetData(lastSelectedBuilding, lastSelectedPosition, VRTK_DeviceFinder.HeadsetTransform());
-            GetComponents<AudioSource>()[1].Play(); //FIXME
+            display.GetComponent<DisplayBehaviour>().SetData(lastSelectedBuilding, lastSelectedBuildingPosition, VRTK_DeviceFinder.HeadsetTransform());
             //VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerActions>().ToggleHighlightTouchpad(false, new Color(0, 0, 1, 0.5f));
             EventBus.Post(new ChangeInteractionConceptEvent(InteractionConcept.Idle));
             Hint.Confirm("BuildingSelectionConfirmHint");
             Hint.Confirm("BuildingSelectionHint");
             Hint.Confirm("BuildingSelectionTriggerHint");
+        }
+        if (selectionOnFloor)
+        {
+            VRTK_DeviceFinder.PlayAreaTransform().position = lastSelectedFloorPosition;
         }
     }
 }

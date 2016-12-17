@@ -4,6 +4,14 @@ using VRTK;
 using System;
 
 public class SliderControl : MonoBehaviour {
+
+    private enum GrabbedState
+    {
+        Grabbed,
+        Hovered,
+        None
+    }
+
     public Transform sliderStart;
     public Transform sliderEnd;
     public Transform buttonTransform;
@@ -19,11 +27,12 @@ public class SliderControl : MonoBehaviour {
     public delegate void OnSliderMove(SliderControl sliderControl);
     public OnSliderMove OnSliderMoveHanders;
 
-    private bool isGrabbed;
+    private GrabbedState grabbedState = GrabbedState.None;
     private Vector3 offset;
     private FloatModel model;
     private Light light;
     private Material material;
+    private float lastModelValue;
 
     void Start()
     {
@@ -46,6 +55,16 @@ public class SliderControl : MonoBehaviour {
     private void OnModelChanged(FloatModel model)
     {
         SetUi();
+
+        float delta = Mathf.Abs(lastModelValue - model.GetValue());
+
+        float intensity = delta / 0.05f;
+
+        if (grabbedState == GrabbedState.Grabbed)
+        {
+            TriggerHapticPulses(0.025f * intensity, 0.075f * intensity);
+        }
+        lastModelValue = model.GetValue();
     }
 
     void OnTriggerExit(Collider other)
@@ -54,6 +73,7 @@ public class SliderControl : MonoBehaviour {
 
         if (trigger != null)
         {
+            grabbedState = GrabbedState.None;
             SetHighlightOff();
         }
     }
@@ -70,16 +90,19 @@ public class SliderControl : MonoBehaviour {
 
         if (trigger.IsPressed())
         {
-            if (!isGrabbed)
+            if (grabbedState != GrabbedState.Grabbed)
             {
                 offset = buttonTransform.position - other.transform.position;
-                isGrabbed = true;
+                grabbedState = GrabbedState.Grabbed;
                 SetHighlightGrabbed();
             }
         } else
         {
-            isGrabbed = false;
-            SetHighlightHovered();
+            if (grabbedState != GrabbedState.Hovered)
+            {
+                grabbedState = GrabbedState.Hovered;
+                SetHighlightHovered();
+            }
             return;
         }
 
@@ -127,17 +150,18 @@ public class SliderControl : MonoBehaviour {
     private void SetHighlightOff()
     {
         SetHighlightValues(lightValueOff, materialEmissionOff);
-        Debug.Log("off");
     }
 
     private void SetHighlightHovered()
     {
         SetHighlightValues(lightValueHovered, materialEmissionHovered);
+        TriggerHapticPulses(0.125f, 0.5f);
     }
 
     private void SetHighlightGrabbed()
     {
         SetHighlightValues(lightValueActive, materialEmissionActive);
+        TriggerHapticPulses(0.125f, 1f);
     }
 
     private void SetHighlightValues(float lightValue, float materialEmissionValue)
@@ -150,5 +174,11 @@ public class SliderControl : MonoBehaviour {
         {
             material.SetColor("_EmissionColor", material.GetColor("_Color") * materialEmissionValue);
         }
+    }
+
+    private void TriggerHapticPulses(float left, float right)
+    {
+        VRTK_DeviceFinder.GetControllerLeftHand().GetComponent<VRTK_ControllerActions>().TriggerHapticPulse((ushort)(left * 3999));
+        VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerActions>().TriggerHapticPulse((ushort)(right * 3999));
     }
 }
