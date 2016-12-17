@@ -12,12 +12,15 @@ public class LookAtBuildingHandler : MonoBehaviour {
 
     private Vector3 lastSelectedFloorPosition;
     private bool selectionOnFloor = false;
-    
+    private GameObject navigationHint;
+
     public float samplingIntervalInSeconds = 0.25f;
     public GameObject selectionPrefab;
     public GameObject displayPrefab;
+    public GameObject navigationHintPrefab;
 
-	void Start () {
+
+    void Start () {
         EventBus.Register(this);
 	}
 	
@@ -53,6 +56,20 @@ public class LookAtBuildingHandler : MonoBehaviour {
                     selectionOnFloor = false;
                 }
             }
+
+            if (selectionOnFloor)
+            {
+                if (navigationHint == null)
+                {
+                    navigationHint = (GameObject)GameObject.Instantiate(navigationHintPrefab);
+                }
+                navigationHint.transform.position = new Vector3(lastSelectedFloorPosition.x, 0, lastSelectedFloorPosition.z);
+                navigationHint.transform.rotation = Quaternion.LookRotation(new Vector3(ray.direction.x, 0, ray.direction.z).normalized, Vector3.up);
+            } else if (navigationHint != null)
+            {
+                GameObject.Destroy(navigationHint);
+            }
+
             if (selectedBuilding != lastSelectedBuilding)
             {
                 if (selectedBuilding != null)
@@ -93,6 +110,21 @@ public class LookAtBuildingHandler : MonoBehaviour {
             }
         }
 	}
+
+    public void OnEvent(StopInteractionConceptEvent e)
+    {
+        if (e.oldConcept == InteractionConcept.Selection)
+        {
+            if (navigationHint != null)
+            {
+                Destroy(navigationHint);
+            }
+            if (currentSelectionObject != null)
+            {
+                Destroy(currentSelectionObject);
+            }
+        }
+    }
 
     public void OnEvent(Events.ClearDisplayEvent e)
     {

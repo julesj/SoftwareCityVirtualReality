@@ -4,7 +4,7 @@
 		_MainTex("Base (RGB)", 2D) = "	" {}
 	}
 	SubShader {
-		Tags { "RenderType"="Fade" }
+		Tags { "RenderType"="Fade" "IgnoreProjector" = "true" }
 		
 		CGPROGRAM
 		// Physically based Standard lighting model, and enable shadows on all light types

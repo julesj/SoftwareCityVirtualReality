@@ -6,16 +6,9 @@ public class LifeCycle : MonoBehaviour {
     void Awake()
     {
         EventBus.Register(this);
-        Application.LoadLevelAdditive("PlayerScene");
         Application.LoadLevelAdditive("SoftwareCityScene");
         Application.LoadLevelAdditive("EnvironmentScene");
-        Invoke("SceneReady", 2);
-    }
-
-
-    private void SceneReady()
-    {
-        EventBus.Post(new SceneReadyEvent());
+        Application.LoadLevelAdditive("PlayerScene");
     }
 
     public void Restart()

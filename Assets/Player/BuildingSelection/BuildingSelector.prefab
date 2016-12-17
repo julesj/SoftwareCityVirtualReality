@@ -56,7 +56,6 @@ GameObject:
   - 114: {fileID: 114000011862620802}
   - 82: {fileID: 82000013222059406}
   - 114: {fileID: 114000011482772168}
-  - 82: {fileID: 82000012090267956}
   m_Layer: 0
   m_Name: BuildingSelector
   m_TagString: Untagged
@@ -290,80 +289,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010627754384}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!82 &82000012090267956
-AudioSource:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012086905440}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 948f691085cd49e4384c68b98603815a, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!82 &82000013222059406
 AudioSource:
   m_ObjectHideFlags: 1
@@ -548,8 +473,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5246e4555fb85c4bad0b5d875c5bed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  samplingIntervalInSeconds: 0.25
+  samplingIntervalInSeconds: 0.01
   selectionPrefab: {fileID: 1000011176040926, guid: 2113514fc375699469d76c55e03fbeb1,
     type: 2}
   displayPrefab: {fileID: 1000012507550166, guid: 4ed9d5ca27493ed4c99a80754804127c,
+    type: 2}
+  navigationHintPrefab: {fileID: 1000013075427222, guid: b137ba1e6b9d8944c9c6811a2e7cb76f,
     type: 2}

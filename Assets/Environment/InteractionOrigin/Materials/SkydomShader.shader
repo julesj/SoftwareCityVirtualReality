@@ -3,7 +3,7 @@
 		_MainTex("Texture", 2D) = "white" {}
 	}
 	SubShader{
-		Tags{ "RenderType" = "Fade" "Queue" = "Background"}
+		Tags{ "RenderType" = "Fade" "Queue" = "Background" "IgnoreProjector" = "true" }
 		CGPROGRAM
 #pragma surface surf Lambert alpha
 	struct Input {
