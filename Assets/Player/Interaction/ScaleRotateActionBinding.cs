@@ -24,6 +24,7 @@ public class ScaleRotateActionBinding : MonoBehaviour {
                 transform.Find("Slider/Grip Rotate").GetComponent<SliderControl>().SetModel(model);
             }
         }
+        transform.parent.gameObject.SetActive(false);
     }
 
     private void OnSliderMoved(SliderControl sliderControl)

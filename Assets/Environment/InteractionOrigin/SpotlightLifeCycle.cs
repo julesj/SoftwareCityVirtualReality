@@ -10,6 +10,10 @@ public class SpotlightLifeCycle : MonoBehaviour {
 	
 	void Awake () {
         EventBus.Register(this);
+    }
+
+    public void OnEvent(SceneReadyEvent e)
+    {
         cams = FindObjectsOfType<Camera>();
         light = GetComponentInChildren<Light>();
         lightShaft = transform.parent.FindChild("LightShaft");
@@ -28,6 +32,10 @@ public class SpotlightLifeCycle : MonoBehaviour {
 
     void Update()
     {
+        if (cams ==  null)
+        {
+            return;
+        }
         float val = (light.spotAngle-1) / 30;
         float shaftScale = 1.1f + 23f*val;
         lightShaft.localScale = new Vector3(shaftScale, 1, shaftScale);

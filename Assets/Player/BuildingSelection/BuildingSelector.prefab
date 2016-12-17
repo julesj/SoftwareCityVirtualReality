@@ -473,8 +473,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5246e4555fb85c4bad0b5d875c5bed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  samplingIntervalInSeconds: 0.25
+  samplingIntervalInSeconds: 0.01
   selectionPrefab: {fileID: 1000011176040926, guid: 2113514fc375699469d76c55e03fbeb1,
     type: 2}
   displayPrefab: {fileID: 1000012507550166, guid: 4ed9d5ca27493ed4c99a80754804127c,
+    type: 2}
+  navigationHintPrefab: {fileID: 1000013075427222, guid: b137ba1e6b9d8944c9c6811a2e7cb76f,
     type: 2}

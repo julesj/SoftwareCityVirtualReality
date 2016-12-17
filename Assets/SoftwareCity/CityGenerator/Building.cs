@@ -20,7 +20,7 @@ public class Building : MonoBehaviour {
         EventBus.Register(this);
     }
 
-    public void OnEvent(SceneReadyEvent e)
+    public void OnEvent(StartPlayingEvent e)
     {
         objects = FindObjectsOfType<DoNotCollideWithBuildings>();
     }

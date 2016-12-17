@@ -7,14 +7,20 @@ public class LookAtBuildingHandler : MonoBehaviour {
     private Ray ray;
     private float timeNextSample;
     private Building lastSelectedBuilding;
-    private Vector3 lastSelectedPosition;
+    private Vector3 lastSelectedBuildingPosition;
     private GameObject currentSelectionObject;
-    
+
+    private Vector3 lastSelectedFloorPosition;
+    private bool selectionOnFloor = false;
+    private GameObject navigationHint;
+
     public float samplingIntervalInSeconds = 0.25f;
     public GameObject selectionPrefab;
     public GameObject displayPrefab;
+    public GameObject navigationHintPrefab;
 
-	void Start () {
+
+    void Start () {
         EventBus.Register(this);
 	}
 	
@@ -39,9 +45,31 @@ public class LookAtBuildingHandler : MonoBehaviour {
                 if (hit.collider.transform.GetComponent<Building>() != null)
                 {
                     selectedBuilding = hit.collider.transform.GetComponent<Building>();
-                    lastSelectedPosition = hit.point;
+                    lastSelectedBuildingPosition = hit.point;
+                }
+                if (hit.collider.transform.GetComponent<Floor>() != null)
+                {
+                    lastSelectedFloorPosition = hit.point;
+                    selectionOnFloor = true;
+                } else
+                {
+                    selectionOnFloor = false;
                 }
             }
+
+            if (selectionOnFloor)
+            {
+                if (navigationHint == null)
+                {
+                    navigationHint = (GameObject)GameObject.Instantiate(navigationHintPrefab);
+                }
+                navigationHint.transform.position = new Vector3(lastSelectedFloorPosition.x, 0, lastSelectedFloorPosition.z);
+                navigationHint.transform.rotation = Quaternion.LookRotation(new Vector3(ray.direction.x, 0, ray.direction.z).normalized, Vector3.up);
+            } else if (navigationHint != null)
+            {
+                GameObject.Destroy(navigationHint);
+            }
+
             if (selectedBuilding != lastSelectedBuilding)
             {
                 if (selectedBuilding != null)
@@ -83,6 +111,21 @@ public class LookAtBuildingHandler : MonoBehaviour {
         }
 	}
 
+    public void OnEvent(StopInteractionConceptEvent e)
+    {
+        if (e.oldConcept == InteractionConcept.Selection)
+        {
+            if (navigationHint != null)
+            {
+                Destroy(navigationHint);
+            }
+            if (currentSelectionObject != null)
+            {
+                Destroy(currentSelectionObject);
+            }
+        }
+    }
+
     public void OnEvent(Events.ClearDisplayEvent e)
     {
         //VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerActions>().ToggleHighlightTouchpad(false, new Color(0, 0, 1, 0.5f));
@@ -98,12 +141,16 @@ public class LookAtBuildingHandler : MonoBehaviour {
         if (lastSelectedBuilding != null)
         {
             GameObject display = GameObject.Instantiate(displayPrefab);
-            display.GetComponent<DisplayBehaviour>().SetData(lastSelectedBuilding, lastSelectedPosition, VRTK_DeviceFinder.HeadsetTransform());
+            display.GetComponent<DisplayBehaviour>().SetData(lastSelectedBuilding, lastSelectedBuildingPosition, VRTK_DeviceFinder.HeadsetTransform());
             //VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerActions>().ToggleHighlightTouchpad(false, new Color(0, 0, 1, 0.5f));
             EventBus.Post(new ChangeInteractionConceptEvent(InteractionConcept.Idle));
             Hint.Confirm("BuildingSelectionConfirmHint");
             Hint.Confirm("BuildingSelectionHint");
             Hint.Confirm("BuildingSelectionTriggerHint");
+        }
+        if (selectionOnFloor)
+        {
+            VRTK_DeviceFinder.PlayAreaTransform().position = lastSelectedFloorPosition;
         }
     }
 }
