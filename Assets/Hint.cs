@@ -170,6 +170,7 @@ public class Hint : MonoBehaviour {
             }
             displayedCount++;
             displayState = DisplayState.Displaying;
+            GetComponentInChildren<AudioSource>().Play();
         }
     }
 }

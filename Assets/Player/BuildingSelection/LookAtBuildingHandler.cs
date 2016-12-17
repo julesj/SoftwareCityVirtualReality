@@ -99,6 +99,7 @@ public class LookAtBuildingHandler : MonoBehaviour {
         {
             GameObject display = GameObject.Instantiate(displayPrefab);
             display.GetComponent<DisplayBehaviour>().SetData(lastSelectedBuilding, lastSelectedPosition, VRTK_DeviceFinder.HeadsetTransform());
+            GetComponents<AudioSource>()[1].Play(); //FIXME
             //VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerActions>().ToggleHighlightTouchpad(false, new Color(0, 0, 1, 0.5f));
             EventBus.Post(new ChangeInteractionConceptEvent(InteractionConcept.Idle));
             Hint.Confirm("BuildingSelectionConfirmHint");
