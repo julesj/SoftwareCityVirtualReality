@@ -478,5 +478,3 @@ MonoBehaviour:
     type: 2}
   displayPrefab: {fileID: 1000012507550166, guid: 4ed9d5ca27493ed4c99a80754804127c,
     type: 2}
-  footstepProjectorPrefab: {fileID: 1000011254365736, guid: dc6ff7de3a699f845b2921c808bbe839,
-    type: 2}

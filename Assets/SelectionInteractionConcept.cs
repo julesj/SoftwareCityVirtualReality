@@ -46,6 +46,5 @@ public class SelectionInteractionConcept : MonoBehaviour {
     public void SelectionConfirmed(object sender, ControllerInteractionEventArgs e)
     {
         EventBus.Post(new Events.BuildingSelectionConfirmedEvent());
-        EventBus.Post(new Events.FloorSelectionConfirmedEvent());
     }
 }

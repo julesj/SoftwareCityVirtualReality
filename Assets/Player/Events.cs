@@ -21,9 +21,4 @@ public class Events {
     {
 
     }
-
-    public class FloorSelectionConfirmedEvent
-    {
-
-    }
 }
