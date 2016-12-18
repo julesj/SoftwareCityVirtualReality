@@ -88,13 +88,12 @@ public class LookAtBuildingHandler : MonoBehaviour {
                     Bounds bounds = selectedBuilding.gameObject.GetComponent<Renderer>().bounds;
                     currentSelectionObject.transform.position = bounds.center;
                     currentSelectionObject.transform.localScale = bounds.size + new Vector3(0.001f, 0.001f, 0.001f);
-                    //VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerActions>().ToggleHighlightTouchpad(true, new Color(0, 0, 1, 0.5f));
 
                     Hint.Display("BuildingSelectionConfirmHint");
+                    //VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerActions>().ToggleHighlightTouchpad(true, new Color(0, 0, 1, 0.5f));
                 }
                 else
                 {
-                    //VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerActions>().ToggleHighlightTouchpad(false, new Color(0, 0, 1, 0.5f));
                     transform.FindChild("TextHolder/FileNameLabel").GetComponent<TextMesh>().text = "";
                     transform.FindChild("TextHolder/PathNameLabel").GetComponent<TextMesh>().text = "";
 
@@ -105,6 +104,7 @@ public class LookAtBuildingHandler : MonoBehaviour {
                     }
 
                     Hint.Hide("BuildingSelectionConfirmHint");
+                    //VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerActions>().ToggleHighlightTouchpad(false);
                 }
                 lastSelectedBuilding = selectedBuilding;
             }
@@ -128,7 +128,7 @@ public class LookAtBuildingHandler : MonoBehaviour {
 
     public void OnEvent(Events.ClearDisplayEvent e)
     {
-        //VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerActions>().ToggleHighlightTouchpad(false, new Color(0, 0, 1, 0.5f));
+        //VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerActions>().ToggleHighlightTouchpad(false);
         if (currentSelectionObject != null)
         {
             Destroy(currentSelectionObject);
@@ -140,9 +140,10 @@ public class LookAtBuildingHandler : MonoBehaviour {
     {
         if (lastSelectedBuilding != null)
         {
+            // TODO: Instantiate without position leads to flickering around zero origin when display shows up
             GameObject display = GameObject.Instantiate(displayPrefab);
             display.GetComponent<DisplayBehaviour>().SetData(lastSelectedBuilding, lastSelectedBuildingPosition, VRTK_DeviceFinder.HeadsetTransform());
-            //VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerActions>().ToggleHighlightTouchpad(false, new Color(0, 0, 1, 0.5f));
+            //VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerActions>().ToggleHighlightTouchpad(false);
             EventBus.Post(new ChangeInteractionConceptEvent(InteractionConcept.Idle));
             Hint.Confirm("BuildingSelectionConfirmHint");
             Hint.Confirm("BuildingSelectionHint");
