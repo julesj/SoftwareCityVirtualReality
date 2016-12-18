@@ -154,15 +154,15 @@ public class LookAtBuildingHandler : MonoBehaviour {
         {
             BlurOptimized blur = VRTK_DeviceFinder.HeadsetCamera().GetComponent<BlurOptimized>();
             blur.enabled = true;
-
+            
             Transform playArea = VRTK_DeviceFinder.PlayAreaTransform();
-            AnimateThis animation = playArea.GetComponent<AnimateThis>();
 
-            animation.CancelAll();
-            animation.Transformate()
+            AnimateThis playAreaAnimation = playArea.GetComponent<AnimateThis>();
+            playAreaAnimation.CancelAll();
+            playAreaAnimation.Transformate()
                 .ToPosition(lastSelectedFloorPosition)
                 .Duration(0.5f)
-                .Ease(AnimateThis.EaseInOutSinus)
+                .Ease(AnimateThis.EaseInQuintic)
                 .OnEnd(OnNavigationAnimationComplete)
                 .Start();
         }

@@ -21,6 +21,22 @@ public class AnimateThis : MonoBehaviour {
         return (Mathf.Sin(t * Mathf.PI - Mathf.PI / 2) + 1) / 2;
     }
 
+    public static float EaseInOutSmooth(float t)
+    {
+        float sqt = t * t;
+        return sqt / (2.0f * (sqt - t) + 1.0f);
+    }
+
+    public static float EaseOutQuintic(float t)
+    {
+        return (t - 1f) * (t - 1f) * (t - 1f) * (t - 1f) * (t - 1f) + 1f;
+    }
+
+    public static float EaseInQuintic(float t)
+    {
+        return t * t * t * t * t;
+    }
+
     public static float EaseSmooth(float t)
     {
         return EaseInOutSinus(t);
