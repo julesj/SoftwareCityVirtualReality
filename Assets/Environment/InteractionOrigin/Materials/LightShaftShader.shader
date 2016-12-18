@@ -3,7 +3,7 @@
 		_MainTex("Texture", 2D) = "white" {}
 	}
 	SubShader{
-		Tags{ "Queue" = "Fade" "RenderType" = "Transparent" "IgnoreProjector" = "true" }
+		Tags{ "Queue" = "Transparent" "RenderType" = "Transparent" "IgnoreProjector" = "true" }
 		Lighting Off
 		CGPROGRAM
 #pragma surface surf Lambert alpha

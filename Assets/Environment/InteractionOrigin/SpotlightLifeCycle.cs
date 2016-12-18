@@ -39,7 +39,7 @@ public class SpotlightLifeCycle : MonoBehaviour {
         float val = (light.spotAngle-1) / 30;
         float shaftScale = 1.1f + 23f*val;
         lightShaft.localScale = new Vector3(shaftScale, 1, shaftScale);
-        RenderSettings.ambientLight = new Color(0.03f + 0.2f * val, 0.03f + 0.2f * val, 0.06f + 0.4f * val);
+        RenderSettings.ambientLight = new Color(0.03f + 0.1f * val, 0.03f + 0.1f * val, 0.06f + 0.2f * val);
         RenderSettings.fogColor = RenderSettings.ambientLight / 2;
         RenderSettings.fog = false;
         if (cams != null)
