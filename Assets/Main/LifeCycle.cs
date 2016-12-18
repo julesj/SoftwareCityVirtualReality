@@ -8,7 +8,21 @@ public class LifeCycle : MonoBehaviour {
         EventBus.Register(this);
         Application.LoadLevelAdditive("SoftwareCityScene");
         Application.LoadLevelAdditive("EnvironmentScene");
-        Application.LoadLevelAdditive("PlayerScene");
+        if (UnityEngine.VR.VRDevice.isPresent)
+        {
+            Application.LoadLevelAdditive("PlayerScene");
+        } else
+        {
+            Application.LoadLevelAdditive("PlayerSceneFallback");
+
+            Invoke("PostSceneReady", 1);
+        }
+        
+    }
+
+    private void PostSceneReady()
+    {
+        EventBus.Post(new SceneReadyEvent());
     }
 
     public void Restart()
