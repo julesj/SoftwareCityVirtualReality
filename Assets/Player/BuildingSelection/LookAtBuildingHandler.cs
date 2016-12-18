@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using VRTK;
+using UnityStandardAssets.ImageEffects;
 
 public class LookAtBuildingHandler : MonoBehaviour {
 
@@ -151,7 +152,25 @@ public class LookAtBuildingHandler : MonoBehaviour {
         }
         if (selectionOnFloor)
         {
-            VRTK_DeviceFinder.PlayAreaTransform().position = lastSelectedFloorPosition;
+            BlurOptimized blur = VRTK_DeviceFinder.HeadsetCamera().GetComponent<BlurOptimized>();
+            blur.enabled = true;
+
+            Transform playArea = VRTK_DeviceFinder.PlayAreaTransform();
+            AnimateThis animation = playArea.GetComponent<AnimateThis>();
+
+            animation.CancelAll();
+            animation.Transformate()
+                .ToPosition(lastSelectedFloorPosition)
+                .Duration(0.5f)
+                .Ease(AnimateThis.EaseInOutSinus)
+                .OnEnd(OnNavigationAnimationComplete)
+                .Start();
         }
+    }
+
+    public void OnNavigationAnimationComplete()
+    {
+        BlurOptimized blur = VRTK_DeviceFinder.HeadsetCamera().GetComponent<BlurOptimized>();
+        blur.enabled = false;
     }
 }
