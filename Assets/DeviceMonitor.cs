@@ -3,10 +3,25 @@ using System.Collections;
 using VRTK;
 
 public class DeviceMonitor : MonoBehaviour {
-    
-	void Awake () {
+
+    ControllerInteractionEventHandler controllerEnabledHandler;
+    ControllerInteractionEventHandler controllerDisabledHandler;
+
+    public void Awake () {
         CheckDevices();
-	}
+
+        controllerEnabledHandler = new ControllerInteractionEventHandler(ControllerEnabled);
+        controllerDisabledHandler = new ControllerInteractionEventHandler(ControllerDisabled);
+    }
+
+    public void Start ()
+    {
+        GameObject leftController = VRTK_DeviceFinder.GetControllerLeftHand();
+        leftController.GetComponent<VRTK_ControllerEvents>().ControllerEnabled += controllerEnabledHandler;
+
+        GameObject rightController = VRTK_DeviceFinder.GetControllerRightHand();
+        rightController.GetComponent<VRTK_ControllerEvents>().ControllerDisabled += controllerDisabledHandler;
+    }
 	
 	private void CheckDevices()
     {
@@ -20,5 +35,15 @@ public class DeviceMonitor : MonoBehaviour {
         {
             Invoke("CheckDevices", 1);
         }
+    }
+
+    private void ControllerEnabled(object sender, ControllerInteractionEventArgs e)
+    {
+        Debug.Log(e.controllerIndex + "CONTROLLER STATE ENABLED" + e);
+    }
+
+    private void ControllerDisabled(object sender, ControllerInteractionEventArgs e)
+    {
+        Debug.Log(e.controllerIndex + "CONTROLLER STATE DISABLED" + e);
     }
 }
