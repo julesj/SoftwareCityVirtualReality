@@ -11,9 +11,12 @@ public class DisplayBehaviour : MonoBehaviour {
 	
 	public void SetData(Building building, Vector3 startPos, Transform viewport)
     {
-        Vector3 endPos = viewport.position - Vector3.ProjectOnPlane((viewport.position - startPos).normalized, Vector3.up)* 1.5f;
+        Vector3 endPos = viewport.position - Vector3.ProjectOnPlane((viewport.position - startPos).normalized, Vector3.up)* 2f;
         Quaternion startRot = Quaternion.LookRotation((endPos - startPos).normalized, Vector3.up);
         Quaternion endRot = Quaternion.LookRotation(Vector3.ProjectOnPlane(viewport.forward, Vector3.up), Vector3.up);
+
+        transform.position = startPos;
+        transform.localScale = Vector3.zero;
 
         GetComponent<AnimateThis>().Transformate()
             .FromPosition(startPos)

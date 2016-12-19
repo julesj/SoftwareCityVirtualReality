@@ -17,8 +17,6 @@ public class GameStartTrigger : MonoBehaviour {
         {
             FindObjectOfType<LifeCycle>().GetComponent<PlayingStateMachine>().PostStateEvent(StateEvent.StopPlaying);
         }
-
-        Debug.Log(gameObject + " entered, counter = " + GetNumberOfGamestarter());
     }
 
     public void OnTriggerExit(Collider other)
@@ -28,8 +26,6 @@ public class GameStartTrigger : MonoBehaviour {
         {
             FindObjectOfType<LifeCycle>().GetComponent<PlayingStateMachine>().PostStateEvent(StateEvent.StartPlaying);
         }
-
-        Debug.Log(gameObject + " entered, counter = " + GetNumberOfGamestarter());
     }
 
     private int GetNumberOfGamestarter()
@@ -38,7 +34,6 @@ public class GameStartTrigger : MonoBehaviour {
 
         // get all colliders in range of triggerSphere
         Collider[] colliders = Physics.OverlapSphere(triggerSphere.transform.position, triggerSphere.radius);
-
         foreach (Collider collider in colliders)
         {
             // increase counter if collider is a GameStarter

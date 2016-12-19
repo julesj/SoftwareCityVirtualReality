@@ -161,7 +161,7 @@ public class LookAtBuildingHandler : MonoBehaviour {
             playAreaAnimation.CancelAll();
             playAreaAnimation.Transformate()
                 .ToPosition(lastSelectedFloorPosition)
-                .Duration(0.5f)
+                .Duration(0.2f)
                 .Ease(AnimateThis.EaseInQuintic)
                 .OnEnd(OnNavigationAnimationComplete)
                 .Start();

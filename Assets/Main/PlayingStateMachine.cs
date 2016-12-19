@@ -89,6 +89,7 @@ public class CalibratingState : State
 
     public void OnExitState()
     {
+        EventBus.Post(new CalibrationEvents.SuccessEvent());
         EventBus.Post(new ChangeInteractionConceptEvent(InteractionConcept.Nothing));
     }
 }
