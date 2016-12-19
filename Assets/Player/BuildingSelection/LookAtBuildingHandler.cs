@@ -112,10 +112,21 @@ public class LookAtBuildingHandler : MonoBehaviour {
         }
 	}
 
+    public void OnEvent(StartInteractionConceptEvent e)
+    {
+        if (e.newConcept == InteractionConcept.Selection)
+        {
+            Hint.Display("HowToNavigateHint");
+        }
+    }
+
+    
+
     public void OnEvent(StopInteractionConceptEvent e)
     {
         if (e.oldConcept == InteractionConcept.Selection)
         {
+            Hint.Hide("HowToNavigateHint");
             if (navigationHint != null)
             {
                 Destroy(navigationHint);
@@ -156,6 +167,7 @@ public class LookAtBuildingHandler : MonoBehaviour {
             blur.enabled = true;
             
             Transform playArea = VRTK_DeviceFinder.PlayAreaTransform();
+            Hint.Confirm("HowToNavigateHint");
 
             AnimateThis playAreaAnimation = playArea.GetComponent<AnimateThis>();
             playAreaAnimation.CancelAll();
