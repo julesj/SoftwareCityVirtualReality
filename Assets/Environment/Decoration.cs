@@ -3,15 +3,11 @@ using System.Collections;
 
 public class Decoration : MonoBehaviour {
 
+    public float tractorBeamSpeed = 0.01f;
 
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public void TractorBeamToPosition(Vector3 position)
+    {
+        Vector3 velocity = (position - transform.position).normalized;
+        gameObject.GetComponent<Rigidbody>().AddForce((velocity * tractorBeamSpeed) * (Vector3.Distance(position, transform.position)), ForceMode.Impulse);
+    }
 }

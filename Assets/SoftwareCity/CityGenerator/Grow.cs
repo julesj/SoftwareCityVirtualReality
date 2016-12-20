@@ -45,15 +45,16 @@ public class Grow : MonoBehaviour {
         transform.localRotation = Quaternion.Euler(0, value * 360, 0);
     }
 
+    
     public void OnEvent(StartPlayingEvent e)
     {
-        scaleModel.SetValue(0.1f);
+        scaleModel.SetValue(0.2f);
         rotateModel.SetValue(0);
     }
 
-    public void OnEvent(StopPlayingEvent e)
+    public void OnEvent(Events.ResetPlayerEvent e)
     {
-        scaleModel.SetValue(0);
+        scaleModel.SetValue(0.2f);
         rotateModel.SetValue(0);
     }
 

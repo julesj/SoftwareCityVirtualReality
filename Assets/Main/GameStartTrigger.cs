@@ -13,37 +13,44 @@ public class GameStartTrigger : MonoBehaviour {
     public void OnTriggerEnter(Collider other)
     {
         // stop playing when both controllers are inside the triggerSphere
-        if (GetNumberOfGamestarter() == 2)
+        if (GetNumberOfColliders<GameStarter>() == 2)
         {
             FindObjectOfType<LifeCycle>().GetComponent<PlayingStateMachine>().PostStateEvent(StateEvent.StopPlaying);
+        }
+
+        // reset stuff when HMD is in triggerSphere
+        if (other.GetComponent<GameReseter>() != null)
+        {
+            EventBus.Post(new Events.ResetPlayerEvent());
+            EventBus.Post(new Events.ClearDisplayEvent());
         }
     }
 
     public void OnTriggerExit(Collider other)
     {
         // start playing when no controller is inside the triggerSphere
-        if (GetNumberOfGamestarter() == 0)
+        if (GetNumberOfColliders<GameStarter>() == 0)
         {
             FindObjectOfType<LifeCycle>().GetComponent<PlayingStateMachine>().PostStateEvent(StateEvent.StartPlaying);
         }
     }
 
-    private int GetNumberOfGamestarter()
+    private int GetNumberOfColliders<T>() 
     {
-        int numberOfGameStarter = 0;
+        int counter = 0;
 
         // get all colliders in range of triggerSphere
         Collider[] colliders = Physics.OverlapSphere(triggerSphere.transform.position, triggerSphere.radius);
         foreach (Collider collider in colliders)
         {
-            // increase counter if collider is a GameStarter
-            if (collider.gameObject.GetComponent<GameStarter>() != null)
+            // increase counter if collider is from correnct type
+            if (collider.gameObject.GetComponent<T>() != null)
             {
-                numberOfGameStarter++;
+                counter++;
             }
         }
 
-        return numberOfGameStarter;
-    } 
+        return counter;
+    }
 
 }

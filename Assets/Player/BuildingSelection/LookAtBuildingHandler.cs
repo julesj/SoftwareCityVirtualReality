@@ -36,6 +36,8 @@ public class LookAtBuildingHandler : MonoBehaviour {
             float nearestDist = float.MaxValue;
             Building selectedBuilding = null;
 
+            Decoration cube = null;
+
             foreach (RaycastHit hit in Physics.RaycastAll(ray, 100))
             {
                 if (hit.distance > nearestDist)
@@ -56,6 +58,14 @@ public class LookAtBuildingHandler : MonoBehaviour {
                 {
                     selectionOnFloor = false;
                 }
+                if (hit.collider.transform.GetComponent<Decoration>() != null)
+                {
+                    cube = hit.collider.transform.GetComponent<Decoration>();
+                }
+                else
+                {
+                    cube = null;
+                }
             }
 
             if (selectionOnFloor)
@@ -69,6 +79,11 @@ public class LookAtBuildingHandler : MonoBehaviour {
             } else if (navigationHint != null)
             {
                 GameObject.Destroy(navigationHint);
+            }
+
+            if (cube != null)
+            {
+                cube.TractorBeamToPosition(ray.origin);
             }
 
             if (selectedBuilding != lastSelectedBuilding)
