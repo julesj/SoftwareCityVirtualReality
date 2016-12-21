@@ -24,6 +24,19 @@ public class GameStartTrigger : MonoBehaviour {
             EventBus.Post(new Events.ResetPlayerEvent());
             EventBus.Post(new Events.ClearDisplayEvent());
         }
+
+        if (other.GetComponent<GameStarter>() != null)
+        {
+            GameObject label = other.GetComponentInChildren<SideLabel>(true).gameObject;
+            AnimateThis animate = label.GetComponent<AnimateThis>();
+            label.SetActive(true);
+            animate.CancelAll();
+            animate.Transformate()
+                .ToScale(0.008f)
+                .Duration(1f)
+                .Ease(AnimateThis.EaseOutElastic)
+                .Start();
+        }
     }
 
     public void OnTriggerExit(Collider other)
@@ -32,6 +45,13 @@ public class GameStartTrigger : MonoBehaviour {
         if (GetNumberOfColliders<GameStarter>() == 0)
         {
             FindObjectOfType<LifeCycle>().GetComponent<PlayingStateMachine>().PostStateEvent(StateEvent.StartPlaying);
+        }
+
+        if (other.GetComponent<GameStarter>() != null)
+        {
+            GameObject label = other.GetComponentInChildren<SideLabel>(true).gameObject;
+            label.transform.localScale = Vector3.zero;
+            label.SetActive(false);
         }
     }
 
