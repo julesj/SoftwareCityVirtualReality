@@ -103,7 +103,10 @@ public class LookAtBuildingHandler : MonoBehaviour {
                     currentSelectionObject = (GameObject) GameObject.Instantiate(selectionPrefab);
                     Bounds bounds = selectedBuilding.gameObject.GetComponent<Renderer>().bounds;
                     currentSelectionObject.transform.position = bounds.center;
-                    currentSelectionObject.transform.localScale = bounds.size + new Vector3(0.001f, 0.001f, 0.001f);
+                    currentSelectionObject.transform.localScale = selectedBuilding.transform.parent.lossyScale + new Vector3(0.001f, 0.001f, 0.001f);
+                    currentSelectionObject.transform.rotation = GameObject.Find("SoftwareCity").transform.rotation;
+
+                    VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerActions>().TriggerHapticPulse((ushort) (0.1f * 3999));
 
                     Hint.Display("BuildingSelectionConfirmHint");
                     //VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerActions>().ToggleHighlightTouchpad(true, new Color(0, 0, 1, 0.5f));
