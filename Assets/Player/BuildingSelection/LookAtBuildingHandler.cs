@@ -36,6 +36,8 @@ public class LookAtBuildingHandler : MonoBehaviour {
             float nearestDist = float.MaxValue;
             Building selectedBuilding = null;
 
+            Decoration cube = null;
+
             foreach (RaycastHit hit in Physics.RaycastAll(ray, 100))
             {
                 if (hit.distance > nearestDist)
@@ -56,6 +58,14 @@ public class LookAtBuildingHandler : MonoBehaviour {
                 {
                     selectionOnFloor = false;
                 }
+                if (hit.collider.transform.GetComponent<Decoration>() != null)
+                {
+                    cube = hit.collider.transform.GetComponent<Decoration>();
+                }
+                else
+                {
+                    cube = null;
+                }
             }
 
             if (selectionOnFloor)
@@ -69,6 +79,11 @@ public class LookAtBuildingHandler : MonoBehaviour {
             } else if (navigationHint != null)
             {
                 GameObject.Destroy(navigationHint);
+            }
+
+            if (cube != null)
+            {
+                cube.TractorBeamToPosition(ray.origin);
             }
 
             if (selectedBuilding != lastSelectedBuilding)
@@ -88,7 +103,10 @@ public class LookAtBuildingHandler : MonoBehaviour {
                     currentSelectionObject = (GameObject) GameObject.Instantiate(selectionPrefab);
                     Bounds bounds = selectedBuilding.gameObject.GetComponent<Renderer>().bounds;
                     currentSelectionObject.transform.position = bounds.center;
-                    currentSelectionObject.transform.localScale = bounds.size + new Vector3(0.001f, 0.001f, 0.001f);
+                    currentSelectionObject.transform.localScale = selectedBuilding.transform.parent.lossyScale + new Vector3(0.001f, 0.001f, 0.001f);
+                    currentSelectionObject.transform.rotation = GameObject.Find("SoftwareCity").transform.rotation;
+
+                    VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerActions>().TriggerHapticPulse((ushort) (0.1f * 3999));
 
                     Hint.Display("BuildingSelectionConfirmHint");
                     //VRTK_DeviceFinder.GetControllerRightHand().GetComponent<VRTK_ControllerActions>().ToggleHighlightTouchpad(true, new Color(0, 0, 1, 0.5f));

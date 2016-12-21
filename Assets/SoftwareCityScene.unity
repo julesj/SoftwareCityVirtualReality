@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Scale
-  value: 0.1
+  value: 0.2
 --- !u!1001 &1999414555
 Prefab:
   m_ObjectHideFlags: 0

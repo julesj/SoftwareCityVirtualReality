@@ -21,4 +21,9 @@ public class Events {
     {
 
     }
+
+    public class ResetPlayerEvent
+    {
+
+    }
 }
