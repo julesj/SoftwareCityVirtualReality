@@ -6,6 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Opening Scene.unity
+  - enabled: 1
     path: Assets/MainScene.unity
   - enabled: 1
     path: Assets/SoftwareCityScene.unity
@@ -23,3 +25,7 @@ EditorBuildSettings:
     path: Assets/Player/PlayerScene.unity
   - enabled: 1
     path: Assets/PlayerSceneFallback.unity
+  - enabled: 1
+    path: Assets/MainSceneContrBar.unity
+  - enabled: 1
+    path: Assets/PlayerSceneBar.unity
