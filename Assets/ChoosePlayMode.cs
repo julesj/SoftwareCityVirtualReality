@@ -33,6 +33,7 @@ public class ChoosePlayMode : MonoBehaviour {
     void ChooseGesture()
     {
         notImpl.SetActive(true);
+        panel.SetActive(false);
     }
 
     void ChooseContrBar()
