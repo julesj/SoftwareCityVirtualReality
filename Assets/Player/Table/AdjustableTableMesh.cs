@@ -206,7 +206,7 @@ public class AdjustableTableMesh : MonoBehaviour {
         mesh.triangles = triangles;
 
         mesh.RecalculateBounds();
-        mesh.Optimize();
+        ;
     }
         
 }
