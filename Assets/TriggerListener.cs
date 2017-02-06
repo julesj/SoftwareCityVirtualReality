@@ -25,7 +25,7 @@ namespace VRTK
         {
             if (other.gameObject.name != "Canvas_direkt")
             {
-                container = GameObject.Find("VRTK_ControllerCollidersContainer"); //Evtl. nur Head benutzen
+                container = GameObject.Find("VRTK_ControllerCollidersContainer"); //Evtl. nur Head benutzen oder container ist schon compound collider
                 laserpointerR = GameObject.Find("[Controller (right)]BasePointer_SimplePointer_PointerTip");
                 controllerEvents = other.gameObject.GetComponentInParent<VRTK_ControllerEvents>();
                 trackedObj = other.gameObject.GetComponentInParent<SteamVR_TrackedObject>();

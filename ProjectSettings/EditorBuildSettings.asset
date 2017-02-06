@@ -8,6 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Opening Scene.unity
   - enabled: 1
+    path: Assets/WelcomeScenes/Controller_WelcomeScene.unity
+  - enabled: 1
+    path: Assets/WelcomeScenes/Gesten_WelcomeScene.unity
+  - enabled: 1
     path: Assets/MainScene.unity
   - enabled: 1
     path: Assets/SoftwareCityScene.unity

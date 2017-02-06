@@ -2163,7 +2163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5837af0260a118e4d808bfe0405429a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  persistOnLoad: 1
+  persistOnLoad: 0
   systemSDK: 1
   boundariesSDK: 1
   headsetSDK: 1

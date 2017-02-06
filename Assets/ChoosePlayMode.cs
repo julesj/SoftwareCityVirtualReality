@@ -38,7 +38,7 @@ public class ChoosePlayMode : MonoBehaviour {
 
     void ChooseContrBar()
     {
-        SceneManager.LoadScene("MainSceneContrBar");
+        SceneManager.LoadScene("Controller_WelcomeScene");
     }
 
     void ChooseContrJuRob()
