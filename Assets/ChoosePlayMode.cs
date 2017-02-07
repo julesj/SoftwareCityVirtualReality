@@ -10,6 +10,7 @@ public class ChoosePlayMode : MonoBehaviour {
     Button contrBar;
     GameObject panel;
     GameObject notImpl;
+    ClipboardBar clipboard;
 
 	// Use this for initialization
 	void Start () {
@@ -27,7 +28,14 @@ public class ChoosePlayMode : MonoBehaviour {
         gesten.onClick.AddListener(ChooseGesture);
         contrBar.onClick.AddListener(ChooseContrBar);
         contrJuRob.onClick.AddListener(ChooseContrJuRob);
+    }
 
+    private void Update()
+    {
+        if (FindObjectOfType<ClipboardBar>() != null && clipboard == null)
+        {
+            clipboard = GameObject.Find("Main").GetComponent<ClipboardBar>();
+        }
     }
 
     void ChooseGesture()
@@ -38,11 +46,13 @@ public class ChoosePlayMode : MonoBehaviour {
 
     void ChooseContrBar()
     {
+        clipboard.setBefore("Opening Scene");
         SceneManager.LoadScene("Controller_WelcomeScene");
     }
 
     void ChooseContrJuRob()
     {
+        clipboard.setBefore("Opening Scene");
         SceneManager.LoadScene("MainScene");
     }
 }
