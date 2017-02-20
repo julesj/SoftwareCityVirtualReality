@@ -46,12 +46,14 @@ public class ChoosePlayMode : MonoBehaviour {
 
     void ChooseContrBar()
     {
+        Debug.Log("Lädt Controller_WelcomeScene");
         clipboard.setBefore("Opening Scene");
         SceneManager.LoadScene("Controller_WelcomeScene");
     }
 
     void ChooseContrJuRob()
     {
+        Debug.Log("Lädt Gesten_WelcomeScene");
         clipboard.setBefore("Opening Scene");
         SceneManager.LoadScene("MainScene");
     }

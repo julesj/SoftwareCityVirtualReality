@@ -17,10 +17,11 @@ public class TriggerListener : MonoBehaviour
 
     VRTK_ControllerEvents controllerEvents;
     SteamVR_TrackedObject trackedObj;
-    string[] dontCollide = { "Body", "SideA", "SideB", "Canvas_direkt" };
+    string[] dontCollide = { "Body", "SideA", "SideB", "Canvas_direkt", "[Controller (right)]BasePointer_SimplePointer_PointerTip", "[Controller (left)]BasePointer_SimplePointer_PointerTip" };
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("OnTriggerEnter: " + other.name);
         if (!dontCollide.Contains(other.gameObject.name))
         {
             controllerEvents = other.gameObject.GetComponentInParent<VRTK_ControllerEvents>();

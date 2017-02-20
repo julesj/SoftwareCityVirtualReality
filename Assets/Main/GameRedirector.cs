@@ -12,9 +12,11 @@ public class GameRedirector : MonoBehaviour {
         scenes = SceneManager.sceneCount;
         bool isBar = false;
         for (int i=0; i < scenes; i++) {
+            Debug.Log(SceneManager.GetSceneAt(i).name);
             if (redirectBar.Contains(SceneManager.GetSceneAt(i).name) && 
                 FindObjectOfType<ClipboardBar>() == null)
             {
+                Debug.Log("Lädt MainSceneBar");
                 SceneManager.LoadScene("MainSceneBar", LoadSceneMode.Additive);
                 isBar = true;
             } else if (FindObjectOfType<ClipboardBar>() != null)
@@ -24,6 +26,7 @@ public class GameRedirector : MonoBehaviour {
         }
         if (FindObjectOfType<LifeCycle>() == null && !isBar)
         {
+            Debug.Log("Lädt MainScene");
             Application.LoadLevel("MainScene");
         }
     }

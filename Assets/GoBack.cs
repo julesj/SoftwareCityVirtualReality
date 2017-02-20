@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 
 namespace VRTK
 {
+    //Dieses Skript muss auf einem Controller liegen!
     public class GoBack : MonoBehaviour
     {
-
+        
         SteamVR_TrackedObject trackedObj;
         SteamVR_Controller.Device device;
         Vector2 axis;
