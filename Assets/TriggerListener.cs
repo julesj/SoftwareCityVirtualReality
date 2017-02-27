@@ -17,16 +17,48 @@ public class TriggerListener : MonoBehaviour
 
     VRTK_ControllerEvents controllerEvents;
     SteamVR_TrackedObject trackedObj;
-    string[] dontCollide = { "Body", "SideA", "SideB", "Canvas_direkt", "[Controller (right)]BasePointer_SimplePointer_PointerTip", "[Controller (left)]BasePointer_SimplePointer_PointerTip" };
+    List<string> dontCollide;
+
+    public Boolean interactableWithLaserpointer;
+    public Boolean interactableWithController;
+    public Boolean interactableWithHands;
+
+    private void Awake()
+    {
+        Rigidbody rigidbody = gameObject.AddComponent<Rigidbody>();
+        rigidbody.isKinematic = true;
+        rigidbody.useGravity = false;
+
+        BoxCollider boxcollider = gameObject.AddComponent<BoxCollider>();
+        boxcollider.isTrigger = false;
+        boxcollider.size = new Vector3(gameObject.GetComponent<RectTransform>().rect.width, gameObject.GetComponent<RectTransform>().rect.height, 1);
+    }
+
+    private void Start()
+    {
+        dontCollide = new List<string> { "Body", "SideA", "SideB", "Canvas_direkt", "[Controller (right)]BasePointer_SimplePointer_PointerTip", "[Controller (left)]BasePointer_SimplePointer_PointerTip" };
+        if (!interactableWithLaserpointer)
+        {
+            dontCollide.Add("[Controller (right)]Basepointer_SimplePointer_Pointer");
+            dontCollide.Add("[Controller (left)]Basepointer_SimplePointer_Pointer");
+        }
+        if (!interactableWithController)
+        {
+            dontCollide.Add("Head");
+        }
+        if (!interactableWithHands)
+        {
+            //TODO
+        }        
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("OnTriggerEnter: " + other.name);
         if (!dontCollide.Contains(other.gameObject.name))
         {
             controllerEvents = other.gameObject.GetComponentInParent<VRTK_ControllerEvents>();
             trackedObj = other.gameObject.GetComponentInParent<SteamVR_TrackedObject>();
-            if (controllerEvents == null) //Bei Laserpointer
+            if (controllerEvents == null && interactableWithLaserpointer) //Bei Laserpointer
             {
                 string name = other.gameObject.name;
                 string pattern = @"\[(.+)]";

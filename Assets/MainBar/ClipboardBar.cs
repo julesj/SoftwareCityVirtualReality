@@ -6,7 +6,6 @@ public class ClipboardBar : MonoBehaviour {
 
     private string before;
 
-
     private void Awake()
     {
         DontDestroyOnLoad(transform.gameObject);
