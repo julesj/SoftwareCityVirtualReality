@@ -28,7 +28,7 @@ public class DeviceMonitor : MonoBehaviour {
         GameObject leftController = VRTK_DeviceFinder.GetControllerLeftHand();
         GameObject rightController = VRTK_DeviceFinder.GetControllerRightHand();
 
-        if (leftController.activeSelf && rightController.activeSelf)
+        if (leftController != null && leftController.activeSelf && rightController != null && rightController.activeSelf)
         {
             EventBus.Post(new SceneReadyEvent());
         } else

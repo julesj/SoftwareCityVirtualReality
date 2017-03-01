@@ -89,8 +89,8 @@ public class CalibrationController : MonoBehaviour {
             applicationButtonPressedHandler = new ControllerInteractionEventHandler(ApplicationMenuButtonPressed);
         }
         
-        leftController.GetComponent<VRTK_ControllerEvents>().ApplicationMenuPressed += applicationButtonPressedHandler;
-        rightController.GetComponent<VRTK_ControllerEvents>().ApplicationMenuPressed += applicationButtonPressedHandler;
+        leftController.GetComponent<VRTK_ControllerEvents>().ButtonTwoPressed += applicationButtonPressedHandler;
+        rightController.GetComponent<VRTK_ControllerEvents>().ButtonTwoPressed += applicationButtonPressedHandler;
 
         // register GripButton
         if (gripButtonPressedHandler == null)
@@ -116,8 +116,8 @@ public class CalibrationController : MonoBehaviour {
         // unregister ApplicationMenuButton
         if (applicationButtonPressedHandler != null)
         {
-            leftController.GetComponent<VRTK_ControllerEvents>().ApplicationMenuPressed -= applicationButtonPressedHandler;
-            rightController.GetComponent<VRTK_ControllerEvents>().ApplicationMenuPressed -= applicationButtonPressedHandler;
+            leftController.GetComponent<VRTK_ControllerEvents>().ButtonTwoPressed -= applicationButtonPressedHandler;
+            rightController.GetComponent<VRTK_ControllerEvents>().ButtonTwoPressed -= applicationButtonPressedHandler;
         }
 
         // unregister GripButton
