@@ -64,7 +64,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1243127998100442
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,13 +74,30 @@ GameObject:
   m_Component:
   - component: {fileID: 4207044287115746}
   - component: {fileID: 114885546112329334}
-  - component: {fileID: 114264712177260524}
-  - component: {fileID: 114462015693187844}
   - component: {fileID: 114929877200939848}
   - component: {fileID: 114320096361131278}
-  - component: {fileID: 114065751528795540}
+  - component: {fileID: 114462015693187844}
+  - component: {fileID: 114264712177260524}
+  - component: {fileID: 114255274962054438}
+  - component: {fileID: 114758873768648868}
   m_Layer: 0
   m_Name: Controller (right)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1642063481975308
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4005366986492946}
+  - component: {fileID: 114315298449764012}
+  m_Layer: 0
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,10 +112,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4426104556898962}
   - component: {fileID: 114798785624982424}
-  - component: {fileID: 114467359193818976}
-  - component: {fileID: 114563880009199572}
-  - component: {fileID: 114795138582146026}
   - component: {fileID: 114753958314851974}
+  - component: {fileID: 114563880009199572}
+  - component: {fileID: 114467359193818976}
+  - component: {fileID: 114795138582146026}
   m_Layer: 0
   m_Name: Controller (left)
   m_TagString: Untagged
@@ -141,22 +158,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1886029448398874
-GameObject:
+--- !u!4 &4005366986492946
+Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4459158750817758}
-  - component: {fileID: 114107295686307238}
-  m_Layer: 0
-  m_Name: Model
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_GameObject: {fileID: 1642063481975308}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4207044287115746}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4207044287115746
 Transform:
   m_ObjectHideFlags: 1
@@ -167,7 +181,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4459158750817758}
+  - {fileID: 4005366986492946}
   m_Father: {fileID: 4685210408771288}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -196,19 +210,6 @@ Transform:
   m_Children:
   - {fileID: 4593506648810178}
   m_Father: {fileID: 4685210408771288}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4459158750817758
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1886029448398874}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4207044287115746}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4593506648810178
@@ -388,40 +389,12 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1866686744989784}
   m_Enabled: 1
---- !u!114 &114065751528795540
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1243127998100442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3404697c9af08e45ad2f7fdf183d586, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114067199423336266
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1020510218701410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5890e3cad70bea64d91aef9145ba3454, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  index: -1
-  modelOverride: 
-  shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  verbose: 0
-  createComponents: 1
-  updateDynamically: 1
---- !u!114 &114107295686307238
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1886029448398874}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5890e3cad70bea64d91aef9145ba3454, type: 3}
@@ -447,6 +420,28 @@ MonoBehaviour:
   index: 0
   origin: {fileID: 0}
   isValid: 0
+--- !u!114 &114255274962054438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1243127998100442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ec704cceb26f6f49b6c900fc83d8d18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableTeleport: 0
+  pointerRenderer: {fileID: 114758873768648868}
+  activationButton: 2
+  holdButtonToActivate: 1
+  activationDelay: 0
+  selectionButton: 0
+  selectOnPress: 0
+  interactWithObjects: 0
+  grabToPointerTip: 0
+  controller: {fileID: 0}
+  customOrigin: {fileID: 0}
 --- !u!114 &114264712177260524
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -467,6 +462,7 @@ MonoBehaviour:
     buttonOneModelPath: 
     buttonTwoModelPath: 
     systemMenuModelPath: 
+    startMenuModelPath: 
   elementHighlighterOverrides:
     body: {fileID: 0}
     trigger: {fileID: 0}
@@ -476,20 +472,43 @@ MonoBehaviour:
     buttonOne: {fileID: 0}
     buttonTwo: {fileID: 0}
     systemMenu: {fileID: 0}
+    startMenu: {fileID: 0}
+--- !u!114 &114315298449764012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1642063481975308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5890e3cad70bea64d91aef9145ba3454, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: -1
+  modelOverride: 
+  shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  verbose: 0
+  createComponents: 1
+  updateDynamically: 1
 --- !u!114 &114320096361131278
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1243127998100442}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 408a45c3d6ea5804fa3bcaaaf8251ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableTeleport: 1
+  enableTeleport: 0
   controller: {fileID: 0}
   pointerOriginTransform: {fileID: 0}
+  pointerOriginSmoothingSettings:
+    smoothsPosition: 0
+    maxAllowedPerFrameDistanceDifference: 0.003
+    smoothsRotation: 0
+    maxAllowedPerFrameAngleDifference: 1.5
   pointerMaterial: {fileID: 0}
   pointerHitColor: {r: 0, g: 0.5, b: 0, a: 1}
   pointerMissColor: {r: 0.8, g: 0, b: 0, a: 1}
@@ -549,8 +568,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointerToggleButton: 3
   pointerSetButton: 3
-  grabToggleButton: 7
-  useToggleButton: 3
+  grabToggleButton: 4
+  useToggleButton: 4
   uiClickButton: 4
   menuToggleButton: 12
   axisFidelity: 1
@@ -573,6 +592,7 @@ MonoBehaviour:
   buttonOneTouched: 0
   buttonTwoPressed: 0
   buttonTwoTouched: 0
+  startMenuPressed: 0
   pointerPressed: 0
   grabPressed: 0
   usePressed: 0
@@ -615,6 +635,7 @@ MonoBehaviour:
   buttonOneTouched: 0
   buttonTwoPressed: 0
   buttonTwoTouched: 0
+  startMenuPressed: 0
   pointerPressed: 0
   grabPressed: 0
   usePressed: 0
@@ -640,6 +661,7 @@ MonoBehaviour:
     buttonOneModelPath: 
     buttonTwoModelPath: 
     systemMenuModelPath: 
+    startMenuModelPath: 
   elementHighlighterOverrides:
     body: {fileID: 0}
     trigger: {fileID: 0}
@@ -649,6 +671,7 @@ MonoBehaviour:
     buttonOne: {fileID: 0}
     buttonTwo: {fileID: 0}
     systemMenu: {fileID: 0}
+    startMenu: {fileID: 0}
 --- !u!114 &114692969953539578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -679,11 +702,11 @@ MonoBehaviour:
   controllerSDK: 1
   autoManageScriptDefines: 1
   actualBoundaries: {fileID: 1162175160297314}
-  actualHeadset: {fileID: 1866686744989784}
+  actualHeadset: {fileID: 1063691562840018}
   actualLeftController: {fileID: 1771261697317234}
   actualRightController: {fileID: 1243127998100442}
   modelAliasLeftController: {fileID: 1020510218701410}
-  modelAliasRightController: {fileID: 1886029448398874}
+  modelAliasRightController: {fileID: 1642063481975308}
   scriptAliasLeftController: {fileID: 1771261697317234}
   scriptAliasRightController: {fileID: 1243127998100442}
 --- !u!114 &114753958314851974
@@ -700,6 +723,11 @@ MonoBehaviour:
   enableTeleport: 1
   controller: {fileID: 0}
   pointerOriginTransform: {fileID: 0}
+  pointerOriginSmoothingSettings:
+    smoothsPosition: 0
+    maxAllowedPerFrameDistanceDifference: 0.003
+    smoothsRotation: 0
+    maxAllowedPerFrameAngleDifference: 1.5
   pointerMaterial: {fileID: 0}
   pointerHitColor: {r: 0, g: 0.5, b: 0, a: 1}
   pointerMissColor: {r: 0.8, g: 0, b: 0, a: 1}
@@ -717,6 +745,37 @@ MonoBehaviour:
   customPointerCursor: {fileID: 0}
   pointerCursorMatchTargetNormal: 0
   pointerCursorRescaledAlongDistance: 0
+--- !u!114 &114758873768648868
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1243127998100442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fc65878c7102524bb8c2bcfbefff497, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playareaCursor: {fileID: 0}
+  layersToIgnore:
+    serializedVersion: 2
+    m_Bits: 4
+  pointerOriginSmoothingSettings:
+    smoothsPosition: 0
+    maxAllowedPerFrameDistanceDifference: 0.003
+    smoothsRotation: 0
+    maxAllowedPerFrameAngleDifference: 1.5
+  validCollisionColor: {r: 0, g: 1, b: 0, a: 1}
+  invalidCollisionColor: {r: 1, g: 0, b: 0, a: 1}
+  tracerVisibility: 0
+  cursorVisibility: 0
+  maximumLength: 100
+  scaleFactor: 0.002
+  cursorScaleMultiplier: 25
+  cursorMatchTargetRotation: 0
+  cursorDistanceRescale: 0
+  customTracer: {fileID: 0}
+  customCursor: {fileID: 0}
 --- !u!114 &114795138582146026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -728,13 +787,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b26f999cbdac8478b6c2a046256169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 0}
-  pointerOriginTransform: {fileID: 0}
+  activationButton: 3
   activationMode: 0
+  selectionButton: 3
   clickMethod: 0
   attemptClickOnDeactivate: 0
+  clickAfterHoverDuration: 0
+  controller: {fileID: 0}
+  pointerOriginTransform: {fileID: 0}
   hoveringElement: {fileID: 0}
   controllerRenderModel: {fileID: 0}
+  hoverDurationTimer: 0
+  canClickOnHover: 0
   autoActivatingCanvas: {fileID: 0}
   collisionClick: 0
 --- !u!114 &114798785624982424
@@ -766,7 +830,7 @@ MonoBehaviour:
   wireframeHeight: 2
   drawWireframeWhenSelectedOnly: 0
   drawInGame: 0
-  size: 2
+  size: 0
   color: {r: 0, g: 1, b: 1, a: 1}
   vertices:
   - {x: 1.5, y: 0.01, z: 1.125}
@@ -802,13 +866,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b26f999cbdac8478b6c2a046256169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activationButton: 2
+  activationMode: 0
+  selectionButton: 4
+  clickMethod: 1
+  attemptClickOnDeactivate: 0
+  clickAfterHoverDuration: 0
   controller: {fileID: 0}
   pointerOriginTransform: {fileID: 0}
-  activationMode: 0
-  clickMethod: 0
-  attemptClickOnDeactivate: 0
   hoveringElement: {fileID: 0}
   controllerRenderModel: {fileID: 0}
+  hoverDurationTimer: 0
+  canClickOnHover: 0
   autoActivatingCanvas: {fileID: 0}
   collisionClick: 0
 --- !u!124 &124211893745759194
