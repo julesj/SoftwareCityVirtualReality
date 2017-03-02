@@ -28,5 +28,13 @@ public class KeyListener : MonoBehaviour {
         {
             EventBus.Post(new Events.BuildingSelectionConfirmedEvent());
         }
+        if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            FindObjectOfType<FloatModel>().SetValue(0.5f);
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad3) || Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            EventBus.Post(new ChangeInteractionConceptEvent(InteractionConcept.Selection));
+        }
     }
 }

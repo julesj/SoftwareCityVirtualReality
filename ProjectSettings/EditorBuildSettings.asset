@@ -7,25 +7,3 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Opening Scene.unity
-  - enabled: 1
-    path: Assets/MainBar/MainSceneBar.unity
-  - enabled: 1
-    path: Assets/WelcomeScenes/Controller_WelcomeScene.unity
-  - enabled: 1
-    path: Assets/WelcomeScenes/Gesten_WelcomeScene.unity
-  - enabled: 1
-    path: Assets/MainScene.unity
-  - enabled: 1
-    path: Assets/SoftwareCityScene.unity
-  - enabled: 1
-    path: Assets/EnvironmentScene.unity
-  - enabled: 1
-    path: Assets/PlayerScenes/PlayerScene.unity
-  - enabled: 1
-    path: Assets/PlayerScenes/PlayerSceneContrBar.unity
-  - enabled: 1
-    path: Assets/PlayerScenes/PlayerSceneFallback.unity
-  - enabled: 1
-    path: Assets/PlayerScenes/PlayerSceneGestureBar.unity
-  - enabled: 1
-    path: Assets/PlayerScenes/PlayerSceneMixedBar.unity
