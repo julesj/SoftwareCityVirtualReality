@@ -5,11 +5,7 @@ using UnityEngine;
 public class ClipboardBar : MonoBehaviour {
 
     private string before;
-
-    private void Awake()
-    {
-        DontDestroyOnLoad(transform.gameObject);
-    }
+    private string playmode;
 
     public string getBefore()
     {
@@ -19,6 +15,16 @@ public class ClipboardBar : MonoBehaviour {
     public void setBefore(string newBefore)
     {
         before = newBefore;
+    }
+
+    public string getPlaymode()
+    {
+        return playmode;
+    }
+
+    public void setPlaymode(string newPlaymode)
+    {
+        playmode = newPlaymode;
     }
 
 }

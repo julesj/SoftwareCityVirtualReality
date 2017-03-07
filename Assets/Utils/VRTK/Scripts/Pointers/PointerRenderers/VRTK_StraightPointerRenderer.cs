@@ -63,6 +63,8 @@ namespace VRTK
         protected override void CreatePointerObjects()
         {
             actualContainer = new GameObject(string.Format("[{0}]StraightPointerRenderer_Container", gameObject.name));
+            //nächste Zeile hinzugefügt:
+            actualContainer.transform.parent = gameObject.transform;
             actualContainer.transform.localPosition = Vector3.zero;
             VRTK_PlayerObject.SetPlayerObject(actualContainer, VRTK_PlayerObject.ObjectTypes.Pointer);
 

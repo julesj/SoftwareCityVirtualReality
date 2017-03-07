@@ -10,8 +10,7 @@ public class StartSoftwareCity : MonoBehaviour {
 
     public void StartCity()
     {
-        SceneManager.LoadSceneAsync("SoftwareCityScene", LoadSceneMode.Additive);
-        SceneManager.LoadSceneAsync("EnvironmentScene", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("ScaleRotateExampleScene", LoadSceneMode.Additive);
 
         int count = SceneManager.sceneCount;
         for (int i = 0; i < count; i++)
