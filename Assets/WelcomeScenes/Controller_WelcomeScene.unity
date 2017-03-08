@@ -273,7 +273,7 @@ Prefab:
     - target: {fileID: 114679064570461206, guid: 225fe1d9733fa26499cbb4aed56e1fab,
         type: 2}
       propertyPath: loadSceneAdditive
-      value: PlayerSceneContrBar
+      value: PlayerSceneMixedBar
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 225fe1d9733fa26499cbb4aed56e1fab, type: 2}
