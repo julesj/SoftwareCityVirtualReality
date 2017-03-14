@@ -431,6 +431,7 @@ namespace VRTK
         /// </summary>
         public virtual void SaveCurrentState()
         {
+            Debug.Log("IsGrabbed: " + IsGrabbed().ToString() + ", snappedInSnapDropZone: " + snappedInSnapDropZone.ToString());
             if (!IsGrabbed() && !snappedInSnapDropZone)
             {
                 previousParent = transform.parent;

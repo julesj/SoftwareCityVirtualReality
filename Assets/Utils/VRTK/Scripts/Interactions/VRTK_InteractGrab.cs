@@ -199,6 +199,7 @@ namespace VRTK
 
         private void ChooseGrabSequence(VRTK_InteractableObject grabbedObjectScript)
         {
+            Debug.Log("Grabbed: " + grabbedObjectScript.IsGrabbed().ToString() + ", Swappable: " + grabbedObjectScript.IsSwappable().ToString());
             if (!grabbedObjectScript.IsGrabbed() || grabbedObjectScript.IsSwappable())
             {
                 InitPrimaryGrab(grabbedObjectScript);
@@ -227,6 +228,7 @@ namespace VRTK
 
         private void InitGrabbedObject()
         {
+            Debug.Log("Should grab: " + interactTouch.GetTouchedObject().name);
             grabbedObject = interactTouch.GetTouchedObject();
             if (grabbedObject)
             {
@@ -240,6 +242,8 @@ namespace VRTK
         private void InitPrimaryGrab(VRTK_InteractableObject currentGrabbedObject)
         {
             var grabbingObject = gameObject;
+            Debug.Log("GrabbingObject: " + gameObject.name + ", GrabbedObject: " + currentGrabbedObject.name);
+            Debug.Log("IsValidInteractableController: " + currentGrabbedObject.IsValidInteractableController(gameObject, currentGrabbedObject.allowedGrabControllers).ToString());
 
             if (!currentGrabbedObject.IsValidInteractableController(gameObject, currentGrabbedObject.allowedGrabControllers))
             {
@@ -310,6 +314,7 @@ namespace VRTK
         private GameObject GetGrabbableObject()
         {
             GameObject obj = interactTouch.GetTouchedObject();
+            Debug.Log("Grab object: " + obj.name);
             if (obj != null && interactTouch.IsObjectInteractable(obj))
             {
                 return obj;

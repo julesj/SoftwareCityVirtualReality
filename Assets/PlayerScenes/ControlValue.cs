@@ -15,22 +15,6 @@ public class ControlValue : MonoBehaviour {
 
     private void Start()
     {
-        controlEvents = GetComponent<VRTK_Control_UnityEvents>();
-        if (controlEvents == null)
-        {
-            controlEvents = gameObject.AddComponent<VRTK_Control_UnityEvents>();
-        }
-
-        controlEvents.OnValueChanged.AddListener(HandleChange);
-
-        foreach (FloatModel model in FindObjectsOfType<FloatModel>())
-        {
-            if (model.name.Equals("Scale"))
-            {
-                scaleModel = model;
-            }
-        }
-
         SceneManager.sceneLoaded += SceneLoaded;
     }
 
@@ -46,6 +30,14 @@ public class ControlValue : MonoBehaviour {
                     scaleModel = model;
                 }
             }
+
+            controlEvents = GetComponent<VRTK_Control_UnityEvents>();
+            if (controlEvents == null)
+            {
+                controlEvents = gameObject.AddComponent<VRTK_Control_UnityEvents>();
+            }
+
+            controlEvents.OnValueChanged.AddListener(HandleChange);
         }
     }
 
