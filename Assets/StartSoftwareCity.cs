@@ -6,7 +6,7 @@ using System.Linq;
 
 public class StartSoftwareCity : MonoBehaviour {
 
-    private string[] welcomeScenes = { "Controller_WelcomeScene", "Gesten_WelcomeScene" };
+    private string[] welcomeScenes = { "Controller_WelcomeScene", "Gesten_WelcomeScene", "Mixed_WelcomeScene" };
 
     public void StartCity()
     {

@@ -8,6 +8,7 @@ public class ChoosePlayMode : MonoBehaviour {
     Button gesten;
     Button contrJuRob;
     Button contrBar;
+    Button mixedBar;
     GameObject panel;
     GameObject notImpl;
     ClipboardBar clipboard;
@@ -20,6 +21,7 @@ public class ChoosePlayMode : MonoBehaviour {
         gesten = GameObject.Find("Gesten").GetComponent<Button>();
         contrBar = GameObject.Find("ControllerBar").GetComponent<Button>();
         contrJuRob = GameObject.Find("ControllerJuRob").GetComponent<Button>();
+        mixedBar = GameObject.Find("MixedBar").GetComponent<Button>();
 
         //UI für Start
         notImpl.SetActive(false);
@@ -28,6 +30,7 @@ public class ChoosePlayMode : MonoBehaviour {
         gesten.onClick.AddListener(ChooseGesture);
         contrBar.onClick.AddListener(ChooseContrBar);
         contrJuRob.onClick.AddListener(ChooseContrJuRob);
+        mixedBar.onClick.AddListener(ChooseMixedBar);
     }
 
     private void Update()
@@ -48,7 +51,8 @@ public class ChoosePlayMode : MonoBehaviour {
     {
         Debug.Log("Lädt Controller_WelcomeScene");
         clipboard.setBefore("Opening Scene");
-        SceneManager.LoadScene("Controller_WelcomeScene");
+        SceneManager.LoadScene("Controller_WelcomeScene", LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync("Opening Scene");
     }
 
     void ChooseContrJuRob()
@@ -56,5 +60,13 @@ public class ChoosePlayMode : MonoBehaviour {
         Debug.Log("Lädt Gesten_WelcomeScene");
         clipboard.setBefore("Opening Scene");
         SceneManager.LoadScene("MainScene");
+    }
+
+    void ChooseMixedBar()
+    {
+        Debug.Log("Lädt Mixed_WelcomeScene");
+        clipboard.setBefore("Opening Scene");
+        SceneManager.LoadScene("Mixed_WelcomeScene", LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync("Opening Scene");
     }
 }

@@ -36,6 +36,7 @@ namespace VRTK
 
         void DoTouchpadPressed(object sender, ControllerInteractionEventArgs e)
         {
+            Debug.Log(angle);
             if (angle > 180)
             {
                 Debug.Log("before: " + clipboard.getBefore());

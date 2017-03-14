@@ -46,6 +46,7 @@ public class ControllerScaleBar : MonoBehaviour {
         Debug.Log("Szene " + scene.name + " wurde geladen");
         if (scene.name == "ScaleRotateExampleScene")
         {
+            //GetComponent<GoBack>().enabled = false;
             foreach (FloatModel model in FindObjectsOfType<FloatModel>())
             {
                 if (model.name.Equals("Scale"))

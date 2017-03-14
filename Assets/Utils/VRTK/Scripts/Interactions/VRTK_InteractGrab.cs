@@ -314,7 +314,6 @@ namespace VRTK
         private GameObject GetGrabbableObject()
         {
             GameObject obj = interactTouch.GetTouchedObject();
-            Debug.Log("Grab object: " + obj.name);
             if (obj != null && interactTouch.IsObjectInteractable(obj))
             {
                 return obj;

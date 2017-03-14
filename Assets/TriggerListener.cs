@@ -18,6 +18,7 @@ public class TriggerListener : MonoBehaviour
     VRTK_ControllerEvents controllerEvents;
     SteamVR_TrackedObject trackedObj;
     List<string> dontCollide;
+    private List<GameObject> collided;
 
     public Boolean interactableWithLaserpointer;
     public Boolean interactableWithController;
@@ -36,6 +37,7 @@ public class TriggerListener : MonoBehaviour
 
     private void Start()
     {
+        collided = new List<GameObject> { };
         dontCollide = new List<string> { "Body", "SideA", "SideB", "Canvas_direkt", "[Controller (right)]BasePointer_SimplePointer_PointerTip", "[Controller (left)]BasePointer_SimplePointer_PointerTip" };
         if (!interactableWithLaserpointer)
         {
@@ -54,8 +56,9 @@ public class TriggerListener : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!dontCollide.Contains(other.gameObject.name))
+        if (!dontCollide.Contains(other.gameObject.name) && collided.Count() == 0)
         {
+            Debug.Log("OnTriggerEnter: " + other.gameObject.name);
             controllerEvents = other.gameObject.GetComponentInParent<VRTK_ControllerEvents>();
             trackedObj = other.gameObject.GetComponentInParent<SteamVR_TrackedObject>();
             if (controllerEvents == null && interactableWithLaserpointer) //Bei Laserpointer
@@ -71,6 +74,7 @@ public class TriggerListener : MonoBehaviour
             }
 
             controllerEvents.AliasUIClickOn += TriggerListener_AliasUIClickOn;
+            collided.Add(other.gameObject);
 
             gameObject.GetComponent<Button>().Select();
             SteamVR_Controller.Input((int)trackedObj.index).TriggerHapticPulse(2000);
@@ -90,9 +94,11 @@ public class TriggerListener : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        Debug.Log("OnTriggerExit: " + other.gameObject.name);
         if(!dontCollide.Contains(other.gameObject.name))
         {
             controllerEvents.AliasUIClickOn -= TriggerListener_AliasUIClickOn;
+            collided.Remove(other.gameObject);
 
             EventSystem.current.SetSelectedGameObject(null);
         }

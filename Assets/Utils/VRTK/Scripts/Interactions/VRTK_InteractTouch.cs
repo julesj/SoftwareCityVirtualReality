@@ -218,7 +218,6 @@ namespace VRTK
 
         protected virtual void OnTriggerEnter(Collider collider)
         {
-            Debug.Log("TriggerEnter: " + collider.gameObject.name);
             var colliderInteractableObject = TriggerStart(collider);
             //If the new collider is not part of the existing touched object (and the object isn't being grabbed) then start touching the new object
             if (touchedObject != null && colliderInteractableObject && touchedObject != colliderInteractableObject && !touchedObject.GetComponent<VRTK_InteractableObject>().IsGrabbed())

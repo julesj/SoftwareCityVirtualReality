@@ -5,7 +5,7 @@ using System.Linq;
 
 public class GameRedirector : MonoBehaviour {
     int scenes;
-    string[] redirectBar = { "Opening Scene", "Controller_WelcomeScene", "Gesten_WelcomeScene" };
+    string[] redirectBar = { "Opening Scene", "Controller_WelcomeScene", "Gesten_WelcomeScene", "Mixed_WelcomeScene" };
     ClipboardBar clipboard;
 
 	void Start () {
