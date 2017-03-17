@@ -25,6 +25,11 @@ public class ControllerScaleBar : MonoBehaviour {
         SceneManager.sceneLoaded += SceneLoaded;
     }
 
+    private void OnDestroy()
+    {
+        Debug.Log("Destroy");
+    }
+
     private void Update()
     {
         if (doScale)

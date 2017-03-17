@@ -38,11 +38,11 @@ public class TriggerListener : MonoBehaviour
     private void Start()
     {
         collided = new List<GameObject> { };
-        dontCollide = new List<string> { "Body", "SideA", "SideB", "Canvas_direkt", "[Controller (right)]BasePointer_SimplePointer_PointerTip", "[Controller (left)]BasePointer_SimplePointer_PointerTip" };
+        dontCollide = new List<string> { "Body", "SideA", "SideB", "Canvas_direkt", "[Controller (right)]StraightPointerRenderer_Cursor", "[Controller (left)]StraightPointerRenderer_Cursor" };
         if (!interactableWithLaserpointer)
         {
-            dontCollide.Add("[Controller (right)]Basepointer_SimplePointer_Pointer");
-            dontCollide.Add("[Controller (left)]Basepointer_SimplePointer_Pointer");
+            dontCollide.Add("[Controller (right)]StraightPointerRenderer_Tracer");
+            dontCollide.Add("[Controller (left)]StraightPointerRenderer_Tracer");
         }
         if (!interactableWithController)
         {
@@ -94,9 +94,9 @@ public class TriggerListener : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("OnTriggerExit: " + other.gameObject.name);
-        if(!dontCollide.Contains(other.gameObject.name))
+        if(!dontCollide.Contains(other.gameObject.name) && collided.Contains(other.gameObject))
         {
+            Debug.Log("OnTriggerExit: " + other.gameObject.name);
             controllerEvents.AliasUIClickOn -= TriggerListener_AliasUIClickOn;
             collided.Remove(other.gameObject);
 

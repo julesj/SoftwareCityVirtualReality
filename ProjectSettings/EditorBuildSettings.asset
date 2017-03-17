@@ -8,15 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Opening Scene.unity
   - enabled: 1
+    path: Assets/WelcomeScenes/Controller_WelcomeScene.unity
+  - enabled: 1
+    path: Assets/WelcomeScenes/Mixed_WelcomeScene.unity
+  - enabled: 1
     path: Assets/MainBar/MainSceneBar.unity
   - enabled: 1
     path: Assets/Main/MainScene.unity
   - enabled: 1
-    path: Assets/WelcomeScenes/Controller_WelcomeScene.unity
-  - enabled: 1
     path: Assets/WelcomeScenes/Gesten_WelcomeScene.unity
-  - enabled: 1
-    path: Assets/WelcomeScenes/Mixed_WelcomeScene.unity
   - enabled: 1
     path: Assets/PlayerScenes/PlayerSceneContrBar.unity
   - enabled: 1

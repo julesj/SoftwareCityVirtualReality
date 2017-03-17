@@ -17,6 +17,7 @@ public class StartSoftwareCity : MonoBehaviour {
         {
             if (welcomeScenes.Contains(SceneManager.GetSceneAt(i).name))
             {
+                Debug.Log("Unload Scene: " + SceneManager.GetSceneAt(i).name);
                 SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(i));
             }
         }
