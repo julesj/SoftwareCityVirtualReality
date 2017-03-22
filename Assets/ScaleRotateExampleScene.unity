@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   origin: {fileID: 299247650}
-  buildingPrefab: {fileID: 171230, guid: 6e6c2355b28ad7b49ba27b21b5ad486e, type: 2}
+  buildingPrefab: {fileID: 171230, guid: 09e7921e719dec746881d09d1076ba8f, type: 2}
   streetPrefab: {fileID: 132800, guid: 5e2077f34cdb3c14d9d9cd41488ffc11, type: 2}
   blockPrefab: {fileID: 145100, guid: 2b9f5ae4c105e9749beb75bf49902784, type: 2}
   pathSeparator: .

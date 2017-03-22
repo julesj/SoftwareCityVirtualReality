@@ -19,7 +19,7 @@ Platform assembly: C:\Users\BarbaraS\Documents\SoftwareCityVirtualReality\UIAnwe
 Loading C:\Users\BarbaraS\Documents\SoftwareCityVirtualReality\UIAnwendung_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
 Platform assembly: C:\Users\BarbaraS\Documents\SoftwareCityVirtualReality\UIAnwendung_Data\Managed\UnityEngine.VR.dll (this message is harmless)
 Loading C:\Users\BarbaraS\Documents\SoftwareCityVirtualReality\UIAnwendung_Data\Managed\UnityEngine.VR.dll into Unity Child Domain
-- Completed reload, in  0.022 seconds
+- Completed reload, in  0.021 seconds
 Platform assembly: C:\Users\BarbaraS\Documents\SoftwareCityVirtualReality\UIAnwendung_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\BarbaraS\Documents\SoftwareCityVirtualReality\UIAnwendung_Data\Managed\System.dll (this message is harmless)
 <RI> Initializing input.
@@ -33,7 +33,7 @@ Failed to create Oculus Session.Compositor failed to initialize.OpenVR initializ
 (Filename:  Line: 381)
 
 [VRDevice] Successfully created device OpenVR.
-UnloadTime: 0.343186 ms
+UnloadTime: 0.340553 ms
 Mixed_WelcomeScene
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
@@ -47,24 +47,8 @@ PlayerSceneMixedBar
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: 1ebc -> priority: 1 
+  Thread -> id: 2f04 -> priority: 1 
 Connected to lighthouse:LHR-8C37A7D9
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-OnTriggerEnter: Head
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-OnTriggerExit: Head
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-OnTriggerEnter: Head
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-OnTriggerExit: Head
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
@@ -92,524 +76,55 @@ Szene ScaleRotateExampleScene wurde geladen
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
+Szene ScaleRotateExampleScene wurde geladen
  
-(Filename:  Line: -1)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-Should grab: Cube (1)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Grabbed: False, Swappable: True
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-GrabbingObject: Controller (right), GrabbedObject: Cube (1)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-IsValidInteractableController: True
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-IsGrabbed: False, snappedInSnapDropZone: False
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-Should grab: Cube (1)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Grabbed: False, Swappable: True
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-GrabbingObject: Controller (right), GrabbedObject: Cube (1)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-IsValidInteractableController: True
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-IsGrabbed: False, snappedInSnapDropZone: False
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-Should grab: Cube (1)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Grabbed: False, Swappable: True
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-GrabbingObject: Controller (right), GrabbedObject: Cube (1)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-IsValidInteractableController: True
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-IsGrabbed: False, snappedInSnapDropZone: False
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-Should grab: Cube (1)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Grabbed: False, Swappable: True
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-GrabbingObject: Controller (right), GrabbedObject: Cube (1)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-IsValidInteractableController: True
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-IsGrabbed: False, snappedInSnapDropZone: False
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-Should grab: Cube (1)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Grabbed: False, Swappable: True
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-GrabbingObject: Controller (right), GrabbedObject: Cube (1)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-IsValidInteractableController: True
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-IsGrabbed: False, snappedInSnapDropZone: False
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-Should grab: Cube (1)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Grabbed: False, Swappable: True
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-GrabbingObject: Controller (right), GrabbedObject: Cube (1)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-IsValidInteractableController: True
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-IsGrabbed: False, snappedInSnapDropZone: False
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-Should grab: Cube (1)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Grabbed: False, Swappable: True
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-GrabbingObject: Controller (right), GrabbedObject: Cube (1)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-IsValidInteractableController: True
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-IsGrabbed: False, snappedInSnapDropZone: False
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-Should grab: Cube (1)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Grabbed: False, Swappable: True
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-GrabbingObject: Controller (right), GrabbedObject: Cube (1)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-IsValidInteractableController: True
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-IsGrabbed: False, snappedInSnapDropZone: False
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Should grab: Cube (1)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Grabbed: False, Swappable: True
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-GrabbingObject: Controller (right), GrabbedObject: Cube (1)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-IsValidInteractableController: True
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-IsGrabbed: False, snappedInSnapDropZone: False
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Should grab: Cube (1)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Grabbed: False, Swappable: True
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-GrabbingObject: Controller (right), GrabbedObject: Cube (1)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-IsValidInteractableController: True
- 
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-IsGrabbed: False, snappedInSnapDropZone: False
+OnTriggerEnter MiniMap: Cube_Minimap
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Should grab: Cube (1)
+Grabs hinzugefügt
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Grabbed: False, Swappable: True
+OnTriggerEnter MiniMap: Cube_Minimap
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-GrabbingObject: Controller (right), GrabbedObject: Cube (1)
+Grabs hinzugefügt
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-IsValidInteractableController: True
+OnTriggerEnter MiniMap: Cube_Minimap
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-IsGrabbed: False, snappedInSnapDropZone: False
+Grabs hinzugefügt
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Should grab: Cube (1)
+OnTriggerEnter MiniMap: Cube_Minimap
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Grabbed: False, Swappable: True
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-GrabbingObject: Controller (right), GrabbedObject: Cube (1)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-IsValidInteractableController: True
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-IsGrabbed: False, snappedInSnapDropZone: False
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.Component:get_gameObject ()
-  at TriggerListener.TriggerListener_AliasUIClickOn (System.Object sender, ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.OnAliasUIClickOn (ControllerInteractionEventArgs e) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.EmitAlias (ButtonAlias type, Boolean touchDown, Single buttonPressure, System.Boolean& buttonBool) [0x00000] in <filename unknown>:0 
-  at VRTK.VRTK_ControllerEvents.Update () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
 
-Should grab: Cube (1)
+Grabs hinzugefügt
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Grabbed: False, Swappable: True
+OnTriggerExit
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-GrabbingObject: Controller (right), GrabbedObject: Cube (1)
+OnTriggerExit
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-IsValidInteractableController: True
+OnTriggerExit
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-IsGrabbed: False, snappedInSnapDropZone: False
+OnTriggerExit
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 

@@ -5,29 +5,29 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Opening Scene.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/WelcomeScenes/Controller_WelcomeScene.unity
   - enabled: 1
     path: Assets/WelcomeScenes/Mixed_WelcomeScene.unity
   - enabled: 1
     path: Assets/MainBar/MainSceneBar.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Main/MainScene.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/WelcomeScenes/Gesten_WelcomeScene.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/PlayerScenes/PlayerSceneContrBar.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/PlayerScenes/PlayerSceneGestureBar.unity
   - enabled: 1
     path: Assets/PlayerScenes/PlayerSceneMixedBar.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Player/PlayerScene.unity
   - enabled: 1
     path: Assets/ScaleRotateExampleScene.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Environment/EnvironmentScene.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/SoftwareCity/SoftwareCityScene.unity

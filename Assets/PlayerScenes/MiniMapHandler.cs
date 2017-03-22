@@ -10,10 +10,13 @@ public class MiniMapHandler : MonoBehaviour {
 
     Vector3 triggerPos;
     Vector3 oldPos;
-    bool isTriggered;
     bool isGrabbed;
     VRTK_ControllerEvents controllerEvents;
     GameObject City;
+
+    uint controllerIndex1;
+
+    public int scaleFactor = 10;
 
     void Start()
     {
@@ -22,12 +25,31 @@ public class MiniMapHandler : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (isTriggered && isGrabbed)
+        //GameObject controller = VRTK_DeviceFinder.GetControllerByIndex(controllerIndex1, false);
+        //Debug.Log("ControllerIndex: " + controllerIndex1);
+        //Debug.Log("Controller Pos Update x: " + controller.transform.position);
+
+        if (isGrabbed)
         {
-            Debug.Log("triggered + grabbed -> oldPos: " + oldPos + ", newPos: " + triggerPos);
-            Vector3 shift = triggerPos - oldPos; //Global? -> y & z; für City z & x
-            City.transform.position += new Vector3(shift.z/100, 0, shift.y/100);
-            Debug.Log("shift: " + shift + ", newCityPos: " + City.transform.position);
+            
+            //if (controller)
+            //{
+            //    Debug.Log("Controller Pos Update x: " + controller.transform.position.x);
+
+                oldPos = triggerPos;
+                triggerPos = gameObject.transform.position;
+
+                Debug.Log("oldPos: x=" + oldPos.x + ", y=" + oldPos.y + ", z=" + oldPos.z);
+                Debug.Log("newPos: x=" + triggerPos.x + ", y=" + triggerPos.y + ", z=" + triggerPos.z);
+                Vector3 shift = triggerPos - oldPos; //Global? -> y & z; für City z & x
+                City.transform.position += new Vector3(shift.z * scaleFactor, 0, -shift.y * scaleFactor);
+                Debug.Log("shift: " + shift + ", newCityPos: " + City.transform.position);
+            //} else
+            //{
+            //    Debug.Log("!!!!!!!!!!!!!!!!!!  Controller is null");
+            //}
+
+            
         }
 	}
 
@@ -41,17 +63,23 @@ public class MiniMapHandler : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Head")
+        
+        if (other.gameObject.name == "Cube_Minimap")
         {
             Debug.Log("OnTriggerEnter MiniMap: " + other.gameObject.name);
-            triggerPos = other.transform.position;
-            controllerEvents = other.gameObject.GetComponentInParent<VRTK_ControllerEvents>();
-            if (controllerEvents)
-            {
-                controllerEvents.AliasGrabOn += ControllerEvents_AliasGrabOn;
-                controllerEvents.AliasGrabOff += ControllerEvents_AliasGrabOff;
+            controllerEvents = gameObject.GetComponentInParent<VRTK_ControllerEvents>();
+
+            //GameObject controller = controllerEvents.gameObject;
+            
+            //if (controller)
+            //{
+            //    controllerIndex1 = VRTK_DeviceFinder.GetControllerIndex(controller);
+            //    Debug.Log("position x OnTriggerEnter: " + controller.transform.position.x);
+
+                controllerEvents.GripPressed += ControllerEvents_AliasGrabOn;
+                controllerEvents.GripReleased += ControllerEvents_AliasGrabOff;
                 Debug.Log("Grabs hinzugefügt");
-            }
+            //}
         }
     }
 
@@ -59,28 +87,28 @@ public class MiniMapHandler : MonoBehaviour {
     {
         Debug.Log("grab off");
         isGrabbed = false;
+        controllerEvents.GripPressed -= ControllerEvents_AliasGrabOn;
+        controllerEvents.GripReleased -= ControllerEvents_AliasGrabOff;
     }
 
     private void ControllerEvents_AliasGrabOn(object sender, ControllerInteractionEventArgs e)
     {
         Debug.Log("grab on");
+        //GameObject controller = VRTK_DeviceFinder.GetControllerByIndex(controllerIndex1, false);
+        //if (controller)
+        //{
+            triggerPos = gameObject.transform.position;
+        //}
         isGrabbed = true;
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        oldPos = triggerPos;
-        triggerPos = other.transform.position;
-        isTriggered = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.name == "Head")
+        if (other.gameObject.name == "Cube_Minimap" && !isGrabbed)
         {
-            isTriggered = false;
-            controllerEvents.AliasGrabOn -= ControllerEvents_AliasGrabOn;
-            controllerEvents.AliasGrabOff -= ControllerEvents_AliasGrabOff;
+            Debug.Log("OnTriggerExit");
+            controllerEvents.GripPressed -= ControllerEvents_AliasGrabOn;
+            controllerEvents.GripReleased -= ControllerEvents_AliasGrabOff;
         }
     }
 }
