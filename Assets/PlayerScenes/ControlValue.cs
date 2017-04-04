@@ -65,7 +65,6 @@ public class ControlValue : MonoBehaviour {
 
     void SceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("Szene " + scene.name + " wurde geladen");
         if (scene.name == "ScaleRotateExampleScene")
         {
             foreach (FloatModel model in FindObjectsOfType<FloatModel>())

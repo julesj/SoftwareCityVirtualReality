@@ -52,7 +52,7 @@ public class SliderControl : MonoBehaviour {
         SetUi();
     }
 
-    private void OnModelChanged(FloatModel model)
+    private void OnModelChanged(FloatModel model, bool scaleRotateAboutUser = false)
     {
         SetUi();
 

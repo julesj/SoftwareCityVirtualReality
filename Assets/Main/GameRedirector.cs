@@ -12,7 +12,6 @@ public class GameRedirector : MonoBehaviour {
         scenes = SceneManager.sceneCount;
         bool isBar = false;
         for (int i=0; i < scenes; i++) {
-            Debug.Log(SceneManager.GetSceneAt(i).name);
             if (redirectBar.Contains(SceneManager.GetSceneAt(i).name) && 
                 FindObjectOfType<ClipboardBar>() == null)
             {

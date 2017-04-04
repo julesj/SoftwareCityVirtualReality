@@ -1,13 +1,17 @@
 ﻿using UnityEngine;
+using VRTK;
 
 
-public class Grow : MonoBehaviour {
+public class GrowBar : MonoBehaviour
+{
 
     public float minScale = 1;
     public float maxScale = 100;
-    
+
     private FloatModel scaleModel;
     private FloatModel rotateModel;
+
+    private Transform headsetTransform;
 
     void Awake()
     {
@@ -33,14 +37,22 @@ public class Grow : MonoBehaviour {
         SetScaleValue(scaleModel.GetValue());
     }
 
+    private void Update()
+    {
+        if (!headsetTransform || headsetTransform.position != Vector3.zero)
+        {
+            headsetTransform = VRTK_DeviceFinder.HeadsetTransform();
+        }
+    }
+
     private void OnScaleChanged(FloatModel scale, bool scaleAboutUser = false)
     {
-        SetScaleValue(scale.GetValue());
+        SetScaleValue(scale.GetValue(), scaleAboutUser);
     }
 
     private void OnRotateChanged(FloatModel rotate, bool rotateAboutUser = false)
     {
-        SetRotationValue(rotate.GetValue());
+        SetRotationValue(rotate.GetValue(), rotateAboutUser);
     }
 
     public void OnEvent(Events.ResetPlayerEvent e)
@@ -49,15 +61,29 @@ public class Grow : MonoBehaviour {
         rotateModel.SetValue(0);
     }
 
-    private void SetRotationValue(float value)
+    public void SetRotationValue(float value, bool rotateAboutUser = false)
     {
-        transform.localRotation = Quaternion.Euler(0, value * 360, 0);
+        if (rotateAboutUser)
+        {
+            transform.RotateAround(headsetTransform.position, Vector3.up, value*360);
+        } else
+        {
+            transform.localRotation = Quaternion.Euler(0, value * 360, 0);
+        }
     }
 
-    private void SetScaleValue(float value)
+    public void SetScaleValue(float value, bool scaleAboutUser = false)
     {
+        if (scaleAboutUser)
+        {
+            transform.parent = headsetTransform;
+        }
         float scale = (minScale + (maxScale - minScale) * Mathf.Pow(value, 5));
         transform.localScale = Vector3.one * scale;
+        if (scaleAboutUser)
+        {
+            transform.parent = null;
+        }
     }
 
 }

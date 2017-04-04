@@ -8,13 +8,13 @@ public class FloatModel : MonoBehaviour {
     [SerializeField]
     private float value;
 
-    public delegate void OnFloatModelValueChanged(FloatModel model);
+    public delegate void OnFloatModelValueChanged(FloatModel model, bool scaleRotateAboutUser = false);
     public OnFloatModelValueChanged onFloatModelValueChangedHandler;
 
-    public void SetValue(float value)
+    public void SetValue(float value, bool scaleRotateAboutUser = false)
     {
         this.value = Mathf.Max(0, Mathf.Min(1, value));
-        onFloatModelValueChangedHandler(this);
+        onFloatModelValueChangedHandler(this, scaleRotateAboutUser);
     }
 
     public float GetValue()

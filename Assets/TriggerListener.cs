@@ -38,11 +38,11 @@ public class TriggerListener : MonoBehaviour
     private void Start()
     {
         collided = new List<GameObject> { };
-        dontCollide = new List<string> { "Body", "SideA", "SideB", "Canvas_direkt", "[Controller (right)]StraightPointerRenderer_Cursor", "[Controller (left)]StraightPointerRenderer_Cursor" };
+        dontCollide = new List<string> { "Body", "SideA", "SideB", "Canvas_direkt", "[Controller (right)]StraightPointerRenderer_Tracer", "[Controller (left)]StraightPointerRenderer_Tracer" };
         if (!interactableWithLaserpointer)
         {
-            dontCollide.Add("[Controller (right)]StraightPointerRenderer_Tracer");
-            dontCollide.Add("[Controller (left)]StraightPointerRenderer_Tracer");
+            dontCollide.Add("[Controller (right)]StraightPointerRenderer_Cursor");
+            dontCollide.Add("[Controller (left)]StraightPointerRenderer_Cursor");
         }
         if (!interactableWithController)
         {
