@@ -9,8 +9,8 @@ public class ControllerScaleRotateBar : MonoBehaviour
 {
     private FloatModel scaleModel;
     private FloatModel rotateModel;
-    private SteamVR_TrackedObject trackedObj;
-    private SteamVR_Controller.Device device;
+    //private SteamVR_TrackedObject trackedObj;
+    //private SteamVR_Controller.Device device;
     private Vector2 axis;
     private float angle;
     private ClipboardBar clipboard;
@@ -24,19 +24,18 @@ public class ControllerScaleRotateBar : MonoBehaviour
 
     void Awake()
     {
-        trackedObj = GetComponent<SteamVR_TrackedObject>();
+        //trackedObj = GetComponent<SteamVR_TrackedObject>();
     }
 
     void Start()
     {
         SceneManager.sceneLoaded += SceneLoaded;
-        growBar = GameObject.Find("SoftwareCity").GetComponent<GrowBar>();
     }
 
     private void Update()
     {
         if (doScale && scaleModel)
-        {
+        {//Scale always about User
             float value = scaleModel.GetValue();
             if (angle < 45 || angle > 315)
             {
@@ -57,7 +56,7 @@ public class ControllerScaleRotateBar : MonoBehaviour
                 if (angle < 135 && angle > 45)
                 {
                     growBar.SetRotationValue(rotateDelta, true);
-                } else
+                } else if (angle> 225 && angle < 315)
                 {
                     growBar.SetRotationValue(-rotateDelta, true);
                 }
@@ -112,6 +111,7 @@ public class ControllerScaleRotateBar : MonoBehaviour
             GetComponent<VRTK_ControllerEvents>().TouchpadPressed += new ControllerInteractionEventHandler(DoTouchpadPressed);
             GetComponent<VRTK_ControllerEvents>().TouchpadReleased += new ControllerInteractionEventHandler(DoTouchpadReleased);
             clipboard = GameObject.Find("Main").GetComponent<ClipboardBar>();
+            growBar = GameObject.Find("SoftwareCity").GetComponent<GrowBar>();
         }
     }
 

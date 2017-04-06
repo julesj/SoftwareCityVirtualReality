@@ -11,10 +11,14 @@ public class FloatModel : MonoBehaviour {
     public delegate void OnFloatModelValueChanged(FloatModel model, bool scaleRotateAboutUser = false);
     public OnFloatModelValueChanged onFloatModelValueChangedHandler;
 
-    public void SetValue(float value, bool scaleRotateAboutUser = false)
+    public void SetValue(float value, bool scaleRotateAboutUser = false, bool sendEvent = true)
     {
         this.value = Mathf.Max(0, Mathf.Min(1, value));
-        onFloatModelValueChangedHandler(this, scaleRotateAboutUser);
+        if (sendEvent)
+        {
+            onFloatModelValueChangedHandler(this, scaleRotateAboutUser);
+        }
+        Debug.Log("value: " + this.value);
     }
 
     public float GetValue()

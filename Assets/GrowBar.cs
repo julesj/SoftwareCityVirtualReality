@@ -66,6 +66,9 @@ public class GrowBar : MonoBehaviour
         if (rotateAboutUser)
         {
             transform.RotateAround(headsetTransform.position, Vector3.up, value*360);
+            float newRotation = transform.localRotation.y;
+            rotateModel.SetValue(newRotation / 360, sendEvent: false);
+            Debug.Log("newRotation: " + newRotation + "localRotation: " + transform.localRotation);
         } else
         {
             transform.localRotation = Quaternion.Euler(0, value * 360, 0);
@@ -74,15 +77,16 @@ public class GrowBar : MonoBehaviour
 
     public void SetScaleValue(float value, bool scaleAboutUser = false)
     {
-        if (scaleAboutUser)
-        {
-            transform.parent = headsetTransform;
-        }
         float scale = (minScale + (maxScale - minScale) * Mathf.Pow(value, 5));
+        float beforeScale = transform.localScale.x;
         transform.localScale = Vector3.one * scale;
         if (scaleAboutUser)
         {
-            transform.parent = null;
+            float afterScale = transform.localScale.x;
+            float scaleDiff = afterScale / beforeScale;
+            Vector3 diff = transform.position - headsetTransform.position;
+            Vector3 endPos = (diff * scaleDiff) + headsetTransform.position;
+            transform.position = new Vector3(endPos.x, transform.position.y, endPos.z);
         }
     }
 
