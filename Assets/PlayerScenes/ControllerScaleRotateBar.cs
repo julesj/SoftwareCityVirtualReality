@@ -9,8 +9,6 @@ public class ControllerScaleRotateBar : MonoBehaviour
 {
     private FloatModel scaleModel;
     private FloatModel rotateModel;
-    //private SteamVR_TrackedObject trackedObj;
-    //private SteamVR_Controller.Device device;
     private Vector2 axis;
     private float angle;
     private ClipboardBar clipboard;

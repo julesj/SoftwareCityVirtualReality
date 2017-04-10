@@ -50,11 +50,11 @@ public class PositionToHeadset : MonoBehaviour {
         
         if (headsetTransform)
         {
-            Debug.Log("positioned: " + positioned);
-            Debug.Log("Old Pos: " + gameObject.transform.position);
+            //Debug.Log("positioned: " + positioned);
+            //Debug.Log("Old Pos: " + gameObject.transform.position);
             if (headsetTransform.position.x != 0 && !positioned)
             {
-                Debug.Log("HeadsetPos: " + headsetTransform.position);
+                //Debug.Log("HeadsetPos: " + headsetTransform.position);
 
                 if (gameObject.GetComponentInParent<Camera>())
                 {//Relativ Verschiebung zum headset
@@ -64,8 +64,8 @@ public class PositionToHeadset : MonoBehaviour {
                     gameObject.transform.position = new Vector3(headsetTransform.position.x + xDistanceFromHeadset, headsetTransform.position.y + yDistanceFromHeadset, headsetTransform.position.z + zDistanceFromHeadset);
                     //gameobject.transform.rotation = headsetTransform.rotation;
                 }
-                Debug.Log("New Pos: " + gameObject.transform.position);
-                Debug.Log("followHeadset: " + followHeadset);
+                //Debug.Log("New Pos: " + gameObject.transform.position);
+                //Debug.Log("followHeadset: " + followHeadset);
                 if (!followHeadset)
                 {
                     positioned = true;

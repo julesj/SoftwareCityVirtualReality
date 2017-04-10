@@ -10,8 +10,7 @@ public class StartSoftwareCity : MonoBehaviour {
 
     public void StartCity()
     {
-        SceneManager.LoadSceneAsync("ScaleRotateExampleScene", LoadSceneMode.Additive);
-
+        bool isAlreadyLoaded = false;
         int count = SceneManager.sceneCount;
         for (int i = 0; i < count; i++)
         {
@@ -20,7 +19,14 @@ public class StartSoftwareCity : MonoBehaviour {
                 Debug.Log("Unload Scene: " + SceneManager.GetSceneAt(i).name);
                 SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(i));
             }
+            if (SceneManager.GetSceneAt(i).name.Equals(ClipboardBar.LoadableScenes.ScaleRotateExampleScene.ToString()))
+            {
+                isAlreadyLoaded = true;
+            }
         }
-        
+        if (!isAlreadyLoaded)
+        {
+            SceneManager.LoadSceneAsync("ScaleRotateExampleScene", LoadSceneMode.Additive);
+        }
     }
 }

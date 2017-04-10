@@ -60,16 +60,51 @@ public class SwipeDetect : MonoBehaviour
         if (velocity > minVelocity && swipeVector.magnitude > minSwipeDist)
         {
             float angleOfSwipe = Mathf.Atan2(swipeVector.y, swipeVector.x) * Mathf.Rad2Deg ;
-            Debug.Log("angle: " + angleOfSwipe); //Winkel geht zwischen 180° (oben) und -180° (unten)
-            if (angleOfSwipe < 15 && angleOfSwipe > -15)
-            {//wieder nach oben -> funktioniert noch nicht
-                rotate.SwipeTopUp();
-                scale.SwipeTopUp();
-            } else if (angleOfSwipe < 165 || angleOfSwipe > 165)
+            Debug.Log("angle: " + angleOfSwipe); //Winkel geht zwischen 180° und -180° (relativ zur x-Achse)
+            if (angleOfSwipe < -75 && angleOfSwipe > -105)
             {
-                rotate.SwipeTopDown();
-                scale.SwipeTopDown();
+                if (!scale.isVisibleTop && !rotate.isVisibleTop && !scale.isVisibleBottom && !rotate.isVisibleBottom)
+                {
+                    TopDown();
+                } else if (scale.isVisibleBottom && rotate.isVisibleBottom)
+                {
+                    BottomDown();
+                }
+            } else if (angleOfSwipe > 75 && angleOfSwipe < 105)
+            {
+                if (scale.isVisibleTop && rotate.isVisibleTop)
+                {
+                    TopUp();
+                }
+                else if (!scale.isVisibleBottom && !rotate.isVisibleBottom && !scale.isVisibleTop && !rotate.isVisibleTop)
+                {
+                    BottomUp();
+                }
             }
         }
+    }
+
+    void TopUp()
+    {
+        rotate.SwipeTopUp();
+        scale.SwipeTopUp();
+    }
+
+    void TopDown()
+    {
+        rotate.SwipeTopDown();
+        scale.SwipeTopDown();
+    }
+
+    void BottomUp()
+    {
+        rotate.SwipeBottomUp();
+        scale.SwipeBottomUp();
+    }
+
+    void BottomDown()
+    {
+        rotate.SwipeBottomDown();
+        scale.SwipeBottomDown();
     }
 }
