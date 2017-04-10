@@ -5,6 +5,11 @@ using System;
 
 public class AnimateThis : MonoBehaviour {
 
+    public static AnimateThis With(MonoBehaviour obj)
+    {
+        return obj.GetComponent<AnimateThis>();
+    }
+
     public static float EasePow2(float t)
     {
         return t * t;
