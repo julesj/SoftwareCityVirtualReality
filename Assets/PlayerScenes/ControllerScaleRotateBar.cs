@@ -15,6 +15,7 @@ public class ControllerScaleRotateBar : MonoBehaviour
     private bool doScale;
     private bool doRotate;
     private GrowBar growBar;
+    private bool rotateAboutUser;
 
     public float scaleDelta = 0.005f;
     public float rotateDelta = 0.005f;
@@ -50,39 +51,33 @@ public class ControllerScaleRotateBar : MonoBehaviour
             float value = rotateModel.GetValue();
 
             if (scaleModel.GetValue() > valueBeginOfRotateAboutUser)
-            {//Rotate about User
-                if (angle < 135 && angle > 45)
-                {
-                    growBar.SetRotationValue(rotateDelta, true);
-                } else if (angle> 225 && angle < 315)
-                {
-                    growBar.SetRotationValue(-rotateDelta, true);
-                }
-                    
+            {
+                rotateAboutUser = true;
+            } else
+            {
+                rotateAboutUser = false;
             }
-            else
-            {//Rotate about City
-                if (angle < 135 && angle > 45)
+           
+            if (angle < 135 && angle > 45)
+            {
+                if (value == 1)
                 {
-                    if (value == 1)
-                    {
-                        rotateModel.SetValue(0f + rotateDelta, false);
-                    }
-                    else
-                    {
-                        rotateModel.SetValue(value + rotateDelta, false);
-                    }
+                    rotateModel.SetValue(0f + rotateDelta, rotateAboutUser);
                 }
-                else if (angle > 225 && angle < 315)
+                else
                 {
-                    if (value == 0)
-                    {
-                        rotateModel.SetValue(1f - rotateDelta, false);
-                    }
-                    else
-                    {
-                        rotateModel.SetValue(value - rotateDelta, false);
-                    }
+                    rotateModel.SetValue(value + rotateDelta, rotateAboutUser);
+                }
+            }
+            else if (angle > 225 && angle < 315)
+            {
+                if (value == 0)
+                {
+                    rotateModel.SetValue(1f - rotateDelta, rotateAboutUser);
+                }
+                else
+                {
+                    rotateModel.SetValue(value - rotateDelta, rotateAboutUser);
                 }
             }
         }

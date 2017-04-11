@@ -12,11 +12,16 @@ public class MoveSoftwareCity : MonoBehaviour {
     private Vector3 oldPos;
     private Vector3 delta;
 
+    public float scaleFactor = 1;
+
 	// Use this for initialization
 	void Start () {
         controllerEvents = gameObject.GetComponentInParent<VRTK_ControllerEvents>();
-        controllerEvents.GripPressed += ControllerEvents_GripPressed;
-        controllerEvents.GripReleased += ControllerEvents_GripReleased;
+        if (controllerEvents)
+        {
+            controllerEvents.GripPressed += ControllerEvents_GripPressed;
+            controllerEvents.GripReleased += ControllerEvents_GripReleased;
+        }
         SceneManager.sceneLoaded += SceneManager_sceneLoaded;
     }
 
@@ -33,7 +38,6 @@ public class MoveSoftwareCity : MonoBehaviour {
     private void ControllerEvents_GripPressed(object sender, ControllerInteractionEventArgs e)
     {
         isGrapped = true;
-        oldPos = gameObject.transform.position;
     }
 
     // Update is called once per frame
@@ -41,8 +45,14 @@ public class MoveSoftwareCity : MonoBehaviour {
 		if (isGrapped)
         {
             delta = gameObject.transform.position - oldPos;
-            SoftwareCity.transform.position += new Vector3(delta.x, 0.0f, delta.z);
+            SoftwareCity.transform.position += new Vector3(delta.x*scaleFactor, 0.0f, delta.z*scaleFactor);
             oldPos = gameObject.transform.position;
         }
 	}
+
+    public void SetIsGrapped(bool grap)
+    {
+        isGrapped = grap;
+        oldPos = gameObject.transform.position;
+    }
 }

@@ -26,7 +26,6 @@ public class ScaleFromGesture : MonoBehaviour {
 
     void SceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("Szene " + scene.name + " wurde geladen");
         if (scene.name.Equals(ClipboardBar.LoadableScenes.ScaleRotateExampleScene.ToString()))
         {
             foreach (FloatModel model in FindObjectsOfType<FloatModel>())
@@ -57,21 +56,17 @@ public class ScaleFromGesture : MonoBehaviour {
             if (minimize && scaleModel)
             {
                 float value = scaleModel.GetValue();
-                Debug.Log("before value: " + value);
                 Vector3 diff = palmPosition - palmBeforePosition;
-                Debug.Log("minimieren um: " + diff.y);
                 float distance = diff.y;
                 distance = Mathf.Max(0, Mathf.Min(1, distance));
-                scaleModel.SetValue(value - (distance * scaleFactor));
+                scaleModel.SetValue(value - (distance * scaleFactor), true);
             } else if (maximize && scaleModel)
             {
                 float value = scaleModel.GetValue();
                 Vector3 diff = palmBeforePosition - palmPosition;
-                Debug.Log("maximieren um: " + diff.y);
                 float distance = diff.y;
                 distance = Mathf.Max(0, Mathf.Min(1, distance));
-                Debug.Log("distance: " + distance + ", neuer Wert: " + value + " + " + distance + " * " + scaleFactor + " = " + (value + distance * scaleFactor));
-                scaleModel.SetValue(value + (distance * scaleFactor));
+                scaleModel.SetValue(value + (distance * scaleFactor), true);
             }
         }
 	}

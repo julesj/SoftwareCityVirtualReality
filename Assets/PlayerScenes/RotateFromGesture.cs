@@ -57,39 +57,35 @@ public class RotateFromGesture : MonoBehaviour
             Hand useBeforeHand = beforeFrame.Hands[0];
             Vector3 palmPosition = useHand.PalmPosition.ToVector3();
             Vector3 palmBeforePosition = useBeforeHand.PalmPosition.ToVector3();
-            if (rotateLeft && rotateModel)
+            if (rotateRight && rotateModel)
             {
                 float value = rotateModel.GetValue();
-                Debug.Log("before value: " + value);
                 Vector3 diff = palmPosition - palmBeforePosition;
-                Debug.Log("minimieren um: " + diff.x);
                 float distance = diff.x;
                 distance = Mathf.Max(0, Mathf.Min(1, distance));
                 if (value == 0)
                 {
-                    rotateModel.SetValue(1f - distance * scaleFactor, false);
+                    rotateModel.SetValue(1f - distance * scaleFactor, true);
                 }
                 else
                 {
-                    rotateModel.SetValue(value - distance * scaleFactor, false);
+                    rotateModel.SetValue(value - distance * scaleFactor, true);
                 }
             }
-            else if (rotateRight && rotateModel)
+            else if (rotateLeft && rotateModel)
             {
                 float value = rotateModel.GetValue();
                 Vector3 diff = palmBeforePosition - palmPosition;
-                Debug.Log("maximieren um: " + diff.x);
                 float distance = diff.x;
                 distance = Mathf.Max(0, Mathf.Min(1, distance));
                 if (value == 1)
                 {
-                    rotateModel.SetValue(0f + distance*scaleFactor, false);
+                    rotateModel.SetValue(0f + distance*scaleFactor, true);
                 }
                 else
                 {
-                    rotateModel.SetValue(value + distance*scaleFactor, false);
+                    rotateModel.SetValue(value + distance*scaleFactor, true);
                 }
-                Debug.Log("distance: " + distance + ", neuer Wert: " + value + " + " + distance + " * " + scaleFactor + " = " + (value + distance * scaleFactor));
             }
         }
     }
@@ -97,13 +93,11 @@ public class RotateFromGesture : MonoBehaviour
     public void SetPalmOpen(bool isOpen)
     {
         palmOpen = isOpen;
-        Debug.Log("palm: " + palmOpen);
     }
 
     public void SetRotateLeft(bool doRotateLeft)
     {
         rotateLeft = doRotateLeft;
-        Debug.Log(rotateLeft);
     }
 
     public void SetRotateRight(bool doRotateRight)

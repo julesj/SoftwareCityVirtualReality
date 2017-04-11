@@ -65,10 +65,8 @@ public class GrowBar : MonoBehaviour
     {
         if (rotateAboutUser)
         {
-            transform.RotateAround(headsetTransform.position, Vector3.up, value*360);
-            float newRotation = transform.localRotation.y;
-            rotateModel.SetValue(newRotation / 360, sendEvent: false);
-            Debug.Log("newRotation: " + newRotation + "localRotation: " + transform.localRotation);
+            float old = rotateModel.GetOldValue();
+            transform.RotateAround(headsetTransform.position, Vector3.up, (value-old)*360);
         } else
         {
             transform.localRotation = Quaternion.Euler(0, value * 360, 0);
@@ -80,7 +78,7 @@ public class GrowBar : MonoBehaviour
         float scale = (minScale + (maxScale - minScale) * Mathf.Pow(value, 5));
         float beforeScale = transform.localScale.x;
         transform.localScale = Vector3.one * scale;
-        if (scaleAboutUser)
+        if (scaleAboutUser && headsetTransform)
         {
             float afterScale = transform.localScale.x;
             float scaleDiff = afterScale / beforeScale;

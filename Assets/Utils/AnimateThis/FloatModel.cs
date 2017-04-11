@@ -7,22 +7,28 @@ public class FloatModel : MonoBehaviour {
 
     [SerializeField]
     private float value;
+    private float oldValue;
 
     public delegate void OnFloatModelValueChanged(FloatModel model, bool scaleRotateAboutUser = false);
     public OnFloatModelValueChanged onFloatModelValueChangedHandler;
 
     public void SetValue(float value, bool scaleRotateAboutUser = false, bool sendEvent = true)
     {
+        this.oldValue = this.value;
         this.value = Mathf.Max(0, Mathf.Min(1, value));
         if (sendEvent)
         {
             onFloatModelValueChangedHandler(this, scaleRotateAboutUser);
         }
-        Debug.Log("value: " + this.value);
     }
 
     public float GetValue()
     {
         return value;
+    }
+
+    public float GetOldValue()
+    {
+        return oldValue;
     }
 }
