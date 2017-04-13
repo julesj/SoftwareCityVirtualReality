@@ -38,34 +38,22 @@ public class ControlValue : MonoBehaviour {
 
         if (parent == TypeOfInteract.slider)
         {
-            controlEvents = GetComponent<VRTK_Control_UnityEvents>();
-            if (controlEvents == null)
-            {
-                controlEvents = gameObject.AddComponent<VRTK_Control_UnityEvents>();
-            }
-            controlEvents.OnValueChanged.AddListener(HandleChange);
+            Slider slider = gameObject.GetComponent<Slider>();
+            slider.onValueChanged.AddListener(HandleChange);
         } else if (parent == TypeOfInteract.up)
         {
-            buttonEvents = GetComponent<VRTK_Button_UnityEvents>();
-            if (buttonEvents == null)
-            {
-                buttonEvents = gameObject.AddComponent<VRTK_Button_UnityEvents>();
-            }
-            buttonEvents.OnPushed.AddListener(HandleUp);
+            Button up = gameObject.GetComponent<Button>();
+            up.onClick.AddListener(HandleUp);
         } else if (parent == TypeOfInteract.down)
         {
-            buttonEvents = GetComponent<VRTK_Button_UnityEvents>();
-            if (buttonEvents == null)
-            {
-                buttonEvents = gameObject.AddComponent<VRTK_Button_UnityEvents>();
-            }
-            buttonEvents.OnPushed.AddListener(HandleDown);
+            Button down = gameObject.GetComponent<Button>();
+            down.onClick.AddListener(HandleDown);
         }
     }
 
     void SceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "ScaleRotateExampleScene")
+        if (scene.name.Equals(ClipboardBar.LoadableScenes.ScaleRotateExampleScene.ToString()))
         {
             foreach (FloatModel model in FindObjectsOfType<FloatModel>())
             {
@@ -85,22 +73,22 @@ public class ControlValue : MonoBehaviour {
         }
     }
 
-    private void HandleChange(object sender, Control3DEventArgs e)
+    public void HandleChange(float value)
     {
-        ChangeValue(e.value);
+        ChangeValue(value); //0...100
     }
 
-    private void HandleUp(object sender, Control3DEventArgs e)
+    public void HandleUp()
     {
-        string[] number = go.text.Split('(');
-        float newValue = float.Parse(number[0]) + 0.5f;
+        string number = go.text;
+        float newValue = float.Parse(number) + 0.5f;
         ChangeValue(newValue);
     }
 
-    private void HandleDown(object sender, Control3DEventArgs e)
+    public void HandleDown()
     {
-        string[] number = go.text.Split('(');
-        float newValue = float.Parse(number[0]) - 0.5f;
+        string number = go.text;
+        float newValue = float.Parse(number) - 0.5f;
         ChangeValue(newValue);
     }
 
@@ -135,6 +123,7 @@ public class ControlValue : MonoBehaviour {
 
     private void WriteText(float value)
     {
-        go.text = value.ToString("0.0") + "(" + value.ToString("0.0") + "%)";
+        go.text = value.ToString("0.0");
+        //text 0...100
     }
 }

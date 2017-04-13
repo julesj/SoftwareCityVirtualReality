@@ -10,8 +10,7 @@ public class SwipeDetect : MonoBehaviour
     private float startTime;
     private float endTime;
 
-    private AnimateUI rotate;
-    private AnimateUI scale;
+    private AnimateUI scaleRotate;
 
     private readonly Vector2 xAxis = new Vector2(1, 0);
     private readonly Vector2 yAxis = new Vector2(0, 1);
@@ -24,26 +23,17 @@ public class SwipeDetect : MonoBehaviour
     {
         GetComponent<VRTK_ControllerEvents>().TouchpadTouchStart += new ControllerInteractionEventHandler(DoTouchpadTouchStart);
         GetComponent<VRTK_ControllerEvents>().TouchpadTouchEnd += new ControllerInteractionEventHandler(DoTouchpadTouchEnd);
-        rotate = GameObject.Find("Canvas_Rotate").GetComponent<AnimateUI>();
-        scale = GameObject.Find("Canvas_Zoom").GetComponent<AnimateUI>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        scaleRotate = GameObject.Find("Canvas_Zoom_Rotate").GetComponent<AnimateUI>();
     }
 
     void DoTouchpadTouchStart(object sender, ControllerInteractionEventArgs e)
     {
-        Debug.Log("TouchStart " + e.touchpadAxis);
         startPos = e.touchpadAxis;
         startTime = Time.time;
     }
 
     void DoTouchpadTouchEnd(object sender, ControllerInteractionEventArgs e)
     {
-        Debug.Log("TouchReleased " + e.touchpadAxis);
         endPos = e.touchpadAxis;
         endTime = Time.time;
         CheckSwipe();
@@ -54,29 +44,30 @@ public class SwipeDetect : MonoBehaviour
         float deltaTime = endTime - startTime;
         Vector2 swipeVector = endPos - startPos;
         float velocity = swipeVector.magnitude / deltaTime;
-        Debug.Log("magnitude: " + swipeVector.magnitude);
-        Debug.Log("Velocity: " + velocity);
 
         if (velocity > minVelocity && swipeVector.magnitude > minSwipeDist)
         {
             float angleOfSwipe = Mathf.Atan2(swipeVector.y, swipeVector.x) * Mathf.Rad2Deg ;
             Debug.Log("angle: " + angleOfSwipe); //Winkel geht zwischen 180° und -180° (relativ zur x-Achse)
+            
+            bool scaleRotateVisibleTop = scaleRotate.GetIsVisbleTop();
+            bool scaleRotateVisibleBottom = scaleRotate.GetIsVisibleBottom();
             if (angleOfSwipe < -75 && angleOfSwipe > -105)
             {
-                if (!scale.isVisibleTop && !rotate.isVisibleTop && !scale.isVisibleBottom && !rotate.isVisibleBottom)
+                if (!scaleRotateVisibleTop && !scaleRotateVisibleBottom)
                 {
                     TopDown();
-                } else if (scale.isVisibleBottom && rotate.isVisibleBottom)
+                } else if (scaleRotateVisibleBottom)
                 {
                     BottomDown();
                 }
             } else if (angleOfSwipe > 75 && angleOfSwipe < 105)
             {
-                if (scale.isVisibleTop && rotate.isVisibleTop)
+                if (scaleRotateVisibleTop)
                 {
                     TopUp();
                 }
-                else if (!scale.isVisibleBottom && !rotate.isVisibleBottom && !scale.isVisibleTop && !rotate.isVisibleTop)
+                else if (!scaleRotateVisibleBottom && !scaleRotateVisibleTop)
                 {
                     BottomUp();
                 }
@@ -86,25 +77,25 @@ public class SwipeDetect : MonoBehaviour
 
     void TopUp()
     {
-        rotate.SwipeTopUp();
-        scale.SwipeTopUp();
+        Debug.Log("should swipe topup");
+        scaleRotate.SwipeTopUp();
     }
 
     void TopDown()
     {
-        rotate.SwipeTopDown();
-        scale.SwipeTopDown();
+        Debug.Log("should swipe topdown");
+        scaleRotate.SwipeTopDown();
     }
 
     void BottomUp()
     {
-        rotate.SwipeBottomUp();
-        scale.SwipeBottomUp();
+        Debug.Log("should swipe bottomup");
+        scaleRotate.SwipeBottomUp();
     }
 
     void BottomDown()
     {
-        rotate.SwipeBottomDown();
-        scale.SwipeBottomDown();
+        Debug.Log("should swipe bottomdown");
+        scaleRotate.SwipeBottomDown();
     }
 }

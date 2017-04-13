@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.VR;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using System.Collections.Generic;
 using Leap.Unity;
@@ -237,6 +238,9 @@ namespace Leap.Unity.InputModule {
       for (int index = 0; index < Pointers.Length; index++) {
         //Create the Canvas to render the Pointer on
         GameObject pointer = new GameObject("Pointer " + index);
+                //Barbaras Erweiterung!!!
+                SceneManager.MoveGameObjectToScene(pointer, gameObject.scene);
+                //bis hierhin
         SpriteRenderer renderer = pointer.AddComponent<SpriteRenderer>();
         renderer.sortingOrder = 1000;
 

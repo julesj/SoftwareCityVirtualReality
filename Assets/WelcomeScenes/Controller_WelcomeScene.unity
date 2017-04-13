@@ -227,7 +227,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1690532924}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -235,7 +235,7 @@ RectTransform:
   - {fileID: 1875986659}
   m_Father: {fileID: 2133930936}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -550,9 +550,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 487999cadd130d74789c8adc0a583309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xDistanceFromHeadset: 0
-  yDistanceFromHeadset: 0
-  zDistanceFromHeadset: 4
+  rightDistance: 0
+  upDistance: 0
+  forwardDistance: 4
   followHeadset: 0
   waitingForScene: 1
   waitForScene: PlayerSceneContrBar

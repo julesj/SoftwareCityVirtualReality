@@ -34,10 +34,6 @@ public class ScaleFromGesture : MonoBehaviour {
                 {
                     scaleModel = model;
                 }
-                if (model.name.Equals("Rotate"))
-                {
-                    rotateModel = model;
-                }
             }
         }
     }

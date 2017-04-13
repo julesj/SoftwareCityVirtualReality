@@ -428,6 +428,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 1000011466818552, guid: eb77a2ac85334834ba1dd3fdb5a12ecb, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eb77a2ac85334834ba1dd3fdb5a12ecb, type: 2}
   m_IsPrefabParent: 0
@@ -548,6 +552,10 @@ Prefab:
     - target: {fileID: 1000011466818552, guid: eb77a2ac85334834ba1dd3fdb5a12ecb, type: 2}
       propertyPath: m_Name
       value: Skyline Near
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011466818552, guid: eb77a2ac85334834ba1dd3fdb5a12ecb, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eb77a2ac85334834ba1dd3fdb5a12ecb, type: 2}

@@ -42,7 +42,7 @@ public class MoveSoftwareCity : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		if (isGrapped)
+		if (isGrapped && SoftwareCity)
         {
             delta = gameObject.transform.position - oldPos;
             SoftwareCity.transform.position += new Vector3(delta.x*scaleFactor, 0.0f, delta.z*scaleFactor);

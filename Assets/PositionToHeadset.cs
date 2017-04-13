@@ -10,13 +10,14 @@ public class PositionToHeadset : MonoBehaviour {
     private bool positioned;
     private bool sceneIsLoaded;
 
-    public float xDistanceFromHeadset = 0.0f;
-    public float yDistanceFromHeadset = 0.0f;
-    public float zDistanceFromHeadset = 0.0f;
+    public float rightDistance = 0.0f;
+    public float upDistance = 0.0f;
+    public float forwardDistance = 0.0f;
 
     public bool followHeadset;
     public bool waitingForScene;
     public string waitForScene;
+
 
     private void Start()
     {
@@ -45,32 +46,33 @@ public class PositionToHeadset : MonoBehaviour {
         {
             headsetTransform = VRTK_DeviceFinder.HeadsetTransform();
         }
-
-        
         
         if (headsetTransform)
         {
-            //Debug.Log("positioned: " + positioned);
-            //Debug.Log("Old Pos: " + gameObject.transform.position);
             if (headsetTransform.position.x != 0 && !positioned)
             {
-                //Debug.Log("HeadsetPos: " + headsetTransform.position);
-
                 if (gameObject.GetComponentInParent<Camera>())
                 {//Relativ Verschiebung zum headset
-                    gameObject.transform.localPosition = new Vector3(xDistanceFromHeadset, yDistanceFromHeadset, zDistanceFromHeadset);
+                    gameObject.transform.localPosition = new Vector3(rightDistance, upDistance, forwardDistance);
                 } else
-                {//Weltkoordinaten -> headsetTransform ist nicht in Weltkoordinaten!!
-                    gameObject.transform.position = new Vector3(headsetTransform.position.x + xDistanceFromHeadset, headsetTransform.position.y + yDistanceFromHeadset, headsetTransform.position.z + zDistanceFromHeadset);
-                    //gameobject.transform.rotation = headsetTransform.rotation;
+                {//Weltkoordinaten
+                    gameObject.transform.position = headsetTransform.position + headsetTransform.right * rightDistance + headsetTransform.up * upDistance + headsetTransform.forward * forwardDistance;
                 }
-                //Debug.Log("New Pos: " + gameObject.transform.position);
-                //Debug.Log("followHeadset: " + followHeadset);
-                if (!followHeadset)
-                {
-                    positioned = true;
-                }
+                gameObject.transform.LookAt(headsetTransform);
+            }
+            if (!followHeadset)
+            {
+                positioned = true;
+            }
+            else
+            {
+                positioned = false;
             }
         }
+    }
+
+    public float[] GetFactors()
+    {
+        return new float[] { rightDistance, upDistance, forwardDistance };
     }
 }
