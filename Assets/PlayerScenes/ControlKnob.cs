@@ -11,6 +11,7 @@ public class ControlKnob : MonoBehaviour {
     private bool doRotate;
     private LeapServiceProvider provider;
     private FloatModel rotateModel;
+    private FloatModel scaleModel;
 
     private Vector3 actPos;
     private Vector3 beforePos;
@@ -34,6 +35,10 @@ public class ControlKnob : MonoBehaviour {
                 if (model.name.Equals("Rotate"))
                 {
                     rotateModel = model;
+                }
+                if (model.name.Equals("Scale"))
+                {
+                    scaleModel = model;
                 }
             }
         }
@@ -105,11 +110,17 @@ public class ControlKnob : MonoBehaviour {
     }
 
     private void rotateCity(float angle)
-    {
-        if (rotateModel)
+    {//hier Änderungen
+        if (rotateModel && scaleModel)
         {
             float actValue = rotateModel.GetValue();
-            rotateModel.SetValue(actValue - (angle / 360));
+            if (scaleModel.GetValue() > 0.8f)
+            {
+                rotateModel.SetValue(actValue - (angle / 360), true);
+            } else
+            {
+                rotateModel.SetValue(actValue - (angle / 360));
+            }
         }
     }
 

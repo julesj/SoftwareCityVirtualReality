@@ -109,15 +109,21 @@ public class ControlValue : MonoBehaviour {
     {
         if (scaleModel)
         {
-            scaleModel.SetValue(value / 100);
+            scaleModel.SetValue(value / 100, true);
         }
     }
 
     private void rotate(float value)
-    {
-        if (rotateModel)
+    {//hier Änderungen
+        if (rotateModel && scaleModel)
         {
-            rotateModel.SetValue(value / 100);
+            if (scaleModel.GetValue() > 0.8)
+            {
+                rotateModel.SetValue(value / 100, true);
+            } else
+            {
+                rotateModel.SetValue(value / 100);
+            }
         }
     }
 
