@@ -13,6 +13,9 @@ public class SwipeDetect : MonoBehaviour
     private AnimateUI scaleRotate;
     private bool scaleRotateVisibleTop;
     private bool scaleRotateVisibleBottom;
+    private AnimateUI minimap;
+    private bool minimapVisibleRight;
+    private bool minimapVisibleLeft;
 
     private readonly Vector2 xAxis = new Vector2(1, 0);
     private readonly Vector2 yAxis = new Vector2(0, 1);
@@ -26,6 +29,7 @@ public class SwipeDetect : MonoBehaviour
         GetComponent<VRTK_ControllerEvents>().TouchpadTouchStart += new ControllerInteractionEventHandler(DoTouchpadTouchStart);
         GetComponent<VRTK_ControllerEvents>().TouchpadTouchEnd += new ControllerInteractionEventHandler(DoTouchpadTouchEnd);
         scaleRotate = GameObject.Find("Canvas_Zoom_Rotate").GetComponent<AnimateUI>();
+        minimap = GameObject.Find("Canvas_Minimap").GetComponent<AnimateUI>();
     }
 
     void DoTouchpadTouchStart(object sender, ControllerInteractionEventArgs e)
@@ -54,6 +58,8 @@ public class SwipeDetect : MonoBehaviour
 
             scaleRotateVisibleTop = scaleRotate.GetIsVisbleTop();
             scaleRotateVisibleBottom = scaleRotate.GetIsVisibleBottom();
+            minimapVisibleRight = minimap.GetIsVisibleRight();
+            minimapVisibleLeft = minimap.GetIsVisibleLeft();
             if (angleOfSwipe < -75 && angleOfSwipe > -105)
             {
                 SwipeDown();
@@ -63,7 +69,7 @@ public class SwipeDetect : MonoBehaviour
             } else if (angleOfSwipe < 15 && angleOfSwipe > -15)
             {
                 SwipeRight();
-            } else if(angleOfSwipe > 165 || angleOfSwipe > -165)
+            } else if(angleOfSwipe > 165 || angleOfSwipe < -165)
             {
                 SwipeLeft();
             }
@@ -72,7 +78,7 @@ public class SwipeDetect : MonoBehaviour
 
     void SwipeDown()
     {
-        if (!scaleRotateVisibleTop && !scaleRotateVisibleBottom)
+        if (!scaleRotateVisibleTop && !scaleRotateVisibleBottom && !minimapVisibleLeft && !minimapVisibleRight)
         {
             Debug.Log("should swipe topdown");
             scaleRotate.SwipeTopDown();
@@ -91,7 +97,7 @@ public class SwipeDetect : MonoBehaviour
             Debug.Log("should swipe topup");
             scaleRotate.SwipeTopUp();
         }
-        else if (!scaleRotateVisibleBottom && !scaleRotateVisibleTop)
+        else if (!scaleRotateVisibleBottom && !scaleRotateVisibleTop && !minimapVisibleLeft && !minimapVisibleRight)
         {
             Debug.Log("should swipe bottomup");
             scaleRotate.SwipeBottomUp();
@@ -100,11 +106,27 @@ public class SwipeDetect : MonoBehaviour
 
     void SwipeRight()
     {
-        //TODO
+        if (minimapVisibleRight)
+        {
+            Debug.Log("should swipe right out");
+            minimap.SwipeRightOut();
+        } else if (!minimapVisibleLeft && !minimapVisibleRight && !scaleRotateVisibleTop && !scaleRotateVisibleBottom)
+        {
+            Debug.Log("should swipe left in");
+            minimap.SwipeLeftIn();
+        }
     }
 
     void SwipeLeft()
     {
-        //TODO
+        if (minimapVisibleLeft)
+        {
+            Debug.Log("should swipe left out");
+            minimap.SwipeLeftOut();
+        } else if (!minimapVisibleLeft && !minimapVisibleRight && !scaleRotateVisibleTop && !scaleRotateVisibleBottom)
+        {
+            Debug.Log("should swipe right in");
+            minimap.SwipeRightIn();
+        }
     }
 }

@@ -290,7 +290,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1351748309}
-        m_MethodName: Log
+        m_MethodName: StartCity
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -343,7 +343,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1351748304}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84d9ea9cd9e2c044c9c02bccd7311d73, type: 3}
+  m_Script: {fileID: 11500000, guid: 126aee258fb5cf24a98c0acc3c19908a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1690532924
@@ -598,7 +598,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightDistance: 0
   upDistance: 0
-  forwardDistance: 1
+  forwardDistance: 0.5
   followHeadset: 0
   waitingForScene: 1
   waitForScene: PlayerSceneGestureBar

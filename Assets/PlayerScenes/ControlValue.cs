@@ -129,7 +129,10 @@ public class ControlValue : MonoBehaviour {
 
     private void WriteText(float value)
     {
-        go.text = value.ToString("0.0");
-        //text 0...100
+        if (value > 0 && value < 100)
+        {
+            go.text = value.ToString("0.0");
+            //text 0...100
+        }
     }
 }

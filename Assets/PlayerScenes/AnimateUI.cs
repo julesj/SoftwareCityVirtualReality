@@ -7,10 +7,15 @@ using VRTK;
 public class AnimateUI : MonoBehaviour {
     private Vector3 newPosTop;
     private Vector3 newPosBottom;
+    private Vector3 newPosRight;
+    private Vector3 newPosLeft;
     private Vector3 oldPosTop;
     private Vector3 oldPosBottom;
+    private Vector3 oldPosRight;
+    private Vector3 oldPosLeft;
     public float newPosUpFactor = 0.5f;
     public float newPosForwardFactor = 0.5f;
+    public float newPosRightFactor = 0.5f;
 
     private Transform oldParent;
     private float[] factors;
@@ -19,6 +24,8 @@ public class AnimateUI : MonoBehaviour {
 
     private bool isVisibleTop = false;
     private bool isVisibleBottom = false;
+    private bool isVisibleRight = false;
+    private bool isVisibleLeft = false;
     private bool cityStarted = false;
 
     private void Start()
@@ -39,12 +46,20 @@ public class AnimateUI : MonoBehaviour {
     private void Update()
     {
         headsetTransform = VRTK_DeviceFinder.HeadsetTransform();
+
         oldPosTop = headsetTransform.position + headsetTransform.right * factors[0] + headsetTransform.up * factors[1] + headsetTransform.forward * factors[2];
         newPosTop = oldPosTop - headsetTransform.up * newPosUpFactor + headsetTransform.forward * newPosForwardFactor;
-        newPosBottom = oldPosBottom + headsetTransform.up * newPosUpFactor + headsetTransform.forward * newPosForwardFactor;
+        
         oldPosBottom = headsetTransform.position + headsetTransform.right * factors[0] - headsetTransform.up * factors[1] + headsetTransform.forward * factors[2];
-        //gameObject.transform.LookAt(headsetTransform);
-        gameObject.transform.eulerAngles = new Vector3(0, gameObject.transform.eulerAngles.y, 0);
+        newPosBottom = oldPosBottom + headsetTransform.up * newPosUpFactor + headsetTransform.forward * newPosForwardFactor;
+
+        oldPosRight = headsetTransform.position + headsetTransform.right * factors[0] + headsetTransform.up * factors[1] + headsetTransform.forward * factors[2];
+        newPosRight = oldPosRight + headsetTransform.forward * newPosForwardFactor - headsetTransform.right * newPosRightFactor;
+
+        oldPosLeft = headsetTransform.position - headsetTransform.right * factors[0] + headsetTransform.up * factors[1] + headsetTransform.forward * factors[2];
+        newPosLeft = oldPosLeft + headsetTransform.forward * newPosForwardFactor + headsetTransform.right * newPosRightFactor;
+
+        gameObject.transform.LookAt(headsetTransform);
     }
 
     public void SwipeTopDown()
@@ -111,9 +126,68 @@ public class AnimateUI : MonoBehaviour {
         }
     }
 
-    public void SetIsVisibleBottom(bool isVisible)
+    public void SwipeRightIn()
     {
-        isVisibleBottom = isVisible;
+        if (cityStarted)
+        {
+            posToHead.followHeadset = false;
+            if (gameObject.transform.localPosition != oldPosRight)
+            {
+                gameObject.transform.localPosition = oldPosRight;
+            }
+            AnimateThis.With(this).Transformate().
+                ToPosition(newPosRight)
+                .Duration(1)
+                .Ease(AnimateThis.EaseInOutSmooth)
+                .Start();
+            isVisibleRight = true;
+        }
+    }
+
+    public void SwipeRightOut()
+    {
+        if (cityStarted)
+        {
+            AnimateThis.With(this).Transformate().
+                        ToPosition(oldPosRight)
+                        .Duration(1)
+                        .Ease(AnimateThis.EaseInOutSmooth)
+                        .Start();
+            isVisibleRight = false;
+            posToHead.followHeadset = true;
+        }
+    }
+
+    public void SwipeLeftIn()
+    {
+        if (cityStarted)
+        {
+            posToHead.followHeadset = false;
+            if (gameObject.transform.localPosition != oldPosLeft)
+            {
+                gameObject.transform.localPosition = oldPosLeft;
+            }
+            AnimateThis.With(this).Transformate().
+                ToPosition(newPosLeft)
+                .Duration(1)
+                .Ease(AnimateThis.EaseInOutSmooth)
+                .Start();
+            isVisibleLeft = true;
+        }
+    }
+
+    public void SwipeLeftOut()
+    {
+        if (cityStarted)
+        {
+            AnimateThis.With(this).Transformate().
+                        ToPosition(oldPosLeft)
+                        .Duration(1)
+                        .Ease(AnimateThis.EaseInOutSmooth)
+                        .Start();
+            isVisibleLeft = false;
+            posToHead.followHeadset = true;
+        }
     }
 
     public bool GetIsVisibleBottom()
@@ -121,13 +195,18 @@ public class AnimateUI : MonoBehaviour {
         return isVisibleBottom;
     }
 
-    public void SetIsVisibleTop(bool isVisible)
-    {
-        isVisibleTop = isVisible;
-    }
-
     public bool GetIsVisbleTop()
     {
         return isVisibleTop;
+    }
+
+    public bool GetIsVisibleRight()
+    {
+        return isVisibleRight;
+    }
+
+    public bool GetIsVisibleLeft()
+    {
+        return isVisibleLeft;
     }
 }

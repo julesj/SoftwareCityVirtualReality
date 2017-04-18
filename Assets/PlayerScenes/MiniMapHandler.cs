@@ -14,9 +14,11 @@ public class MiniMapHandler : MonoBehaviour {
     Vector3 oldPos;
     bool isGrabbed; //für Controller und Hand
     bool secondGrab;
+    bool isController;
     VRTK_ControllerEvents controllerEvents;
     GameObject City;
     GameObject Minimap;
+    Vector3 fingerpos;
     Vector3 oldPos1;
     Vector3 oldPos2;
     FloatModel scaleModel;
@@ -24,17 +26,16 @@ public class MiniMapHandler : MonoBehaviour {
     LeapServiceProvider provider;
 
     public int scaleFactorMove = 10;
-    public float scaleFactorScaleRotate = 0.5f;
+    public float scaleFactorScaleRotate = 10f;
 
     void Start()
     {
         SceneManager.sceneLoaded += SceneLoaded;
-        
+        provider = FindObjectOfType<LeapServiceProvider>();
     }
 
     // Update is called once per frame
     void Update () {
-
         if (isGrabbed && !secondGrab)
         {
             MoveCity();
@@ -52,7 +53,8 @@ public class MiniMapHandler : MonoBehaviour {
         Vector3 actual = Minimap.transform.InverseTransformDirection(pos1 - pos2);
         Vector3 before = Minimap.transform.InverseTransformDirection(oldPos1 - oldPos2);
 
-        float angle = Mathf.Atan2(actual.z, actual.x) - Mathf.Atan2(before.z, before.x);
+        float angle = Mathf.Atan2(actual.y, actual.x) - Mathf.Atan2(before.y, before.x);
+        Debug.Log("rotate around " + angle);
         float actRotateValue = rotateModel.GetValue();
         if (actRotateValue == 0.0f && angle * Mathf.Rad2Deg > 0)
         {
@@ -78,7 +80,15 @@ public class MiniMapHandler : MonoBehaviour {
     void MoveCity()
     {
         oldPos = triggerPos;
-        triggerPos = gameObject.transform.position;
+        if (isController)
+        {
+            triggerPos = gameObject.transform.position;
+        } else
+        {
+            GetFingersPos();
+            triggerPos = fingerpos;
+        }
+        
         Vector3 shift = triggerPos - oldPos; //Global? -> y & z; für City z & x
         Vector3 shiftLocal = Minimap.gameObject.transform.InverseTransformDirection(shift);
         City.transform.position += new Vector3(shiftLocal.x * scaleFactorMove, 0, shiftLocal.y * scaleFactorMove);
@@ -110,6 +120,8 @@ public class MiniMapHandler : MonoBehaviour {
         if (other.gameObject.name == "Cube_Minimap")
         {
             controllerEvents = gameObject.GetComponentInParent<VRTK_ControllerEvents>();
+            controllerEvents.TriggerPressed -= ControllerEvents_AliasGrabOn;
+            controllerEvents.TriggerReleased -= ControllerEvents_AliasGrabOff;
             controllerEvents.TriggerPressed += ControllerEvents_AliasGrabOn;
             controllerEvents.TriggerReleased += ControllerEvents_AliasGrabOff;
         }
@@ -125,8 +137,9 @@ public class MiniMapHandler : MonoBehaviour {
         {
             isGrabbed = false;
         }
-        controllerEvents.GripPressed -= ControllerEvents_AliasGrabOn;
-        controllerEvents.GripReleased -= ControllerEvents_AliasGrabOff;
+        controllerEvents.TriggerPressed -= ControllerEvents_AliasGrabOn;
+        controllerEvents.TriggerReleased -= ControllerEvents_AliasGrabOff;
+        isController = false;
     }
 
     private void ControllerEvents_AliasGrabOn(object sender, ControllerInteractionEventArgs e)
@@ -140,40 +153,67 @@ public class MiniMapHandler : MonoBehaviour {
         {
             isGrabbed = true;
         }
+        isController = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.name == "Cube_Minimap" && !isGrabbed)
         {
-            controllerEvents.GripPressed -= ControllerEvents_AliasGrabOn;
-            controllerEvents.GripReleased -= ControllerEvents_AliasGrabOff;
+            controllerEvents.TriggerPressed -= ControllerEvents_AliasGrabOn;
+            controllerEvents.TriggerReleased -= ControllerEvents_AliasGrabOff;
         }
     }
 
     public void SetIsGrapped(bool grapped)
     {
-        if (Minimap)
-        {//geht das mit gameobject oder muss Hand gesucht werden?
-            Vector3 relPos = Minimap.transform.InverseTransformPoint(gameObject.transform.position);
-            if (Mathf.Abs(relPos.z) < 20)
+        if (Minimap != null)
+        { 
+            GetFingersPos();
+            Vector3 relPos = Minimap.transform.InverseTransformPoint(fingerpos);
+            if (!grapped)
             {
-                if (isGrabbed && grapped)
+                if (secondGrab)
                 {
-                    secondGrab = true;
-                } else if (!isGrabbed && grapped)
-                {
-                    isGrabbed = true;
-                } else if (secondGrab && !grapped)
-                {
+                    Debug.Log("Set Secondgrab false");
                     secondGrab = false;
-                } else if (isGrabbed && !grapped)
+                }
+                else if (isGrabbed)
                 {
+                    Debug.Log("Set isGrabbed false");
                     isGrabbed = false;
                 }
-                
-                triggerPos = gameObject.transform.position;
+            } else if (grapped && Mathf.Abs(relPos.z) < 50)
+            {
+                if (isGrabbed)
+                {
+                    Debug.Log("Set Secondgrab true");
+                    secondGrab = true;
+                } else if (!isGrabbed)
+                {
+                    Debug.Log("Set isGrabbed true");
+                    isGrabbed = true;
+                }
+                triggerPos = fingerpos;
             }
         }
+    }
+
+    private void GetFingersPos()
+    {
+        List<Hand> hands = provider.CurrentFrame.Hands;
+        if (hands.Count > 0)
+        {
+            Hand hand = hands[0];
+            List<Finger> fingerList = hand.Fingers;
+            foreach (Finger finger in fingerList)
+            {
+                if (finger.Type == Finger.FingerType.TYPE_INDEX)
+                {
+                    fingerpos = finger.TipPosition.ToVector3();
+                }
+            }
+        }
+        
     }
 }

@@ -38,6 +38,7 @@ public class MoveSoftwareCity : MonoBehaviour {
     private void ControllerEvents_GripPressed(object sender, ControllerInteractionEventArgs e)
     {
         isGrapped = true;
+        oldPos = gameObject.transform.position;
     }
 
     // Update is called once per frame

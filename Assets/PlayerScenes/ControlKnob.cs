@@ -12,12 +12,13 @@ public class ControlKnob : MonoBehaviour {
     private LeapServiceProvider provider;
     private FloatModel rotateModel;
     private FloatModel scaleModel;
+    private bool cityLoaded;
 
     private Vector3 actPos;
     private Vector3 beforePos;
 
-    public float stopRotate = -20;
-    public float startRotate = 10;
+    public float negativBorder = -20;
+    public float positivBorder = 10;
     public Text write;
 
 	// Use this for initialization
@@ -41,36 +42,40 @@ public class ControlKnob : MonoBehaviour {
                     scaleModel = model;
                 }
             }
+            cityLoaded = true;
         }
     }
 
     // Update is called once per frame
     void Update () {
-        if (provider.CurrentFrame.Hands.Count > 0)
+        if (cityLoaded)
         {
-            GetFingersPos();
-        }
-
-        Vector3 actPosLocal = gameObject.transform.InverseTransformPoint(actPos);
-        Debug.Log(actPosLocal.z);
-        if (actPosLocal.z < stopRotate || actPosLocal.z > startRotate)
-        {
-            doRotate = false;
-            beforePos = Vector3.zero;
-        } else
-        {
-            doRotate = true;
-        }
-
-        if (doRotate)
-        {
-            if (actPos != null)
+            if (provider.CurrentFrame.Hands.Count > 0)
             {
-                float angle = GetRotateAngle();
-                rotateArrow(angle * Mathf.Rad2Deg);
-                rotateCity(angle * Mathf.Rad2Deg);
-                WriteText(angle * Mathf.Rad2Deg / 3.6f);
-                beforePos = actPos;
+                GetFingersPos();
+            }
+
+            Vector3 actPosLocal = gameObject.transform.InverseTransformPoint(actPos);
+            if (actPosLocal.z > negativBorder && actPosLocal.z < positivBorder && Mathf.Abs(actPosLocal.x) < 90 && Mathf.Abs(actPosLocal.y) < 90) 
+            {
+                doRotate = true;
+            }
+            else
+            {
+                doRotate = false;
+                beforePos = Vector3.zero;
+            }
+
+            if (doRotate)
+            {
+                if (actPos != null)
+                {
+                    float angle = GetRotateAngle();
+                    rotateArrow(angle * Mathf.Rad2Deg);
+                    rotateCity(angle * Mathf.Rad2Deg);
+                    WriteText(angle * Mathf.Rad2Deg / 3.6f);
+                    beforePos = actPos;
+                }
             }
         }
 	}
@@ -126,6 +131,9 @@ public class ControlKnob : MonoBehaviour {
 
     private void WriteText(float text)
     {
-        write.text = text.ToString("0.0");
+        if (text > 0 && text < 100)
+        {
+            write.text = text.ToString("0.0");
+        }
     }
 }
