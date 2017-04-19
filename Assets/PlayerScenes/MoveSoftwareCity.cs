@@ -43,10 +43,12 @@ public class MoveSoftwareCity : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		if (isGrapped && SoftwareCity)
+        GameObject canvas = GameObject.Find("Canvas_Info");
+		if (isGrapped && SoftwareCity && !canvas)
         {
             delta = gameObject.transform.position - oldPos;
-            SoftwareCity.transform.position += new Vector3(delta.x*scaleFactor, 0.0f, delta.z*scaleFactor);
+            float scale = SoftwareCity.transform.localScale.x;
+            SoftwareCity.transform.position += new Vector3(delta.x*scaleFactor*(scale*0.08f+0.92f), 0.0f, delta.z*scaleFactor* (scale*0.08f+0.92f));
             oldPos = gameObject.transform.position;
         }
 	}

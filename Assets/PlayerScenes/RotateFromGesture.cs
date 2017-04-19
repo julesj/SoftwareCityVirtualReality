@@ -48,7 +48,8 @@ public class RotateFromGesture : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (palmOpen)
+        GameObject canvas = GameObject.Find("Canvas_Info");
+        if (palmOpen && !canvas)
         {
             Frame frame = controller.Frame();
             Frame beforeFrame = controller.Frame(1);
@@ -89,6 +90,9 @@ public class RotateFromGesture : MonoBehaviour
             }
         }
     }
+
+    private void RotateRight() { 
+}
 
     public void SetPalmOpen(bool isOpen)
     {

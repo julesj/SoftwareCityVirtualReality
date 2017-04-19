@@ -73,7 +73,8 @@ public class TriggerListener : MonoBehaviour
                 trackedObj = GameObject.Find(m.Groups[1].Value).GetComponent<SteamVR_TrackedObject>();
             }
 
-            controllerEvents.AliasUIClickOn += TriggerListener_AliasUIClickOn;
+            controllerEvents.TriggerClicked -= TriggerListener_AliasUIClickOn;
+            controllerEvents.TriggerClicked += TriggerListener_AliasUIClickOn;
             collided.Add(other.gameObject);
 
             gameObject.GetComponent<Button>().Select();
@@ -84,12 +85,13 @@ public class TriggerListener : MonoBehaviour
     private void TriggerListener_AliasUIClickOn(object sender, ControllerInteractionEventArgs e)
     {
         SteamVR_Controller.Input((int)trackedObj.index).TriggerHapticPulse(2000);
-        gameObject.GetComponent<Button>().onClick.Invoke();
-    }
+        if (gameObject)
+        {
+            gameObject.GetComponent<Button>().onClick.Invoke();
+            controllerEvents.TriggerClicked -= TriggerListener_AliasUIClickOn;
 
-    private void OnTriggerStay(Collider other)
-    {
-        //Laserpointer hört auf abfangen?
+            EventSystem.current.SetSelectedGameObject(null);
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -97,7 +99,7 @@ public class TriggerListener : MonoBehaviour
         if(!dontCollide.Contains(other.gameObject.name) && collided.Contains(other.gameObject))
         {
             Debug.Log("OnTriggerExit: " + other.gameObject.name);
-            controllerEvents.AliasUIClickOn -= TriggerListener_AliasUIClickOn;
+            controllerEvents.TriggerClicked -= TriggerListener_AliasUIClickOn;
             collided.Remove(other.gameObject);
 
             EventSystem.current.SetSelectedGameObject(null);

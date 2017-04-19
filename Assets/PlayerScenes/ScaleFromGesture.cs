@@ -40,7 +40,8 @@ public class ScaleFromGesture : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		if (palmOpen)
+        GameObject canvas = GameObject.Find("Canvas_Info");
+        if (palmOpen && !canvas)
         {
             Frame frame = controller.Frame();
             Frame beforeFrame = controller.Frame(1);

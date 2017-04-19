@@ -33,51 +33,56 @@ public class ControllerScaleRotateBar : MonoBehaviour
 
     private void Update()
     {
-        if (doScale && scaleModel)
-        {//Scale always about User
-            float value = scaleModel.GetValue();
-            if (angle < 45 || angle > 315)
-            {
-                scaleModel.SetValue(value + scaleDelta, true);
-            }
-            else if (angle < 225 && angle > 135)
-            {
-                scaleModel.SetValue(value - scaleDelta, true);
-            }
-        }
-
-        if (doRotate && rotateModel && scaleModel)
+        GameObject canvas = GameObject.Find("Canvas_Info");
+        if (!canvas)
         {
-            float value = rotateModel.GetValue();
+            if (doScale && scaleModel)
+            {//Scale always about User
+                float value = scaleModel.GetValue();
+                if (angle < 45 || angle > 315)
+                {
+                    scaleModel.SetValue(value + scaleDelta, true);
+                }
+                else if (angle < 225 && angle > 135)
+                {
+                    scaleModel.SetValue(value - scaleDelta, true);
+                }
+            }
 
-            if (scaleModel.GetValue() > valueBeginOfRotateAboutUser)
+            if (doRotate && rotateModel && scaleModel)
             {
-                rotateAboutUser = true;
-            } else
-            {
-                rotateAboutUser = false;
-            }
-           
-            if (angle < 135 && angle > 45)
-            {
-                if (value == 1)
+                float value = rotateModel.GetValue();
+
+                if (scaleModel.GetValue() > valueBeginOfRotateAboutUser)
                 {
-                    rotateModel.SetValue(0f + rotateDelta, rotateAboutUser);
+                    rotateAboutUser = true;
                 }
                 else
                 {
-                    rotateModel.SetValue(value + rotateDelta, rotateAboutUser);
+                    rotateAboutUser = false;
                 }
-            }
-            else if (angle > 225 && angle < 315)
-            {
-                if (value == 0)
+
+                if (angle < 135 && angle > 45)
                 {
-                    rotateModel.SetValue(1f - rotateDelta, rotateAboutUser);
+                    if (value == 1)
+                    {
+                        rotateModel.SetValue(0f + rotateDelta, rotateAboutUser);
+                    }
+                    else
+                    {
+                        rotateModel.SetValue(value + rotateDelta, rotateAboutUser);
+                    }
                 }
-                else
+                else if (angle > 225 && angle < 315)
                 {
-                    rotateModel.SetValue(value - rotateDelta, rotateAboutUser);
+                    if (value == 0)
+                    {
+                        rotateModel.SetValue(1f - rotateDelta, rotateAboutUser);
+                    }
+                    else
+                    {
+                        rotateModel.SetValue(value - rotateDelta, rotateAboutUser);
+                    }
                 }
             }
         }

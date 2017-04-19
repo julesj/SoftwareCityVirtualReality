@@ -51,7 +51,8 @@ public class GestureScaleRotateBar : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		if (rightHandClosed && leftHandClosed)
+        GameObject canvas = GameObject.Find("Canvas_Info");
+		if (rightHandClosed && leftHandClosed && !canvas)
         {
             foreach (MoveSoftwareCity moveCity in move)
             {

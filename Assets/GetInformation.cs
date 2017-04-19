@@ -1,26 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using VRTK;
 using Leap.Unity;
 using Leap;
 
 public class GetInformation : MonoBehaviour {
-    public bool isTouched;
+    private bool isTouched;
     private bool isHand;
-    private bool isClicked;
+    private static bool isIndexExtended;
     private Material oldMaterial;
     private GameObject currentSelectionObject;
     private GameObject canvas;
     private Transform headsetTransform;
     private LeapServiceProvider provider;
+    private GameObject other;
 
     public GameObject selectionPrefab;
 
 	// Use this for initialization
 	void Start () {
         canvas = GameObject.Find("Canvas_Info");
-        //canvas.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -28,6 +29,11 @@ public class GetInformation : MonoBehaviour {
         if (!headsetTransform)
         {
             headsetTransform = VRTK_DeviceFinder.HeadsetTransform();
+        }
+        
+        if (!other)
+        {
+            isTouched = false;
         }
 
         if (isTouched && isHand)
@@ -37,19 +43,16 @@ public class GetInformation : MonoBehaviour {
             {
                 Hand hand = hands[0];
                 Vector3 fingerpos = GetFingersPos(hand);
-                if (Mathf.Abs(gameObject.transform.InverseTransformPoint(fingerpos).z) < 5)
+                if (Mathf.Abs(gameObject.transform.InverseTransformPoint(fingerpos).z) < 1.5f)
                 {
-                    isClicked = true;
-                } else
-                {
-                    isClicked = false;
+                    SetCanvas();
+                    isTouched = false;
                 }
             }
         }
 
 		if (isTouched && currentSelectionObject == null)
         {
-            Debug.Log("IsTouched");
             if (currentSelectionObject != null)
             {
                 Destroy(currentSelectionObject);
@@ -64,15 +67,29 @@ public class GetInformation : MonoBehaviour {
             Destroy(currentSelectionObject);
             currentSelectionObject = null;
         }
-
-        if (isTouched && isClicked)
-        {
-            canvas.SetActive(true);
-            //canvas.gameObject.GetComponentInChildren<Text>() = gameObject.GetComponentInParent<Building>().node.allAttributes;
-            canvas.transform.position = headsetTransform.position + headsetTransform.forward * 0.5f;
-            canvas.transform.LookAt(headsetTransform);
-        }
 	}
+
+    private void SetCanvas()
+    {
+        Debug.Log("Set Canvas");
+        canvas.SetActive(true);
+        Dictionary<string, string> attributes = gameObject.GetComponentInParent<Building>().node.allAttributes;
+        List<string> keys = new List<string>();
+        keys.AddRange(attributes.Keys);
+        keys.Sort();
+        string list = "";
+        foreach (string key in keys)
+        {
+            list += key + ": " + attributes[key] + "\n";
+        }
+
+        GameObject.Find("PackageLabel").GetComponent<Text>().text = gameObject.GetComponentInParent<Building>().node.pathName;
+        GameObject.Find("NameLabel").GetComponent<Text>().text = gameObject.GetComponentInParent<Building>().node.name;
+        GameObject.Find("Infotext").GetComponent<Text>().text = list;
+
+        canvas.transform.position = headsetTransform.position + headsetTransform.forward * 0.5f;
+        canvas.transform.LookAt(headsetTransform);
+    }
 
     private Vector3 GetFingersPos(Hand hand)
     {
@@ -93,14 +110,19 @@ public class GetInformation : MonoBehaviour {
         {
             isTouched = true;
             VRTK_ControllerEvents events = other.gameObject.GetComponentInParent<VRTK_ControllerEvents>();
+            events.TriggerClicked -= Events_TriggerClicked;
             events.TriggerClicked += Events_TriggerClicked;
-            events.TriggerReleased += Events_TriggerReleased;
+            this.other = other.gameObject;
         }
         if (other.name.Equals("bone1") || other.name.Equals("bone2") || other.name.Equals("bone3"))
         {
-            isTouched = true;
-            isHand = true;
-            provider = FindObjectOfType<LeapServiceProvider>();
+            if (isIndexExtended)
+            {
+                isTouched = true;
+                isHand = true;
+                provider = FindObjectOfType<LeapServiceProvider>();
+                this.other = other.gameObject;
+            }
         }
     }
 
@@ -111,7 +133,6 @@ public class GetInformation : MonoBehaviour {
             isTouched = false;
             VRTK_ControllerEvents events = other.gameObject.GetComponentInParent<VRTK_ControllerEvents>();
             events.TriggerClicked -= Events_TriggerClicked;
-            events.TriggerReleased -= Events_TriggerReleased;
         }
         if (other.name.Equals("bone1") || other.name.Equals("bone2") || other.name.Equals("bone3"))
         {
@@ -120,19 +141,17 @@ public class GetInformation : MonoBehaviour {
         }
     }
 
-    private void Events_TriggerReleased(object sender, ControllerInteractionEventArgs e)
-    {
-        isClicked = false;
-    }
-
     private void Events_TriggerClicked(object sender, ControllerInteractionEventArgs e)
     {
-        isClicked = true;
+        if (isTouched)
+        {
+            SetCanvas();
+            isTouched = false;
+        }
     }
 
-    public void SetIsTouched(bool touched)
+    public void SetIsIndexExtended(bool extended)
     {
-        Debug.Log("SetIsTouched " + touched);
-        isTouched = touched;
+        isIndexExtended = extended;
     }
 }
