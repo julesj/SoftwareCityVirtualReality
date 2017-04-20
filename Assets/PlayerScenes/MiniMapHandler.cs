@@ -39,9 +39,11 @@ public class MiniMapHandler : MonoBehaviour {
         if (isGrabbed && !secondGrab)
         {
             MoveCity();
+            FindObjectOfType<HelpSystemMixed>().Deactivate();
         } else if (isGrabbed && secondGrab)
         {
             ScaleRotateCity();
+            FindObjectOfType<HelpSystemMixed>().Deactivate();
         }
 	}
 
@@ -119,11 +121,14 @@ public class MiniMapHandler : MonoBehaviour {
     {
         if (other.gameObject.name == "Cube_Minimap")
         {
+            Debug.Log("OnTriggerEnterMinimapHandler: " + other.name);
             controllerEvents = gameObject.GetComponentInParent<VRTK_ControllerEvents>();
             controllerEvents.TriggerPressed -= ControllerEvents_AliasGrabOn;
             controllerEvents.TriggerReleased -= ControllerEvents_AliasGrabOff;
             controllerEvents.TriggerPressed += ControllerEvents_AliasGrabOn;
             controllerEvents.TriggerReleased += ControllerEvents_AliasGrabOff;
+            gameObject.GetComponent<VRTK_ControllerActions>().ToggleHighlightTrigger(true, new Color(192,190,255), 0.5f);
+            SteamVR_Controller.Input((int)gameObject.GetComponent<SteamVR_TrackedObject>().index).TriggerHapticPulse(2000, Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger);
         }
     }
 
@@ -146,6 +151,7 @@ public class MiniMapHandler : MonoBehaviour {
     {
         Debug.Log("grab on");
         triggerPos = gameObject.transform.position;
+        oldPos2 = gameObject.transform.position;
         if (isGrabbed)
         {
             secondGrab = true;
@@ -162,6 +168,7 @@ public class MiniMapHandler : MonoBehaviour {
         {
             controllerEvents.TriggerPressed -= ControllerEvents_AliasGrabOn;
             controllerEvents.TriggerReleased -= ControllerEvents_AliasGrabOff;
+            gameObject.GetComponent<VRTK_ControllerActions>().ToggleHighlightTrigger(false);
         }
     }
 
@@ -195,6 +202,7 @@ public class MiniMapHandler : MonoBehaviour {
                     isGrabbed = true;
                 }
                 triggerPos = fingerpos;
+                oldPos1 = fingerpos;
             }
         }
     }

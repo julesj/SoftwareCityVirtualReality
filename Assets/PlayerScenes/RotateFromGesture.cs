@@ -88,6 +88,12 @@ public class RotateFromGesture : MonoBehaviour
                     rotateModel.SetValue(value + distance*scaleFactor, true);
                 }
             }
+
+            HelpSystemGesture help = FindObjectOfType<HelpSystemGesture>();
+            if (help.processed[3] && !help.processed[4])
+            {
+                help.WaitForInfoText();
+            }
         }
     }
 

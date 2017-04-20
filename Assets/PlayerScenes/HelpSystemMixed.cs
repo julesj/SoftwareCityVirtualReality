@@ -1,5 +1,4 @@
-﻿using System.Collections; using System.Collections.Generic; using UnityEngine; using UnityEngine.SceneManagement; using VRTK;  public class HelpSystemController : MonoBehaviour {     private GameObject ui;     private GameObject scalerotate;     private GameObject move;     private GameObject choice;     private SteamVR_TrackedObject trackedObj;     private VRTK_ControllerActions actions;     private List<GameObject> leftIcons;     private List<GameObject> rightIcons;     public bool[] processed;  	// Use this for initialization 	void Start () {         SceneManager.sceneLoaded += SceneManager_sceneLoaded;         leftIcons = new List<GameObject>();         rightIcons = new List<GameObject>();         actions = gameObject.GetComponent<VRTK_ControllerActions>();
-        processed = new bool[] { false, false, false, false };
+﻿using System.Collections; using System.Collections.Generic; using UnityEngine; using UnityEngine.SceneManagement;  public class HelpSystemMixed : MonoBehaviour {     private GameObject ui;     private GameObject scalerotate;     private GameObject move;     private GameObject choice;     private SteamVR_TrackedObject trackedObj;     private List<GameObject> trackpadIcons;     public bool[] processed;  	// Use this for initialization 	void Start () {         SceneManager.sceneLoaded += SceneManager_sceneLoaded;         trackpadIcons = new List<GameObject>();         processed = new bool[] { false, false, false, false };
     }
 
     private void SceneManager_sceneLoaded(Scene scene, LoadSceneMode sceneMode)
@@ -7,10 +6,7 @@
         Debug.Log(scene.name);
         if (scene.name.Equals(ClipboardBar.LoadableScenes.ScaleRotateExampleScene.ToString()))
         {
-            if (!processed[0])
-            {
-                processed[0] = true;
-            }
+            Deactivate();
             WaitForInfoText();
         }
     }
@@ -21,18 +17,13 @@
         {
             ui = GameObject.Find("UI_Info");
             scalerotate = GameObject.Find("Drehen/Zoomen_Info");
-            move = GameObject.Find("Bewegen");
+            move = GameObject.Find("Minimap_Info");
             choice = GameObject.Find("Auswahl");
-
-            leftIcons.Add(GameObject.Find("Zoom_Out_Left"));
-            leftIcons.Add(GameObject.Find("Zoom_In_Left"));
-            leftIcons.Add(GameObject.Find("Rotate_Left_Left"));
-            leftIcons.Add(GameObject.Find("Rotate_Right_Left"));
-
-            rightIcons.Add(GameObject.Find("Zoom_In_Right"));
-            rightIcons.Add(GameObject.Find("Zoom_Out_Right"));
-            rightIcons.Add(GameObject.Find("Rotate_Left_Right"));
-            rightIcons.Add(GameObject.Find("Rotate_Right_Right"));
+            
+            trackpadIcons.Add(GameObject.Find("Minimap"));
+            trackpadIcons.Add(GameObject.Find("ScaleRotate"));
+            trackpadIcons.Add(GameObject.Find("Arrow_horizontal"));
+            trackpadIcons.Add(GameObject.Find("Arrow_vertical"));
 
             if (ui)
             {
@@ -49,6 +40,7 @@
         StartCoroutine(WaitForInfoText_Coroutine());
     }      private IEnumerator WaitForInfoText_Coroutine()
     {
+        Debug.Log("Wait for seconds: " + processed[0] + ", " + processed[1] + ", " + processed[2] + ", " + processed[3]);
         if (!processed[0])
         {
             yield return new WaitForSeconds(5);
@@ -59,11 +51,11 @@
             ShowScaleRotateInfo();
         } else if (!processed[2])
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(2);
             ShowMoveInfo();
         } else if (!processed[3])
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(2);
             ShowChoiceInfo();
         }
         
@@ -72,39 +64,38 @@
             Deactivate();
             ui.SetActive(true);
             ui.GetComponent<PositionToHeadset>().followHeadset = false;
-            actions.ToggleHighlightTrigger(true, Color.cyan, 0.5f);
-            SteamVR_Controller.Input((int)trackedObj.index).TriggerHapticPulse(2000, Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger);
             processed[0] = true;
         }     }      private void ShowScaleRotateInfo()     {         if (!processed[1])
         {
             Deactivate();
             scalerotate.SetActive(true);
-            activeIcons(true);
+            trackpadIcons[1].SetActive(true);
+            trackpadIcons[3].SetActive(true);
             scalerotate.GetComponent<PositionToHeadset>().followHeadset = false;
-            actions.ToggleHighlightTouchpad(true, Color.cyan, 0.5f);
             SteamVR_Controller.Input((int)trackedObj.index).TriggerHapticPulse(2000, Valve.VR.EVRButtonId.k_EButton_SteamVR_Touchpad);
+            //Position Icons
             processed[1] = true;
         }
-    }      private void ShowMoveInfo()     {         if (!processed[2])
+    }      private void ShowMoveInfo()     {//Minimap_Info         if (!processed[2])
         {
             Deactivate();
             move.SetActive(true);
+            activeIcons(false);
+            trackpadIcons[2].SetActive(true);
+            trackpadIcons[0].SetActive(true);
             move.GetComponent<PositionToHeadset>().followHeadset = false;
-            actions.ToggleHighlightGrip(true, Color.cyan, 0.5f);
-            SteamVR_Controller.Input((int)trackedObj.index).TriggerHapticPulse(2000, Valve.VR.EVRButtonId.k_EButton_Grip);
+            SteamVR_Controller.Input((int)trackedObj.index).TriggerHapticPulse(2000, Valve.VR.EVRButtonId.k_EButton_SteamVR_Touchpad);
             processed[2] = true;
         }
     }      private void ShowChoiceInfo()     {         if (!processed[3])
         {
-
             Deactivate();
+            activeIcons(true);
             choice.SetActive(true);
             choice.GetComponent<PositionToHeadset>().followHeadset = false;
-            actions.ToggleHighlightTrigger(true, Color.cyan, 0.5f);
-            SteamVR_Controller.Input((int)trackedObj.index).TriggerHapticPulse(2000, Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger);
             processed[3] = true;
         }
-    }      public void Deactivate()     {         actions.ToggleHighlightTrigger(false);         actions.ToggleHighlightGrip(false);         actions.ToggleHighlightTouchpad(false);         GameObject help = GameObject.Find("Helptext_Controller");         if (help)
+    }      public void Deactivate()     {         gameObject.GetComponent<VRTK.VRTK_ControllerActions>().ToggleHighlightTouchpad(false);         GameObject help = GameObject.Find("Helptext_Mixed");         if (help)
         {
             Transform[] children = help.GetComponentsInChildren<Transform>();
             foreach (Transform child in children)
@@ -117,11 +108,7 @@
             }
         }     }      private void activeIcons(bool active)
     {
-        foreach (GameObject icon in leftIcons)
-        {
-            icon.SetActive(active);
-        }
-        foreach (GameObject icon in rightIcons)
+        foreach (GameObject icon in trackpadIcons)
         {
             icon.SetActive(active);
         }

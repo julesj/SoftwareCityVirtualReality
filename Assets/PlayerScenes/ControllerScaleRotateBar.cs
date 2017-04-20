@@ -85,6 +85,15 @@ public class ControllerScaleRotateBar : MonoBehaviour
                     }
                 }
             }
+
+            if (doScale || doRotate)
+            {
+                HelpSystemController help = FindObjectOfType<HelpSystemController>();
+                if (help.processed[1] && !help.processed[2])
+                {
+                    help.WaitForInfoText();
+                }
+            }
         }
     }
 

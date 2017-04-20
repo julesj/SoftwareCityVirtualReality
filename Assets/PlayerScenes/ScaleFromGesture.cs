@@ -65,6 +65,12 @@ public class ScaleFromGesture : MonoBehaviour {
                 distance = Mathf.Max(0, Mathf.Min(1, distance));
                 scaleModel.SetValue(value + (distance * scaleFactor), true);
             }
+
+            HelpSystemGesture help = FindObjectOfType<HelpSystemGesture>();
+            if (help.processed[4] && !help.processed[5])
+            {
+                help.WaitForInfoText();
+            }
         }
 	}
 

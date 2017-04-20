@@ -47,6 +47,17 @@ public class GetInformation : MonoBehaviour {
                 {
                     SetCanvas();
                     isTouched = false;
+                    HelpSystemMixed helpMixed = FindObjectOfType<HelpSystemMixed>();
+                    if (helpMixed.processed[3])
+                    {
+                        helpMixed.Deactivate();helpMixed.WaitForInfoText();
+                    }
+
+                    HelpSystemGesture helpGesture = FindObjectOfType<HelpSystemGesture>();
+                    if (helpGesture && helpGesture.processed[5])
+                    {
+                        helpGesture.Deactivate();
+                    }
                 }
             }
         }
@@ -147,6 +158,10 @@ public class GetInformation : MonoBehaviour {
         {
             SetCanvas();
             isTouched = false;
+            if (FindObjectOfType<HelpSystemController>().processed[3])
+            {
+                FindObjectOfType<HelpSystemController>().Deactivate();
+            }
         }
     }
 

@@ -50,8 +50,14 @@ public class PositionToController : MonoBehaviour {
         transform.parent = trackpad;
         if (posToController == positionToController.centerTrackpad)
         {
-            transform.localPosition = new Vector3(0, 0.001f, -0.045f);
             transform.localEulerAngles = new Vector3(90, 180, 180);
+            if (this.gameObject.name.Equals("Arrow_horizontal") || this.gameObject.name.Equals("Arrow_vertical"))
+            {
+                transform.localPosition = new Vector3(0, 0.01f, -0.048f);
+            } else
+            {
+                transform.localPosition = new Vector3(0, 0.001f, -0.045f);
+            }
         }
         if (posToController == positionToController.upTrackpad)
         {

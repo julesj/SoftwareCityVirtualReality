@@ -75,6 +75,12 @@ public class ControlKnob : MonoBehaviour {
                     rotateCity(angle * Mathf.Rad2Deg);
                     WriteText(angle * Mathf.Rad2Deg / 3.6f);
                     beforePos = actPos;
+
+                    HelpSystemMixed help = FindObjectOfType<HelpSystemMixed>();
+                    if (help.processed[1] && !help.processed[2])
+                    {
+                        help.Deactivate();
+                    }
                 }
             }
         }

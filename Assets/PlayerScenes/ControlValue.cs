@@ -103,6 +103,12 @@ public class ControlValue : MonoBehaviour {
             rotate(value);
         }
         WriteText(value);
+
+        HelpSystemMixed help = FindObjectOfType<HelpSystemMixed>();
+        if (help.processed[1] && !help.processed[2])
+        {
+            help.Deactivate();
+        }
     }
 
     private void scale(float value)

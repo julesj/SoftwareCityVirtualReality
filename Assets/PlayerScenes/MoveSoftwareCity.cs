@@ -39,17 +39,30 @@ public class MoveSoftwareCity : MonoBehaviour {
     {
         isGrapped = true;
         oldPos = gameObject.transform.position;
+        if (FindObjectOfType<HelpSystemController>().processed[2] && !FindObjectOfType<HelpSystemController>().processed[3])
+        {
+            FindObjectOfType<HelpSystemController>().Deactivate();
+            FindObjectOfType<HelpSystemController>().WaitForInfoText();
+        }
     }
 
     // Update is called once per frame
     void Update () {
         GameObject canvas = GameObject.Find("Canvas_Info");
-		if (isGrapped && SoftwareCity && !canvas)
+        if (FindObjectOfType<GestureScaleRotateBar>() == null || !FindObjectOfType<GestureScaleRotateBar>().isMoving)
         {
-            delta = gameObject.transform.position - oldPos;
-            float scale = SoftwareCity.transform.localScale.x;
-            SoftwareCity.transform.position += new Vector3(delta.x*scaleFactor*(scale*0.08f+0.92f), 0.0f, delta.z*scaleFactor* (scale*0.08f+0.92f));
-            oldPos = gameObject.transform.position;
+            if (isGrapped && SoftwareCity && !canvas)
+            {
+                delta = gameObject.transform.position - oldPos;
+                float scale = SoftwareCity.transform.localScale.x;
+                SoftwareCity.transform.position += new Vector3(delta.x * scaleFactor * (scale * 0.08f + 0.92f), 0.0f, delta.z * scaleFactor * (scale * 0.08f + 0.92f));
+                oldPos = gameObject.transform.position;
+
+                if (FindObjectOfType<HelpSystemGesture>().processed[2] && !FindObjectOfType<HelpSystemGesture>().processed[3])
+                {
+                    FindObjectOfType<HelpSystemGesture>().WaitForInfoText();
+                }
+            }
         }
 	}
 

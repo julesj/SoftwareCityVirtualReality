@@ -86,7 +86,16 @@ public class SwipeDetect : MonoBehaviour
         else if (scaleRotateVisibleBottom)
         {
             Debug.Log("should swipe bottomdown");
+            GameObject.FindObjectOfType<HelpSystemMixed>().WaitForInfoText();
             scaleRotate.SwipeBottomDown();
+        } else if (minimapVisibleLeft)
+        {
+            minimap.SwipeLeftOut();
+            scaleRotate.SwipeTopDown();
+        } else if (minimapVisibleRight)
+        {
+            minimap.SwipeRightOut();
+            scaleRotate.SwipeTopDown();
         }
     }
 
@@ -95,11 +104,22 @@ public class SwipeDetect : MonoBehaviour
         if (scaleRotateVisibleTop)
         {
             Debug.Log("should swipe topup");
+            GameObject.FindObjectOfType<HelpSystemMixed>().WaitForInfoText();
             scaleRotate.SwipeTopUp();
         }
         else if (!scaleRotateVisibleBottom && !scaleRotateVisibleTop && !minimapVisibleLeft && !minimapVisibleRight)
         {
             Debug.Log("should swipe bottomup");
+            scaleRotate.SwipeBottomUp();
+        }
+        else if (minimapVisibleLeft)
+        {
+            minimap.SwipeLeftOut();
+            scaleRotate.SwipeBottomUp();
+        }
+        else if (minimapVisibleRight)
+        {
+            minimap.SwipeRightOut();
             scaleRotate.SwipeBottomUp();
         }
     }
@@ -109,10 +129,19 @@ public class SwipeDetect : MonoBehaviour
         if (minimapVisibleRight)
         {
             Debug.Log("should swipe right out");
+            GameObject.FindObjectOfType<HelpSystemMixed>().WaitForInfoText();
             minimap.SwipeRightOut();
         } else if (!minimapVisibleLeft && !minimapVisibleRight && !scaleRotateVisibleTop && !scaleRotateVisibleBottom)
         {
             Debug.Log("should swipe left in");
+            minimap.SwipeLeftIn();
+        } else if (scaleRotateVisibleBottom)
+        {
+            scaleRotate.SwipeBottomDown();
+            minimap.SwipeLeftIn();
+        } else if (scaleRotateVisibleTop)
+        {
+            scaleRotate.SwipeTopUp();
             minimap.SwipeLeftIn();
         }
     }
@@ -122,10 +151,22 @@ public class SwipeDetect : MonoBehaviour
         if (minimapVisibleLeft)
         {
             Debug.Log("should swipe left out");
+            GameObject.FindObjectOfType<HelpSystemMixed>().WaitForInfoText();
             minimap.SwipeLeftOut();
-        } else if (!minimapVisibleLeft && !minimapVisibleRight && !scaleRotateVisibleTop && !scaleRotateVisibleBottom)
+        }
+        else if (!minimapVisibleLeft && !minimapVisibleRight && !scaleRotateVisibleTop && !scaleRotateVisibleBottom)
         {
             Debug.Log("should swipe right in");
+            minimap.SwipeRightIn();
+        }
+        else if (scaleRotateVisibleBottom)
+        {
+            scaleRotate.SwipeBottomDown();
+            minimap.SwipeRightIn();
+        }
+        else if (scaleRotateVisibleTop)
+        {
+            scaleRotate.SwipeTopUp();
             minimap.SwipeRightIn();
         }
     }

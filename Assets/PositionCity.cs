@@ -15,7 +15,7 @@ public class PositionCity : MonoBehaviour {
 
         if (headsetTransform && !positioned)
         {
-            gameObject.transform.position = new Vector3(headsetTransform.position.x, 0, headsetTransform.position.z) + headsetTransform.forward;
+            gameObject.transform.position = new Vector3(headsetTransform.position.x + headsetTransform.forward.x, 0, headsetTransform.position.z + headsetTransform.forward.z);
             positioned = true;
         }
 	}

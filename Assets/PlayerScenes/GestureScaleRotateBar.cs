@@ -21,6 +21,7 @@ public class GestureScaleRotateBar : MonoBehaviour {
     private MoveSoftwareCity[] move;
 
     public float scaleFactor = 0.5f;
+    public bool isMoving = false;
 
 	// Use this for initialization
 	void Start () {
@@ -54,6 +55,7 @@ public class GestureScaleRotateBar : MonoBehaviour {
         GameObject canvas = GameObject.Find("Canvas_Info");
 		if (rightHandClosed && leftHandClosed && !canvas)
         {
+            isMoving = true;
             foreach (MoveSoftwareCity moveCity in move)
             {
                 moveCity.SetIsGrapped(false);
@@ -83,6 +85,16 @@ public class GestureScaleRotateBar : MonoBehaviour {
 
             oldPos1 = pos1;
             oldPos2 = pos2;
+
+            HelpSystemGesture help = FindObjectOfType<HelpSystemGesture>();
+            if (help.processed[1] && !help.processed[2])
+            {
+                Debug.Log("scaleRotateVerstanden");
+                help.WaitForInfoText();
+            }
+        } else if (!rightHandClosed || !leftHandClosed)
+        {
+            isMoving = false;
         }
 	}
 

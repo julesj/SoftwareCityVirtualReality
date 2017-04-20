@@ -11,7 +11,8 @@ public class SelfDeactivate : MonoBehaviour {
 	
 	IEnumerator Wait()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2);
+        gameObject.GetComponent<PositionToHeadset>().followHeadset = false;
         gameObject.SetActive(false);
     }
 }
