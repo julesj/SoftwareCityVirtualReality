@@ -264,6 +264,7 @@ GameObject:
   - component: {fileID: 26766350}
   - component: {fileID: 26766349}
   - component: {fileID: 1073058924}
+  - component: {fileID: 26766355}
   m_Layer: 0
   m_Name: Controller_Controller
   m_TagString: Untagged
@@ -348,7 +349,7 @@ MeshFilter:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 26766348}
-  m_Mesh: {fileID: 616946076}
+  m_Mesh: {fileID: 1915456476}
 --- !u!23 &26766353
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -363,7 +364,7 @@ MeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 704838290}
+  - {fileID: 1264164311}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -397,6 +398,17 @@ MonoBehaviour:
   right: {fileID: 1073058920}
   objects: []
   assignAllBeforeIdentified: 0
+--- !u!114 &26766355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 26766348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f789213c70b72c4b8be327ef07a2136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &34049089 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 139088, guid: 576767ee4cc2f72418faa449c8b40e65, type: 2}
@@ -559,7 +571,7 @@ GameObject:
   - component: {fileID: 76268263}
   - component: {fileID: 76268265}
   - component: {fileID: 76268264}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -621,7 +633,7 @@ GameObject:
   - component: {fileID: 88732417}
   - component: {fileID: 88732419}
   - component: {fileID: 88732418}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1124,7 +1136,7 @@ GameObject:
   - component: {fileID: 317095196}
   - component: {fileID: 317095198}
   - component: {fileID: 317095197}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2017,7 +2029,7 @@ GameObject:
   - component: {fileID: 459692200}
   - component: {fileID: 459692202}
   - component: {fileID: 459692201}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: palm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2228,134 +2240,6 @@ MonoBehaviour:
   go: {fileID: 1280899097}
   parent: 2
   type: 0
---- !u!43 &616946076
-Mesh:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  serializedVersion: 8
-  m_SubMeshes:
-  - serializedVersion: 2
-    firstByte: 0
-    indexCount: 24
-    topology: 0
-    firstVertex: 0
-    vertexCount: 8
-    localAABB:
-      m_Center: {x: 0, y: 0.01, z: 0}
-      m_Extent: {x: 1.7499999, y: 0, z: 1.5999998}
-  m_Shapes:
-    vertices: []
-    shapes: []
-    channels: []
-    fullWeights: []
-  m_BindPose: []
-  m_BoneNameHashes: 
-  m_RootBoneNameHash: 0
-  m_MeshCompression: 0
-  m_IsReadable: 1
-  m_KeepVertices: 1
-  m_KeepIndices: 1
-  m_IndexBuffer: 000004000100010004000500010005000200020005000600020006000300030006000700030007000000000007000400
-  m_Skin: []
-  m_VertexData:
-    m_CurrentChannels: 13
-    m_VertexCount: 8
-    m_Channels:
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 3
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 12
-      format: 0
-      dimension: 4
-    - stream: 0
-      offset: 28
-      format: 0
-      dimension: 2
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    m_DataSize: 288
-    _typelessdata: cccccc3f0ad7233c9899b9bf000000000000803f0000803f0000803f0000000000000000ccccccbf0ad7233c9899b9bf000000000000803f0000803f0000803f0000803f00000000ccccccbf0ad7233c9899b93f000000000000803f0000803f0000803f0000000000000000cccccc3f0ad7233c9899b93f000000000000803f0000803f0000803f0000803f00000000ffffdf3f0ad7233ccbccccbf000000000000803f0000803f00000000000000000000803fffffdfbf0ad7233ccbccccbf000000000000803f0000803f000000000000803f0000803fffffdfbf0ad7233ccbcccc3f000000000000803f0000803f00000000000000000000803fffffdf3f0ad7233ccbcccc3f000000000000803f0000803f000000000000803f0000803f
-  m_CompressedMesh:
-    m_Vertices:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_UV:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Normals:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Tangents:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Weights:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_NormalSigns:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_TangentSigns:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_FloatColors:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_BoneIndices:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Triangles:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_UVInfo: 0
-  m_LocalAABB:
-    m_Center: {x: 0, y: 0.01, z: 0}
-    m_Extent: {x: 1.7499999, y: 0, z: 1.5999998}
-  m_MeshUsageFlags: 0
-  m_BakedConvexCollisionMesh: 
-  m_BakedTriangleCollisionMesh: 
-  m_MeshOptimized: 0
 --- !u!1 &655914447
 GameObject:
   m_ObjectHideFlags: 0
@@ -2810,6 +2694,46 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: 0.46710742
       objectReference: {fileID: 0}
+    - target: {fileID: 1000011702194464, guid: 585b1cb301cc5094d8606d5e869e94e6, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012452607466, guid: 585b1cb301cc5094d8606d5e869e94e6, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012278790446, guid: 585b1cb301cc5094d8606d5e869e94e6, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013841640190, guid: 585b1cb301cc5094d8606d5e869e94e6, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000014043033936, guid: 585b1cb301cc5094d8606d5e869e94e6, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013130095918, guid: 585b1cb301cc5094d8606d5e869e94e6, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013626667424, guid: 585b1cb301cc5094d8606d5e869e94e6, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011853028776, guid: 585b1cb301cc5094d8606d5e869e94e6, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011532960680, guid: 585b1cb301cc5094d8606d5e869e94e6, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011017243362, guid: 585b1cb301cc5094d8606d5e869e94e6, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 585b1cb301cc5094d8606d5e869e94e6, type: 2}
   m_IsPrefabParent: 0
@@ -3066,35 +2990,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 699612316}
---- !u!21 &704838290
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Sprites/Default
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 5
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  m_SavedProperties:
-    serializedVersion: 2
-    m_TexEnvs:
-    - first:
-        name: _MainTex
-      second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - first:
-        name: PixelSnap
-      second: 0
-    m_Colors:
-    - first:
-        name: _Color
-      second: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &708741310
 GameObject:
   m_ObjectHideFlags: 0
@@ -3167,7 +3062,7 @@ GameObject:
   m_Component:
   - component: {fileID: 713183661}
   - component: {fileID: 713183662}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3484,7 +3379,7 @@ GameObject:
   - component: {fileID: 797055189}
   - component: {fileID: 797055191}
   - component: {fileID: 797055190}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3672,7 +3567,7 @@ GameObject:
   - component: {fileID: 823262052}
   - component: {fileID: 823262054}
   - component: {fileID: 823262053}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4191,7 +4086,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1010629867}
   - component: {fileID: 1010629868}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pinky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4249,7 +4144,7 @@ GameObject:
   - component: {fileID: 1012130021}
   - component: {fileID: 1012130023}
   - component: {fileID: 1012130022}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5178,7 +5073,7 @@ GameObject:
   - component: {fileID: 1125230700}
   - component: {fileID: 1125230702}
   - component: {fileID: 1125230701}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5427,7 +5322,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1201219104}
   - component: {fileID: 1201219105}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: thumb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5610,7 +5505,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1253605306}
   - component: {fileID: 1253605307}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: index
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5694,11 +5589,9 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1256407920}
-  m_Text: 'Drehen & Zoomen (1):
-
-    Swipe auf dem Controller vertikal -> Auf- und Zuklappen der Elemente
-
-    Bedienung der Elemente wie auf einem Touchbildschirm'
+  m_Text: "Drehen & Zoomen (1):\n(Swipe) Wische auf dem Controller vertikal -> \nAuf-
+    und Zuklappen der Elemente zum Bedienen der Stadt\nBedienung der Elemente wie
+    auf einem Touchbildschirm"
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -5743,6 +5636,35 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!21 &1264164311
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Sprites/Default
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: _MainTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - first:
+        name: PixelSnap
+      second: 0
+    m_Colors:
+    - first:
+        name: _Color
+      second: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1279515071
 GameObject:
   m_ObjectHideFlags: 0
@@ -6041,7 +5963,7 @@ GameObject:
   - component: {fileID: 1318123976}
   - component: {fileID: 1318123978}
   - component: {fileID: 1318123977}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6103,7 +6025,7 @@ GameObject:
   - component: {fileID: 1318885141}
   - component: {fileID: 1318885143}
   - component: {fileID: 1318885142}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6227,7 +6149,7 @@ GameObject:
   - component: {fileID: 1322634700}
   - component: {fileID: 1322634702}
   - component: {fileID: 1322634701}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6374,7 +6296,7 @@ GameObject:
   - component: {fileID: 1359895489}
   - component: {fileID: 1359895491}
   - component: {fileID: 1359895490}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6590,17 +6512,17 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1400770376}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1279515072}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 115.5}
-  m_SizeDelta: {x: -100, y: 125}
+  m_AnchoredPosition: {x: 0, y: 75}
+  m_SizeDelta: {x: -100, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1400770378
 MonoBehaviour:
@@ -6634,8 +6556,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Bewegen der Stadt:\nHand zu Faust ballen oder Trigger auf Controller dr\xFCcken\nRotieren/Skalieren:\nHand
-    zu Faust ballen und Trigger auf Controller dr\xFCcken"
+  m_Text: "Bewegen der Stadt:\nInnerhalb der Map Hand zu Faust ballen oder Trigger
+    auf Controller dr\xFCcken"
 --- !u!222 &1400770379
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6953,6 +6875,7 @@ GameObject:
   - component: {fileID: 1465077743}
   - component: {fileID: 1465077746}
   - component: {fileID: 1465077745}
+  - component: {fileID: 1465077747}
   m_Layer: 0
   m_Name: Canvas_Zoom_Rotate
   m_TagString: Untagged
@@ -7017,6 +6940,17 @@ MonoBehaviour:
   newPosUpFactor: 0.8
   newPosForwardFactor: 0.3
   newPosRightFactor: 0.5
+--- !u!114 &1465077747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1465077742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f789213c70b72c4b8be327ef07a2136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1465427935
 GameObject:
   m_ObjectHideFlags: 0
@@ -7164,7 +7098,7 @@ GameObject:
   - component: {fileID: 1487429823}
   - component: {fileID: 1487429825}
   - component: {fileID: 1487429824}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7502,13 +7436,11 @@ TextMesh:
   m_GameObject: {fileID: 1573441198}
   m_Text: 'Drehen & Zoomen (2):
 
-    Swipe auf dem Controller horizontal -> Auf- und Zuklappen der Minimap
+    (Swipe) Wische auf dem Controller horizontal ->
 
-    Greifen mit Faust oder Trigger -> Ziehen der Stadt
+    Auf- und Zuklappen der Minimap zum Bewegen der Stadt
 
-    Greifen mit Faust und Gripbutton -> Zoomen und Drehen wie auf Google Maps
-
-'
+    Greifen mit Faust oder Trigger innerhalb der Map -> Ziehen der Stadt'
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -7836,7 +7768,7 @@ GameObject:
   - component: {fileID: 1679746664}
   - component: {fileID: 1679746666}
   - component: {fileID: 1679746665}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7898,7 +7830,7 @@ GameObject:
   - component: {fileID: 1693103480}
   - component: {fileID: 1693103482}
   - component: {fileID: 1693103481}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: forearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7960,7 +7892,7 @@ GameObject:
   - component: {fileID: 1721074211}
   - component: {fileID: 1721074213}
   - component: {fileID: 1721074212}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8021,7 +7953,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1741918249}
   - component: {fileID: 1741918250}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8467,7 +8399,7 @@ GameObject:
   - component: {fileID: 1889659488}
   - component: {fileID: 1889659490}
   - component: {fileID: 1889659489}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bone2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8598,6 +8530,134 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1896547774}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!43 &1915456476
+Mesh:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  serializedVersion: 8
+  m_SubMeshes:
+  - serializedVersion: 2
+    firstByte: 0
+    indexCount: 24
+    topology: 0
+    firstVertex: 0
+    vertexCount: 8
+    localAABB:
+      m_Center: {x: 0, y: 0.01, z: 0}
+      m_Extent: {x: 1.7499999, y: 0, z: 1.5999998}
+  m_Shapes:
+    vertices: []
+    shapes: []
+    channels: []
+    fullWeights: []
+  m_BindPose: []
+  m_BoneNameHashes: 
+  m_RootBoneNameHash: 0
+  m_MeshCompression: 0
+  m_IsReadable: 1
+  m_KeepVertices: 1
+  m_KeepIndices: 1
+  m_IndexBuffer: 000004000100010004000500010005000200020005000600020006000300030006000700030007000000000007000400
+  m_Skin: []
+  m_VertexData:
+    m_CurrentChannels: 13
+    m_VertexCount: 8
+    m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 12
+      format: 0
+      dimension: 4
+    - stream: 0
+      offset: 28
+      format: 0
+      dimension: 2
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 288
+    _typelessdata: cccccc3f0ad7233c9899b9bf000000000000803f0000803f0000803f0000000000000000ccccccbf0ad7233c9899b9bf000000000000803f0000803f0000803f0000803f00000000ccccccbf0ad7233c9899b93f000000000000803f0000803f0000803f0000000000000000cccccc3f0ad7233c9899b93f000000000000803f0000803f0000803f0000803f00000000ffffdf3f0ad7233ccbccccbf000000000000803f0000803f00000000000000000000803fffffdfbf0ad7233ccbccccbf000000000000803f0000803f000000000000803f0000803fffffdfbf0ad7233ccbcccc3f000000000000803f0000803f00000000000000000000803fffffdf3f0ad7233ccbcccc3f000000000000803f0000803f000000000000803f0000803f
+  m_CompressedMesh:
+    m_Vertices:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UV:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Normals:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Tangents:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Weights:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_NormalSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_TangentSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_FloatColors:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BoneIndices:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Triangles:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UVInfo: 0
+  m_LocalAABB:
+    m_Center: {x: 0, y: 0.01, z: 0}
+    m_Extent: {x: 1.7499999, y: 0, z: 1.5999998}
+  m_MeshUsageFlags: 0
+  m_BakedConvexCollisionMesh: 
+  m_BakedTriangleCollisionMesh: 
+  m_MeshOptimized: 0
 --- !u!1 &1924726523
 GameObject:
   m_ObjectHideFlags: 0
@@ -9082,6 +9142,7 @@ GameObject:
   - component: {fileID: 2047833876}
   - component: {fileID: 2047833877}
   - component: {fileID: 2047833878}
+  - component: {fileID: 2047833879}
   m_Layer: 9
   m_Name: Canvas_Minimap
   m_TagString: Untagged
@@ -9106,7 +9167,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0.7, y: 1.3}
-  m_SizeDelta: {x: 700, y: 900}
+  m_SizeDelta: {x: 700, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2047833872
 MonoBehaviour:
@@ -9217,6 +9278,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc273bf7d9e9cd345bbd183ae5d141f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2047833879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2047833870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f789213c70b72c4b8be327ef07a2136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2056874845
 GameObject:
   m_ObjectHideFlags: 0
@@ -9297,7 +9369,7 @@ GameObject:
   - component: {fileID: 2076013975}
   - component: {fileID: 2076013974}
   - component: {fileID: 2076013976}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RigidRoundHand_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9370,6 +9442,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2089692547}
+  - component: {fileID: 2089692548}
   m_Layer: 0
   m_Name: Helptext_Mixed
   m_TagString: Untagged
@@ -9394,6 +9467,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2089692548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2089692546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f789213c70b72c4b8be327ef07a2136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2089875984
 GameObject:
   m_ObjectHideFlags: 0

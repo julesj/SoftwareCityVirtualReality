@@ -72,7 +72,7 @@
             trackpadIcons[1].SetActive(true);
             trackpadIcons[3].SetActive(true);
             scalerotate.GetComponent<PositionToHeadset>().followHeadset = false;
-            SteamVR_Controller.Input((int)trackedObj.index).TriggerHapticPulse(2000, Valve.VR.EVRButtonId.k_EButton_SteamVR_Touchpad);
+            SteamVR_Controller.Input((int)trackedObj.index).TriggerHapticPulse(20000, Valve.VR.EVRButtonId.k_EButton_SteamVR_Touchpad);
             //Position Icons
             processed[1] = true;
         }
@@ -84,7 +84,7 @@
             trackpadIcons[2].SetActive(true);
             trackpadIcons[0].SetActive(true);
             move.GetComponent<PositionToHeadset>().followHeadset = false;
-            SteamVR_Controller.Input((int)trackedObj.index).TriggerHapticPulse(2000, Valve.VR.EVRButtonId.k_EButton_SteamVR_Touchpad);
+            SteamVR_Controller.Input((int)trackedObj.index).TriggerHapticPulse(20000, Valve.VR.EVRButtonId.k_EButton_SteamVR_Touchpad);
             processed[2] = true;
         }
     }      private void ShowChoiceInfo()     {         if (!processed[3])

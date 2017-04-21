@@ -40,11 +40,11 @@ public class MiniMapHandler : MonoBehaviour {
         {
             MoveCity();
             FindObjectOfType<HelpSystemMixed>().Deactivate();
-        } else if (isGrabbed && secondGrab)
-        {
-            ScaleRotateCity();
-            FindObjectOfType<HelpSystemMixed>().Deactivate();
-        }
+        } //else if (isGrabbed && secondGrab)
+        //{
+        //    ScaleRotateCity();
+        //    FindObjectOfType<HelpSystemMixed>().Deactivate();
+        //}
 	}
 
     void ScaleRotateCity()
@@ -150,14 +150,14 @@ public class MiniMapHandler : MonoBehaviour {
     private void ControllerEvents_AliasGrabOn(object sender, ControllerInteractionEventArgs e)
     {
         Debug.Log("grab on");
-        triggerPos = gameObject.transform.position;
-        oldPos2 = gameObject.transform.position;
         if (isGrabbed)
         {
             secondGrab = true;
+            oldPos2 = gameObject.transform.position;
         } else
         {
             isGrabbed = true;
+            triggerPos = gameObject.transform.position;
         }
         isController = true;
     }
@@ -196,13 +196,13 @@ public class MiniMapHandler : MonoBehaviour {
                 {
                     Debug.Log("Set Secondgrab true");
                     secondGrab = true;
+                    oldPos1 = fingerpos;
                 } else if (!isGrabbed)
                 {
                     Debug.Log("Set isGrabbed true");
+                    triggerPos = fingerpos;
                     isGrabbed = true;
                 }
-                triggerPos = fingerpos;
-                oldPos1 = fingerpos;
             }
         }
     }
