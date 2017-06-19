@@ -37,9 +37,9 @@ public class DisplayBehaviour : MonoBehaviour {
             list += key + ": " + attributes[key] + "\n";
         }
 
-        transform.FindChild("PackageLabel").GetComponent<TextMesh>().text = node.pathName;
-        transform.FindChild("NameLabel").GetComponent<TextMesh>().text = node.name;
-        transform.FindChild("MetricsLabel").GetComponent<TextMesh>().text = list;
+        transform.Find("PackageLabel").GetComponent<TextMesh>().text = node.pathName;
+        transform.Find("NameLabel").GetComponent<TextMesh>().text = node.name;
+        transform.Find("MetricsLabel").GetComponent<TextMesh>().text = list;
     }
 
     public void OnEvent(Events.ClearDisplayEvent e)

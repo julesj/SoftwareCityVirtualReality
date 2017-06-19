@@ -13,9 +13,9 @@ public class AdjustableRoundTable : MonoBehaviour {
     private SphereCollider sphereCollider;
 
 	void Start () {
-        top = transform.FindChild("Top").GetComponent<AdjustableTableMesh>();
-        middle = transform.FindChild("Middle").GetComponent<AdjustableTableMesh>();
-        bottom = transform.FindChild("Bottom").GetComponent<AdjustableTableMesh>();
+        top = transform.Find("Top").GetComponent<AdjustableTableMesh>();
+        middle = transform.Find("Middle").GetComponent<AdjustableTableMesh>();
+        bottom = transform.Find("Bottom").GetComponent<AdjustableTableMesh>();
         sphereCollider = top.GetComponent<SphereCollider>();
     }
 	

@@ -35,7 +35,7 @@ public class PositionToController : MonoBehaviour {
         {
             if (!trackpad)
             {
-                trackpad = controller.transform.GetChild(0).FindChild("trackpad");
+                trackpad = controller.transform.GetChild(0).Find("trackpad");
             }
         }
 

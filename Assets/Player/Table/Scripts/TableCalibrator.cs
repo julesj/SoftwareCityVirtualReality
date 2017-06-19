@@ -21,9 +21,9 @@ public class TableCalibrator: MonoBehaviour {
     {
         controllerActions.TriggerHapticPulse(3999);
 
-        Transform appButton = controllerActions.gameObject.transform.FindChild("Model/button/attach");
-        Transform sysButton = controllerActions.gameObject.transform.FindChild("Model/sys_button/attach");
-        Transform controllerBase = controllerActions.gameObject.transform.FindChild("Model/base/attach");
+        Transform appButton = controllerActions.gameObject.transform.Find("Model/button/attach");
+        Transform sysButton = controllerActions.gameObject.transform.Find("Model/sys_button/attach");
+        Transform controllerBase = controllerActions.gameObject.transform.Find("Model/base/attach");
 
         Vector3 direction = sysButton.position - appButton.position;
 
